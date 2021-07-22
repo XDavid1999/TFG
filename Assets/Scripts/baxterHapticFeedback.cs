@@ -8,7 +8,8 @@ public class baxterHapticFeedback : MonoBehaviour
     // Start is called before the first frame update
     SensablePlugin sensablePlugin;
     private List<ContactPoint> contacts = new List<ContactPoint>();
-
+    private float[] middleCollisionPoint;
+    public float thresholdCollisionDetection = 0.5f;
 
     void Awake()
     {
@@ -25,17 +26,25 @@ public class baxterHapticFeedback : MonoBehaviour
         float[] position = new float[3];
         collision.GetContacts(contacts);
         position = getNormal(contacts);
+        
+        if(middleCollisionPoint==null)
+            sensablePlugin.recalculateJointAngles();
 
+        if (gameObject!=sensablePlugin.collidingBaxterArticulation  || checkDistance(middleCollisionPoint, getMiddlePoint(contacts)))
+            sensablePlugin.recalculateJointAngles();
+
+        middleCollisionPoint = getMiddlePoint(contacts);
+        
+            
         position[0] *= 40;
         position[1] *= 40;
         position[2] *= 40;
 
-        sensablePlugin.recalculateJointAngles();
+
         sensablePlugin.collidigObject = collision.collider.name;
+        sensablePlugin.collidingBaxterArticulation = gameObject;
         sensablePlugin.isColliding = true;
         sensablePlugin.forces = position;
-
-        Debug.Log("COLLISION: " + sensablePlugin.collidigObject);
     }
 
     internal void OnCollisionStayChild(Collision collision)
@@ -48,6 +57,13 @@ public class baxterHapticFeedback : MonoBehaviour
         sensablePlugin.isColliding = false;
     }
 
+    public bool checkDistance(float[] point1, float[] point2)
+    {
+        Vector3 origin = new Vector3(point1[0], point1[1], point1[2]);
+        Vector3 end = new Vector3(point2[0], point2[1], point2[2]);
+
+        return Vector3.Distance(origin, end) > thresholdCollisionDetection ? true : false;
+    }
     public float[] getNormal(List<ContactPoint> contacts)
     {
         float[] normal = new float[3];

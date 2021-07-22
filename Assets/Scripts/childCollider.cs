@@ -14,7 +14,7 @@ public class childCollider : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        script.OnCollisionEnterChild(collision, this.gameObject);
+        script.OnCollisionEnterChild(collision, transform.parent.parent.parent.gameObject);
     }
 
     void OnCollisionStay(Collision collision)

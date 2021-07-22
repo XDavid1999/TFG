@@ -94,17 +94,26 @@ public class SensablePlugin : MonoBehaviour
         HL_PROXY_TOUCH_NORMAL,
     }
 
+    mapBaxterArticulations mapBaxterArticulations;
+    /* Minimum/Maximum value of torque we will use */
     public const float MIN_TORQUE = 40;
     public const float MAX_TORQUE = 900;
 
+    /* ID of the initialized device */
     private int hapticDevice;
+    /* Is the robot colliding? */
     public bool isColliding = false;
+    /* Name of the object we are colliding with */
     public string collidigObject;
+    /* Name of the object we are colliding with */
+    public GameObject collidingBaxterArticulation;
+    /* Current forces set in haptic device */
     public float[] forces = new float[3];
+    /* Current Angles in haptic device */
     public float[] JointAngles = new float[6];
     float[] jointValues = new float[3];
     float[] gimbalValues = new float[3];
-
+    /* Angles of haptic device when the collision started */
     float[] localJointValues = new float[3];
     float[] localGimbalValues = new float[3];
     float[] localJointAngles = new float[6];
@@ -194,7 +203,7 @@ public class SensablePlugin : MonoBehaviour
     #endregion
     private void Awake()
     {
-
+        mapBaxterArticulations = GetComponent<mapBaxterArticulations>();
     }
     private void Start()
     {
@@ -211,7 +220,10 @@ public class SensablePlugin : MonoBehaviour
         hdEndFrame(hapticDevice);
 
     }
-
+    private void OnApplicationQuit()
+    {
+        disableDevice();
+    }
     private int initDevice(HDenum[] capabilities)
     {
         int hapticDevice = hdInitDevice((char)HDenum.HD_DEFAULT_DEVICE);
@@ -264,17 +276,25 @@ public class SensablePlugin : MonoBehaviour
         }
     }
     public void setVariableForce(){
-        float[] baseForce = { MIN_TORQUE, MIN_TORQUE, MIN_TORQUE };
+        float[] variation = getDirectionVector(getBaxterArticulationIndex());
 
-
-        
+       //for (int i = 0; i < variation.Length; i++)
+       //{
+           forces[1] = MIN_TORQUE + Mathf.Exp(13.5f * variation[0]);
+        //}
+        Debug.Log(MIN_TORQUE + Mathf.Exp(13.5f * variation[0]));
+        //Debug.Log(variation[0]);
         hdSetFloatv(HDenum.HD_CURRENT_TORQUE, forces);
     }
 
+    public int getBaxterArticulationIndex()
+    {
+        return Array.IndexOf(mapBaxterArticulations.selectedArticulations, collidingBaxterArticulation.GetComponent<ArticulationBody>());
+    }
     public float[] getDirectionVector(int index) {
         float[] solution = { 0f, 0f, 0f };
-        float value = 0;
-
+        float value;
+       
         for (int i = 0; i < index + 1; ++i)
         {
             value = localJointAngles[i] - JointAngles[i];
@@ -282,6 +302,7 @@ public class SensablePlugin : MonoBehaviour
             switch (getArticulationAxis(i))
             {
                 case "x":
+                    //Debug.Log(mapBaxterArticulations.selectedArticulations[i].name+value);
                     solution[0] += value;
                     break;
                 case "y":
@@ -295,6 +316,8 @@ public class SensablePlugin : MonoBehaviour
 
         return solution;
     }
+
+    /* Axis of movement found by index */
     public string getArticulationAxis(int index)
     {
         switch (index) {
@@ -335,31 +358,9 @@ public class SensablePlugin : MonoBehaviour
             resetForce();
         }
     }
-    //public void hlForces()
-    //{
-    //    double[] direction = new double[3];
-    //    //direction[0] = forces[0];
-    //    //direction[1] = forces[1];
-    //    //direction[2] = forces[2];
-    //    direction[0] = 3;
-    //    direction[1] = 0;
-    //    direction[2] = 0;
-
-    //    hlBeginFrame();
-    //    hlEffectdv(HLenum.HL_EFFECT_PROPERTY_DIRECTION, direction);
-    //    hlEffectd(HLenum.HL_EFFECT_PROPERTY_GAIN, 0.4);
-    //    hlEffectd(HLenum.HL_EFFECT_PROPERTY_MAGNITUDE, 0.4);
-    //    hlEffectd(HLenum.HL_EFFECT_PROPERTY_DURATION, 1000);
-    //    hlTriggerEffect(HLenum.HL_EFFECT_CONSTANT);
-    //    hlEndFrame();
-    //}
-
-    private void OnApplicationQuit()
+    public void disableDevice()
     {
-        //hlMakeCurrent(-1);
-        //hlDeleteContext(hHLRC);
         hdStopScheduler();
         hdDisableDevice((char)hapticDevice);
     }
-
 }
