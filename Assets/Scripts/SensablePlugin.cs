@@ -2,6 +2,8 @@ using System;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using System.Linq;
+using System.Collections.Generic;
+
 public class SensablePlugin : MonoBehaviour
 {
     public enum HDenum
@@ -98,6 +100,7 @@ public class SensablePlugin : MonoBehaviour
     /* Minimum/Maximum value of torque we will use */
     public const float MIN_TORQUE = 40;
     public const float MAX_TORQUE = 900;
+    float MAX_PENETRATION = 0.4f;
 
     /* ID of the initialized device */
     private int hapticDevice;
@@ -109,6 +112,8 @@ public class SensablePlugin : MonoBehaviour
     public GameObject collidingBaxterArticulation;
     /* Current forces set in haptic device */
     public float[] forces = new float[3];
+    private List<float[]> lastForces;
+    int lastForcesLength = 3;
     /* Current Angles in haptic device */
     public float[] JointAngles = new float[6];
     float[] jointValues = new float[3];
@@ -224,6 +229,7 @@ public class SensablePlugin : MonoBehaviour
     {
         disableDevice();
     }
+    /** Función para inicializar el dispositivo háptico */
     private int initDevice(HDenum[] capabilities)
     {
         int hapticDevice = hdInitDevice((char)HDenum.HD_DEFAULT_DEVICE);
@@ -237,7 +243,8 @@ public class SensablePlugin : MonoBehaviour
 
         return hapticDevice;
     }
-
+    /** Función que devuelve un mapeo de los ángulos del dispositivo háptico en los vectores
+     * utilizados */
     public int CalculateJointAngles()
     {
         hdGetFloatv(HDenum.HD_CURRENT_JOINT_ANGLES, jointValues);
@@ -256,7 +263,7 @@ public class SensablePlugin : MonoBehaviour
 
         return (int)HDenum.HD_CALLBACK_CONTINUE;
     }
-
+    /** Función para guardar los ángulos de baxter en el momento en que colisiona */
     public void recalculateJointAngles()
     {
         hdBeginFrame(hapticDevice);
@@ -275,19 +282,47 @@ public class SensablePlugin : MonoBehaviour
             localJointAngles[i + 3] = gimbalValues[i];
         }
     }
-    /** La fuerza variable se seteará con una función exponencial: f(x) = MIN_TORQUE * (e^(50*variación))
-     La razón de usar esta función es sencilla: queremos un feedback suave al tocar y alto cuando tratemos 
-    de penetrar un objeto. Trataremos de suavizar el cambio de fuerza comparando los valores actuales de 
-    fuerza con los anteriores, haciendo así transiciones más suaves */
-    public void setVariableForce(){
-        float[] variation = getDirectionVector(getBaxterArticulationIndex());
+    /** Actualiza el vector que contiene las últimas fuerzas seteadas */
+    private void updateLastForces(float[] newforces)
+    {
+        if(lastForces.Count==lastForcesLength)
+            lastForces.RemoveAt(0);
 
-       for (int i = 0; i < variation.Length; i++)
-       {
-           forces[i] = ((MIN_TORQUE + Mathf.Exp(50f * variation[i]))+forces[i])/2;
-            if (i == 1)
-                Debug.Log(forces[i]);
-       }
+        lastForces.Add(newforces);
+    }
+    /** Calcula la nueva fuerza a partir de las últimas fuerzas usadas en el dispositivo */
+    private float[] getComparedForce(List<float[]> forces)
+    {
+        float[] newForce = new float[3];
+
+        for (int i = 0; i < forces.Count; ++i)
+        {
+            newForce[0] += forces[i][0];
+            newForce[1] += forces[i][1];
+            newForce[2] += forces[i][2];
+        }
+
+        newForce[0] /= newForce[0]/forces.Count;
+        newForce[1] /= newForce[1]/forces.Count;
+        newForce[2] /= newForce[2]/forces.Count;
+
+        return newForce;
+    }
+    /** La fuerza variable se seteará con una función exponencial: f(x) = MIN_TORQUE * (e^(50*variación))
+    * La razón de usar esta función es sencilla: queremos un feedback suave al tocar y alto cuando tratemos 
+    * de penetrar un objeto. Trataremos de suavizar el cambio de fuerza comparando los valores actuales de 
+    * fuerza con los anteriores, haciendo así transiciones más suaves */
+    public void setVariableForce(){
+        int index = getBaxterArticulationIndex(collidingBaxterArticulation);
+        float[] variation = getDirectionVector(index);
+        updateLastForces(variation);
+        float[] lastForceSum = getComparedForce(lastForces);
+        float constant = Mathf.Log(MAX_TORQUE) / MAX_PENETRATION;
+
+        for (int i = 0; i < variation.Length; i++)
+        {
+            forces[i] = MIN_TORQUE + Mathf.Exp(constant * lastForceSum[i]);
+        }
 
         hdSetFloatv(HDenum.HD_CURRENT_TORQUE, forces);
     }
@@ -299,6 +334,7 @@ public class SensablePlugin : MonoBehaviour
         float min;
         float max;
         float range;
+        value = Mathf.Abs(value);
 
         switch (index)
         {
@@ -342,10 +378,15 @@ public class SensablePlugin : MonoBehaviour
 
         return -1;
     }
-    public int getBaxterArticulationIndex()
+
+    /** Función que retorna el índice correspondiente dada una articulación de baxter*/
+    public int getBaxterArticulationIndex(GameObject baxterArticulation)
     {
-        return Array.IndexOf(mapBaxterArticulations.selectedArticulations, collidingBaxterArticulation.GetComponent<ArticulationBody>());
+        return Array.IndexOf(mapBaxterArticulations.selectedArticulations, baxterArticulation.GetComponent<ArticulationBody>());
     }
+
+    /** Función que retorna un vector de dirección conocidos los ángulos de baxter,
+     * usada para establecer feedback háptico*/
     public float[] getDirectionVector(int index) {
         float[] solution = { 0f, 0f, 0f };
         /** Importancia de la articulación iésima en el movimiento en su eje */
@@ -363,7 +404,6 @@ public class SensablePlugin : MonoBehaviour
                     break;
                 case "y":
                     solution[0] += value * weight[i];
-                    //Debug.Log(mapBaxterArticulations.selectedArticulations[i].name + " : " + value);
                     break;                
                 case "z":
                     solution[2] += value * weight[i];
@@ -374,7 +414,7 @@ public class SensablePlugin : MonoBehaviour
         return solution;
     }
 
-    /* Axis of movement found by index */
+    /** Devuelve el eje de acción de cada articulación por orden */
     public string getArticulationAxis(int index)
     {
         switch (index) {
@@ -394,7 +434,7 @@ public class SensablePlugin : MonoBehaviour
 
         return "";
     }
-
+    /** Función para eliminar todas las fuerzas establecidas */
     public void resetForce()
     {
         forces[0] = 0;
