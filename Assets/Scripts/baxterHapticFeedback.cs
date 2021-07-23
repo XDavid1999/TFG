@@ -34,12 +34,10 @@ public class baxterHapticFeedback : MonoBehaviour
             sensablePlugin.recalculateJointAngles();
 
         middleCollisionPoint = getMiddlePoint(contacts);
-        
-            
+
         position[0] *= 40;
         position[1] *= 40;
         position[2] *= 40;
-
 
         sensablePlugin.collidigObject = collision.collider.name;
         sensablePlugin.collidingBaxterArticulation = gameObject;

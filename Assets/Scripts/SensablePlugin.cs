@@ -275,41 +275,98 @@ public class SensablePlugin : MonoBehaviour
             localJointAngles[i + 3] = gimbalValues[i];
         }
     }
+    /** La fuerza variable se seteará con una función exponencial: f(x) = MIN_TORQUE * (e^(50*variación))
+     La razón de usar esta función es sencilla: queremos un feedback suave al tocar y alto cuando tratemos 
+    de penetrar un objeto. Trataremos de suavizar el cambio de fuerza comparando los valores actuales de 
+    fuerza con los anteriores, haciendo así transiciones más suaves */
     public void setVariableForce(){
         float[] variation = getDirectionVector(getBaxterArticulationIndex());
 
-       //for (int i = 0; i < variation.Length; i++)
-       //{
-           forces[1] = MIN_TORQUE + Mathf.Exp(13.5f * variation[0]);
-        //}
-        Debug.Log(MIN_TORQUE + Mathf.Exp(13.5f * variation[0]));
-        //Debug.Log(variation[0]);
+       for (int i = 0; i < variation.Length; i++)
+       {
+           forces[i] = ((MIN_TORQUE + Mathf.Exp(50f * variation[i]))+forces[i])/2;
+            if (i == 1)
+                Debug.Log(forces[i]);
+       }
+
         hdSetFloatv(HDenum.HD_CURRENT_TORQUE, forces);
     }
+    
+    /** Devuelve un valor entre 0 y 1 del desplazamiento que el robot ha hecho en la articulación dada,
+     es decir, devuelve de forma ponderada cual ha sido la cantidad, dentro del rango posible*/
+   public float normalizeHapticAngles(int index, float value)
+    {
+        float min;
+        float max;
+        float range;
 
+        switch (index)
+        {
+            case 0:
+                min = 0.913f;
+                max = -0.913f;
+                range = Mathf.Abs(min) + Mathf.Abs(max);
+
+                return value/range;
+            case 1:
+                min = 0.330f;
+                max = 1.726f;
+                range = Mathf.Abs(min) + Mathf.Abs(max);
+
+                return value / range;
+            case 2:
+                min = -1.007f;
+                max = -0.402f;
+                range = Mathf.Abs(min) + Mathf.Abs(max);
+
+                return value / range;
+            case 3:
+                min = -2.509f;
+                max = 2.296f;
+                range = Mathf.Abs(min) + Mathf.Abs(max);
+
+                return value / range;
+            case 4:
+                min = -1.426f;
+                max = 1.057f;
+                range = Mathf.Abs(min) + Mathf.Abs(max);
+
+                return value / range;
+            case 5:
+                min = -2.872f;
+                max = 2.628f;
+                range = Mathf.Abs(min) + Mathf.Abs(max);
+
+                return value / range;
+        }
+
+        return -1;
+    }
     public int getBaxterArticulationIndex()
     {
         return Array.IndexOf(mapBaxterArticulations.selectedArticulations, collidingBaxterArticulation.GetComponent<ArticulationBody>());
     }
     public float[] getDirectionVector(int index) {
         float[] solution = { 0f, 0f, 0f };
+        /** Importancia de la articulación iésima en el movimiento en su eje */
+        float[] weight = { 1f, 0.6f, 0.25f, 0.5f, 0.15f, 0.5f };
         float value;
        
         for (int i = 0; i < index + 1; ++i)
         {
-            value = localJointAngles[i] - JointAngles[i];
+            value = normalizeHapticAngles(i, localJointAngles[i]) - normalizeHapticAngles(i, JointAngles[i]);
 
             switch (getArticulationAxis(i))
             {
                 case "x":
-                    //Debug.Log(mapBaxterArticulations.selectedArticulations[i].name+value);
-                    solution[0] += value;
+                    solution[1] += value * weight[i];
                     break;
                 case "y":
-                    solution[1] += value;
+                    solution[0] += value * weight[i];
+                    //Debug.Log(mapBaxterArticulations.selectedArticulations[i].name + " : " + value);
                     break;                
                 case "z":
-                    solution[2] += value;
+                    solution[2] += value * weight[i];
                     break;
             }
         }
