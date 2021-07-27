@@ -9,7 +9,7 @@ public class baxterHapticFeedback : MonoBehaviour
     SensablePlugin sensablePlugin;
     private List<ContactPoint> contacts = new List<ContactPoint>();
     private float[] middleCollisionPoint;
-    public float thresholdCollisionDetection = 0.5f;
+    public float thresholdCollisionDetection = 0.3f;
 
     void Awake()
     {
@@ -35,14 +35,17 @@ public class baxterHapticFeedback : MonoBehaviour
 
         middleCollisionPoint = getMiddlePoint(contacts);
 
-        position[0] *= 40;
-        position[1] *= 40;
-        position[2] *= 40;
+        //Debug.Log(position[0] + " " + 0);
+        //Debug.Log(position[1] + " " + 1);
+        //Debug.Log(position[2] + " " + 2);
+        //position[0] *= 40;
+        //position[1] *= 40;
+        //position[2] *= 40;
 
         sensablePlugin.collidigObject = collision.collider.name;
         sensablePlugin.collidingBaxterArticulation = gameObject;
         sensablePlugin.isColliding = true;
-        sensablePlugin.forces = position;
+        sensablePlugin.position = position;
     }
 
     internal void OnCollisionStayChild(Collision collision)
@@ -52,7 +55,9 @@ public class baxterHapticFeedback : MonoBehaviour
     
     internal void OnCollisionExitChild(Collision collision)
     {
+        float[] resetPos = { 0,0,0 };
         sensablePlugin.isColliding = false;
+        sensablePlugin.position = resetPos;
     }
 
     public bool checkDistance(float[] point1, float[] point2)

@@ -100,8 +100,9 @@ public class SensablePlugin : MonoBehaviour
     /* Minimum/Maximum value of torque we will use */
     public const float MIN_TORQUE = 40;
     public const float MAX_TORQUE = 900;
-    float MAX_PENETRATION = 0.4f;
+    public static float[] MAX_PENETRATIONS = { 0.2f, 0.2f, 0.1f };
 
+    float[] CONSTANTS = { Mathf.Log(MAX_TORQUE - MIN_TORQUE) / MAX_PENETRATIONS[0], Mathf.Log(MAX_TORQUE - MIN_TORQUE) / MAX_PENETRATIONS[1], Mathf.Log(MAX_TORQUE - MIN_TORQUE) / MAX_PENETRATIONS[2] };
     /* ID of the initialized device */
     private int hapticDevice;
     /* Is the robot colliding? */
@@ -112,8 +113,10 @@ public class SensablePlugin : MonoBehaviour
     public GameObject collidingBaxterArticulation;
     /* Current forces set in haptic device */
     public float[] forces = new float[3];
-    private List<float[]> lastForces;
+    private List<float[]> lastForces = new List<float[]>(); 
     int lastForcesLength = 3;
+    /* Collision's direction */
+    public float[] position = new float[3];
     /* Current Angles in haptic device */
     public float[] JointAngles = new float[6];
     float[] jointValues = new float[3];
@@ -285,8 +288,11 @@ public class SensablePlugin : MonoBehaviour
     /** Actualiza el vector que contiene las últimas fuerzas seteadas */
     private void updateLastForces(float[] newforces)
     {
-        if(lastForces.Count==lastForcesLength)
+        if (lastForces.Count==lastForcesLength)
             lastForces.RemoveAt(0);
+
+        for(int i = 0; i < newforces.Length; ++i)
+            newforces[i] = MIN_TORQUE + Mathf.Exp(CONSTANTS[i] * newforces[i]);
 
         lastForces.Add(newforces);
     }
@@ -294,7 +300,6 @@ public class SensablePlugin : MonoBehaviour
     private float[] getComparedForce(List<float[]> forces)
     {
         float[] newForce = new float[3];
-
         for (int i = 0; i < forces.Count; ++i)
         {
             newForce[0] += forces[i][0];
@@ -302,9 +307,9 @@ public class SensablePlugin : MonoBehaviour
             newForce[2] += forces[i][2];
         }
 
-        newForce[0] /= newForce[0]/forces.Count;
-        newForce[1] /= newForce[1]/forces.Count;
-        newForce[2] /= newForce[2]/forces.Count;
+        newForce[0] /= forces.Count;
+        newForce[1] /= forces.Count;
+        newForce[2] /= forces.Count;
 
         return newForce;
     }
@@ -315,15 +320,36 @@ public class SensablePlugin : MonoBehaviour
     public void setVariableForce(){
         int index = getBaxterArticulationIndex(collidingBaxterArticulation);
         float[] variation = getDirectionVector(index);
-        updateLastForces(variation);
-        float[] lastForceSum = getComparedForce(lastForces);
-        float constant = Mathf.Log(MAX_TORQUE) / MAX_PENETRATION;
+        //updateLastForces(variation);
+        //float[] lastForceSum = getComparedForce(lastForces);
+        
+        //constant = 10;
+        float calculatedForce, difference;
 
         for (int i = 0; i < variation.Length; i++)
-        {
-            forces[i] = MIN_TORQUE + Mathf.Exp(constant * lastForceSum[i]);
-        }
+        { 
+            calculatedForce = Mathf.Sign(position[i]) * (MIN_TORQUE + Mathf.Exp(CONSTANTS[i] * Mathf.Abs(variation[i])));
+            
+            difference = Mathf.Abs(calculatedForce) - Mathf.Abs(forces[i]);
 
+            if (variation[i] < 0.05)
+            {
+                forces[i] = calculatedForce - MIN_TORQUE;
+            }
+            else
+            {
+                if (difference > 50)
+                    forces[i] += 20;
+                else
+                {
+                    if (calculatedForce > MAX_TORQUE)
+                        forces[i] = MAX_TORQUE;
+                    else
+                        forces[i] = calculatedForce;
+                }
+            }
+            Debug.Log(forces[i]);
+        }
         hdSetFloatv(HDenum.HD_CURRENT_TORQUE, forces);
     }
     
@@ -388,28 +414,35 @@ public class SensablePlugin : MonoBehaviour
     /** Función que retorna un vector de dirección conocidos los ángulos de baxter,
      * usada para establecer feedback háptico*/
     public float[] getDirectionVector(int index) {
+        float minZCollisionValue = 0.4f;
+        float minYCollisionValue = 0.2f;
         float[] solution = { 0f, 0f, 0f };
         /** Importancia de la articulación iésima en el movimiento en su eje */
-        float[] weight = { 1f, 0.6f, 0.25f, 0.5f, 0.15f, 0.5f };
+        float[] weightX = { 0f, 0.6f, 0.25f, 0f, 0.15f, 0f };
+        float[] weightZ = { 0f, 0.2f, 0.6f, 0f, 0.2f, 0f };
         float value;
        
         for (int i = 0; i < index + 1; ++i)
         {
             value = normalizeHapticAngles(i, localJointAngles[i]) - normalizeHapticAngles(i, JointAngles[i]);
 
-            switch (getArticulationAxis(i))
-            {
-                case "x":
-                    solution[1] += value * weight[i];
-                    break;
-                case "y":
-                    solution[0] += value * weight[i];
-                    break;                
-                case "z":
-                    solution[2] += value * weight[i];
-                    break;
-            }
+            if (getArticulationAxis(i).Contains("x"))
+                solution[1] += value * weightX[i];
+            if (getArticulationAxis(i).Contains("y"))
+                if (value > minYCollisionValue)
+                    solution[0] += value;
+                else
+                    solution[0] += value *0.01f;
+            if (getArticulationAxis(i).Contains("z"))
+                if (value > minZCollisionValue)
+                    solution[2] += value * weightZ[i];
+                else
+                    solution[2] += value * weightZ[i] * 0.1f;
         }
+
+        //Debug.Log(solution[0] + " " + 0);
+        //Debug.Log(solution[1] + " " + 1);
+        //Debug.Log(solution[2] + " " + 2);
 
         return solution;
     }
@@ -421,15 +454,15 @@ public class SensablePlugin : MonoBehaviour
             case 0:
                 return "y";
             case 1:
-                return "x";
+                return "xz";
             case 2:
-                return "x";
+                return "xz";
             case 3:
-                return "z";
+                return "";
             case 4:
-                return "x";
+                return "xz";
             case 5:
-                return "z";
+                return "";
         }
 
         return "";
@@ -448,7 +481,6 @@ public class SensablePlugin : MonoBehaviour
         if (isColliding)
         {
             setVariableForce();
-            //hdSetFloatv(HDenum.HD_CURRENT_TORQUE, forces);
         }
         else
         {
