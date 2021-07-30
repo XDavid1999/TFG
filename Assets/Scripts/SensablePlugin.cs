@@ -106,8 +106,8 @@ public class SensablePlugin : MonoBehaviour
     mapBaxterArticulations mapBaxterArticulations;
     /* Minimum/Maximum value of torque we will use */
     public const float MIN_TORQUE = 40;
-    public const float MAX_TORQUE = 900;
-    public static float[] MAX_PENETRATIONS = { 0.3f, 0.2f, 0.2f };
+    public const float MAX_TORQUE = 1200;
+    public static float[] MAX_PENETRATIONS = { 0.3f, 0.2f, 0.3f };
 
     float[] CONSTANTS = { Mathf.Log(MAX_TORQUE - MIN_TORQUE) / MAX_PENETRATIONS[0], Mathf.Log(MAX_TORQUE - MIN_TORQUE) / MAX_PENETRATIONS[1], Mathf.Log(MAX_TORQUE - MIN_TORQUE) / MAX_PENETRATIONS[2] };
     /* ID of the initialized device */
@@ -115,12 +115,15 @@ public class SensablePlugin : MonoBehaviour
     /* Is the robot colliding? */
     public bool isColliding = false;
     public bool buttonActive = false;
+    public bool grabbingObject = false;
     /* Name of the object we are colliding with */
     public string collidigObject;
     /* Name of the object we are colliding with */
     public GameObject collidingBaxterArticulation;
+    public GameObject grabbingObjectGameobject = null;
     /* Current forces set in haptic device */
     public float[] forces = new float[3];
+    public float[] velocity = new float[3];
     /* Collision's direction */
     public List<float[]> positions = new List<float[]>();
     public int positionsLength = 2;
@@ -236,8 +239,7 @@ public class SensablePlugin : MonoBehaviour
     private void FixedUpdate()
     {
         SetForces();
-        //getButtonStateSync();
-        //Debug.Log(buttonActive);
+        isGrabbingObject();
         hdScheduleSynchronous(updateHapticContext, null, ushort.MaxValue);
     }
     private void OnApplicationQuit()
@@ -247,12 +249,51 @@ public class SensablePlugin : MonoBehaviour
         writeInFile(infoZ, "infoZ");
         disableDevice();
     }
+    public void isGrabbingObject()
+    {
+        if (grabbingObject)
+        {
+            getButtonStateSync();
+            if (buttonActive) {
+                forces[1] -= 100;
+                inertia();
+            }
+            else
+            {
+                grabbingObject = false;
+                Destroy(grabbingObjectGameobject.GetComponent<childCollider>());
+                grabbingObjectGameobject.transform.SetParent(null);
+            }
+        }
+    }
+
+    public void inertia()
+    {
+        Debug.Log(grabbingObjectGameobject.GetComponent<Rigidbody>().inertiaTensor[0]);
+        forces[0] += grabbingObjectGameobject.GetComponent<Rigidbody>().inertiaTensor[1];
+        forces[1] += grabbingObjectGameobject.GetComponent<Rigidbody>().inertiaTensor[0];
+        forces[2] += grabbingObjectGameobject.GetComponent<Rigidbody>().inertiaTensor[2];
+    }
+
+    public void getVelocitySync()
+    {
+        hdScheduleSynchronous(getCurrentVelocity, null, ushort.MaxValue);
+    }
+
+    public int getCurrentVelocity()
+    {
+        hdBeginFrame(hapticDevice);
+        hdGetFloatv(HDenum.HD_CURRENT_VELOCITY, velocity);
+        hdEndFrame(hapticDevice);
+
+        return (int)HDenum.HD_CALLBACK_DONE;
+    }
+
     /** Función para inicializar el dispositivo háptico */
     private int initDevice(HDenum[] capabilities)
     {
         int hapticDevice = hdInitDevice((char)HDenum.HD_DEFAULT_DEVICE);
         hdStartScheduler();
-        //hdSetSchedulerRate(500);
 
         foreach (HDenum capability in capabilities)
         {
@@ -296,10 +337,15 @@ public class SensablePlugin : MonoBehaviour
 
     public int getButtonState()
     {
-        bool[] buttons = new bool[1];
+        int [] buttons = new int[1];
         hdBeginFrame(hapticDevice);
-        hdGetBooleanv(HDenum.HD_CURRENT_BUTTONS, buttons);
-        buttonActive = buttons[0];
+        hdGetIntegerv(HDenum.HD_CURRENT_BUTTONS, buttons);
+
+        if (buttons[0] == 0)
+            buttonActive = false;
+        else
+            buttonActive = true;
+
         hdEndFrame(hapticDevice);
 
         return (int)HDenum.HD_CALLBACK_DONE;
@@ -391,7 +437,7 @@ public class SensablePlugin : MonoBehaviour
                 }
                 else if (Mathf.Abs(variation[i]) < 0.06 && Mathf.Abs(variation[i]) < 0.1)
                 {
-                    forces[i] = position[i] * calculatedForce;
+                    forces[i] = 0.7f * calculatedForce;
                 }
                 else
                 {
@@ -413,9 +459,9 @@ public class SensablePlugin : MonoBehaviour
             }
 
 
-            Debug.Log("Sense: " + sense + " " + i);
-            Debug.Log("Var: " + variation[i] + " " + i);   
-            Debug.Log("For: " + forces[i] + " " + i);
+            //Debug.Log("Sense: " + sense + " " + i);
+            //Debug.Log("Var: " + variation[i] + " " + i);   
+            //Debug.Log("For: " + forces[i] + " " + i);
         }
 
         infoY.Add(forces[0].ToString());

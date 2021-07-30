@@ -7,6 +7,8 @@ public class baxterHapticFeedback : MonoBehaviour
 {
     // Start is called before the first frame update
     SensablePlugin sensablePlugin;
+    mapBaxterArticulations mapBaxterArticulations;
+    childCollider childCollider;
     private List<ContactPoint> contacts = new List<ContactPoint>();
     private float[] middleCollisionPoint;
     public float thresholdCollisionDetection = 0.5f;
@@ -14,6 +16,8 @@ public class baxterHapticFeedback : MonoBehaviour
     void Awake()
     {
         sensablePlugin = GetComponent<SensablePlugin>();
+        mapBaxterArticulations = GetComponent<mapBaxterArticulations>();
+        childCollider = GetComponent<childCollider>();
     }
 
     void Start()
@@ -23,33 +27,57 @@ public class baxterHapticFeedback : MonoBehaviour
 
     internal void OnCollisionEnterChild(Collision collision, GameObject gameObject)
     {
-        float[] position = new float[3];
-        collision.GetContacts(contacts);
-        position = getNormal(contacts);
-
-        if (middleCollisionPoint == null)
-            sensablePlugin.recalculateSync();
-
-        if (gameObject!=sensablePlugin.collidingBaxterArticulation  || checkDistance(middleCollisionPoint, getMiddlePoint(contacts)))
+        sensablePlugin.getButtonStateSync();
+        if (sensablePlugin.buttonActive && collision.gameObject.tag=="Grabbable" && !sensablePlugin.grabbingObject)
+            grabbingObject(collision.gameObject, gameObject);
+        else
         {
-            if (sensablePlugin.positions.Count == sensablePlugin.positionsLength)
-                sensablePlugin.positions.Remove(sensablePlugin.positions[0]);
+            float[] position = new float[3];
+            collision.GetContacts(contacts);
+            position = getNormal(contacts);
 
-            sensablePlugin.positions.Add(position);
-            sensablePlugin.recalculateSync();
+            if (middleCollisionPoint == null)
+            {
+                middleCollisionPoint = getMiddlePoint(contacts);
+                sensablePlugin.recalculateSync();
+            }
+
+            if (gameObject!=sensablePlugin.collidingBaxterArticulation  || checkDistance(middleCollisionPoint, getMiddlePoint(contacts)))
+            {
+                if (sensablePlugin.positions.Count == sensablePlugin.positionsLength)
+                    sensablePlugin.positions.Remove(sensablePlugin.positions[0]);
+
+                sensablePlugin.positions.Add(position);
+                sensablePlugin.recalculateSync();
+            }
+
+            middleCollisionPoint = getMiddlePoint(contacts);   
+
+            sensablePlugin.collidingBaxterArticulation = gameObject;
+            sensablePlugin.isColliding = true;
         }
-
-        middleCollisionPoint = getMiddlePoint(contacts);
-
-        sensablePlugin.collidigObject = collision.collider.name;
-        sensablePlugin.collidingBaxterArticulation = gameObject;
-        sensablePlugin.isColliding = true;
-        
     }
 
-    internal void OnCollisionStayChild(Collision collision)
+    public void grabbingObject(GameObject collidingObject, GameObject baxterArticulation)
     {
-        sensablePlugin.isColliding = true;
+        if(baxterArticulation == mapBaxterArticulations.selectedArticulations[mapBaxterArticulations.selectedArticulations.Length - 1].gameObject)
+        {
+            sensablePlugin.grabbingObjectGameobject = collidingObject.gameObject;
+            sensablePlugin.isColliding = false;
+            sensablePlugin.grabbingObject = true;
+            collidingObject.transform.SetParent(baxterArticulation.transform);
+            collidingObject.AddComponent<childCollider>();
+
+        }
+    }
+
+    internal void OnCollisionStayChild(Collision collision, GameObject gameObject)
+    {
+        sensablePlugin.getButtonStateSync();
+        if (sensablePlugin.buttonActive && collision.gameObject.tag == "Grabbable" && !sensablePlugin.grabbingObject)
+            grabbingObject(collision.gameObject, gameObject);
+        else
+            sensablePlugin.isColliding = true;
     }
     
     internal void OnCollisionExitChild(Collision collision)
