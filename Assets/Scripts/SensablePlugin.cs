@@ -3,6 +3,7 @@ using System.Runtime.InteropServices;
 using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
+using System.IO;
 
 public class SensablePlugin : MonoBehaviour
 {
@@ -44,11 +45,17 @@ public class SensablePlugin : MonoBehaviour
 
         HD_NOMINAL_MAX_TORQUE_FORCE = 0x2622,
         HD_NOMINAL_MAX_TORQUE_CONTINUOUS_FORCE = 0x2623,
-        HD_NOMINAL_MAX_FORCE               =0x2603,
+        HD_NOMINAL_MAX_FORCE = 0x2603,
+
+        HD_DEVICE_BUTTON_1 = (1 << 0),      
+        HD_DEVICE_BUTTON_2 = (1 << 1),      
+        HD_DEVICE_BUTTON_3 = (1 << 2),      
+        HD_DEVICE_BUTTON_4 = (1 << 3),      
 
         HD_CALLBACK_DONE = 0,
         HD_CALLBACK_CONTINUE = 1,
 
+        HD_INSTANTANEOUS_UPDATE_RATE = 0x2601,
         HD_USER_STATUS_LIGHT = 0x2900
     }
 
@@ -100,23 +107,23 @@ public class SensablePlugin : MonoBehaviour
     /* Minimum/Maximum value of torque we will use */
     public const float MIN_TORQUE = 40;
     public const float MAX_TORQUE = 900;
-    public static float[] MAX_PENETRATIONS = { 0.2f, 0.2f, 0.1f };
+    public static float[] MAX_PENETRATIONS = { 0.3f, 0.2f, 0.2f };
 
     float[] CONSTANTS = { Mathf.Log(MAX_TORQUE - MIN_TORQUE) / MAX_PENETRATIONS[0], Mathf.Log(MAX_TORQUE - MIN_TORQUE) / MAX_PENETRATIONS[1], Mathf.Log(MAX_TORQUE - MIN_TORQUE) / MAX_PENETRATIONS[2] };
     /* ID of the initialized device */
     private int hapticDevice;
     /* Is the robot colliding? */
     public bool isColliding = false;
+    public bool buttonActive = false;
     /* Name of the object we are colliding with */
     public string collidigObject;
     /* Name of the object we are colliding with */
     public GameObject collidingBaxterArticulation;
     /* Current forces set in haptic device */
     public float[] forces = new float[3];
-    private List<float[]> lastForces = new List<float[]>(); 
-    int lastForcesLength = 3;
     /* Collision's direction */
-    public float[] position = new float[3];
+    public List<float[]> positions = new List<float[]>();
+    public int positionsLength = 2;
     /* Current Angles in haptic device */
     public float[] JointAngles = new float[6];
     float[] jointValues = new float[3];
@@ -125,6 +132,10 @@ public class SensablePlugin : MonoBehaviour
     float[] localJointValues = new float[3];
     float[] localGimbalValues = new float[3];
     float[] localJointAngles = new float[6];
+
+    public List<string> infoX = new List<string>();
+    public List<string> infoY = new List<string>();
+    public List<string> infoZ = new List<string>();
 
     #region Device Angles
     public static readonly float S0_MinAngle = Mathf.Rad2Deg * -1f;
@@ -165,19 +176,20 @@ public class SensablePlugin : MonoBehaviour
     [DllImport("hd")] public static extern void hdEnable(HDenum pname);
     [DllImport("hd")] public static extern void hdDisable(HDenum pname);
     [DllImport("hd")] public static extern bool hdIsEnabled(HDenum pnamevalues);
-    [DllImport("hd")] public static extern void hdScheduleSynchronous(Func<int> function, object[] parameters, ushort priority);
+    [DllImport("hd")] public static extern ulong hdScheduleSynchronous(Func<int> function, object[] parameters, ushort priority);
     [DllImport("hd")] public static extern int hdScheduleAsynchronous(Func<int> function, object[] parameters, ushort priority);
     [DllImport("hd")] public static extern void hdSetSchedulerRate(long nRate);
+    [DllImport("hd")] public static extern void hdUnschedule(ulong handler);
     [DllImport("hd")] public static extern double hdGetSchedulerTimeStamp();
     #endregion
 
     #region Imported hl functions
     [DllImport("hl")] public static extern UIntPtr hlCreateContext(int hHD);
-    [DllImport("hl")]  public static extern void hlDeleteContext(UIntPtr hHLRC);
-    [DllImport("hl")]  public static extern void hlMakeCurrent(UIntPtr hHLRC);
-    [DllImport("hl")]  public static extern void hlContextDevice(int hHD);
-    [DllImport("hl")]  public static extern int hlGetCurrentContext();
-    [DllImport("hl")]  public static extern int hlGetCurrentDevice();
+    [DllImport("hl")] public static extern void hlDeleteContext(UIntPtr hHLRC);
+    [DllImport("hl")] public static extern void hlMakeCurrent(UIntPtr hHLRC);
+    [DllImport("hl")] public static extern void hlContextDevice(int hHD);
+    [DllImport("hl")] public static extern int hlGetCurrentContext();
+    [DllImport("hl")] public static extern int hlGetCurrentDevice();
 
     [DllImport("hl")] public static extern void hlBeginFrame();
     [DllImport("hl")] public static extern void hlEndFrame();
@@ -188,12 +200,12 @@ public class SensablePlugin : MonoBehaviour
     [DllImport("hl")] public static extern void hlGetIntegerv(HLenum pname, int[] value);
     [DllImport("hl")] public static extern void hlGetDoublev(HLenum pname, double[] values);
     [DllImport("hl")] public static extern void hlGetBooleanv(HLenum pname, bool[] values);
-    
+
     /* Force effects */
-    [DllImport("hl")] public static extern void hlStartEffect(HLenum type, int effect); 
-    [DllImport("hl")] public static extern void hlStopEffect(int effect); 
+    [DllImport("hl")] public static extern void hlStartEffect(HLenum type, int effect);
+    [DllImport("hl")] public static extern void hlStopEffect(int effect);
     [DllImport("hl")] public static extern void hlUpdateEffect(int effect);
-    
+
     [DllImport("hl")] public static extern int hlGenEffects(double range);
     [DllImport("hl")] public static extern void hlDeleteEffects(int effect, double range);
     [DllImport("hl")] public static extern void hlIsEffect(int effect);
@@ -212,24 +224,27 @@ public class SensablePlugin : MonoBehaviour
     private void Awake()
     {
         mapBaxterArticulations = GetComponent<mapBaxterArticulations>();
-    }
-    private void Start()
-    {
         HDenum[] capabilities = { HDenum.HD_FORCE_OUTPUT };
         hapticDevice = initDevice(capabilities);
     }
 
-
-    private void Update()
+    private void Start()
     {
-        hdBeginFrame(hapticDevice);
-        CalculateJointAngles();
-        SetForces();
-        hdEndFrame(hapticDevice);
 
+    }
+
+    private void FixedUpdate()
+    {
+        SetForces();
+        //getButtonStateSync();
+        //Debug.Log(buttonActive);
+        hdScheduleSynchronous(updateHapticContext, null, ushort.MaxValue);
     }
     private void OnApplicationQuit()
     {
+        writeInFile(infoX, "infoX");
+        writeInFile(infoY, "infoY");
+        writeInFile(infoZ, "infoZ");
         disableDevice();
     }
     /** Función para inicializar el dispositivo háptico */
@@ -246,28 +261,52 @@ public class SensablePlugin : MonoBehaviour
 
         return hapticDevice;
     }
+    public void recalculateSync()
+    {
+        hdScheduleSynchronous(recalculateJointAngles, null, ushort.MaxValue);
+    }
     /** Función que devuelve un mapeo de los ángulos del dispositivo háptico en los vectores
      * utilizados */
-    public int CalculateJointAngles()
+    public int updateHapticContext()
     {
+        hdBeginFrame(hapticDevice);        
         hdGetFloatv(HDenum.HD_CURRENT_JOINT_ANGLES, jointValues);
         hdGetFloatv(HDenum.HD_CURRENT_GIMBAL_ANGLES, gimbalValues);
+        hdSetFloatv(HDenum.HD_CURRENT_TORQUE, forces);
 
         for (int i = 0; i < 2; i++)
         {
             JointAngles[i] = jointValues[i];
         }
-            JointAngles[2] = (jointValues[2] - jointValues[1]);
+        JointAngles[2] = (jointValues[2] - jointValues[1]);
 
         for (int i = 0; i < 3; i++)
         {
             JointAngles[i + 3] = gimbalValues[i];
         }
+        hdEndFrame(hapticDevice);
 
-        return (int)HDenum.HD_CALLBACK_CONTINUE;
+        return (int)HDenum.HD_CALLBACK_DONE;
     }
+
+    public void getButtonStateSync()
+    {
+        hdScheduleSynchronous(getButtonState, null, ushort.MaxValue);
+    }
+
+    public int getButtonState()
+    {
+        bool[] buttons = new bool[1];
+        hdBeginFrame(hapticDevice);
+        hdGetBooleanv(HDenum.HD_CURRENT_BUTTONS, buttons);
+        buttonActive = buttons[0];
+        hdEndFrame(hapticDevice);
+
+        return (int)HDenum.HD_CALLBACK_DONE;
+    }
+
     /** Función para guardar los ángulos de baxter en el momento en que colisiona */
-    public void recalculateJointAngles()
+    public int recalculateJointAngles()
     {
         hdBeginFrame(hapticDevice);
         hdGetFloatv(HDenum.HD_CURRENT_JOINT_ANGLES, localJointValues);
@@ -284,78 +323,154 @@ public class SensablePlugin : MonoBehaviour
         {
             localJointAngles[i + 3] = gimbalValues[i];
         }
+
+        return (int)HDenum.HD_CALLBACK_DONE;
     }
     /** Actualiza el vector que contiene las últimas fuerzas seteadas */
-    private void updateLastForces(float[] newforces)
-    {
-        if (lastForces.Count==lastForcesLength)
-            lastForces.RemoveAt(0);
 
-        for(int i = 0; i < newforces.Length; ++i)
-            newforces[i] = MIN_TORQUE + Mathf.Exp(CONSTANTS[i] * newforces[i]);
-
-        lastForces.Add(newforces);
-    }
-    /** Calcula la nueva fuerza a partir de las últimas fuerzas usadas en el dispositivo */
-    private float[] getComparedForce(List<float[]> forces)
+    public float[] getLastPos()
     {
-        float[] newForce = new float[3];
-        for (int i = 0; i < forces.Count; ++i)
+        float[] sol = { 0, 0, 0 };
+
+        foreach (float[] pos in positions)
         {
-            newForce[0] += forces[i][0];
-            newForce[1] += forces[i][1];
-            newForce[2] += forces[i][2];
+            sol[0] += pos[0];
+            sol[1] += pos[1];
+            sol[2] += pos[2];
         }
 
-        newForce[0] /= forces.Count;
-        newForce[1] /= forces.Count;
-        newForce[2] /= forces.Count;
+        sol[0] /= positions.Count;
+        sol[1] /= positions.Count;
+        sol[2] /= positions.Count;
 
-        return newForce;
+        return sol;
     }
     /** La fuerza variable se seteará con una función exponencial: f(x) = MIN_TORQUE * (e^(50*variación))
     * La razón de usar esta función es sencilla: queremos un feedback suave al tocar y alto cuando tratemos 
     * de penetrar un objeto. Trataremos de suavizar el cambio de fuerza comparando los valores actuales de 
     * fuerza con los anteriores, haciendo así transiciones más suaves */
-    public void setVariableForce(){
-        int index = getBaxterArticulationIndex(collidingBaxterArticulation);
+    public void setVariableForce() {
+        //int index = getBaxterArticulationIndex(collidingBaxterArticulation);
+        //Debug.Log(index);
+        int index = 5;
         float[] variation = getDirectionVector(index);
-        //updateLastForces(variation);
-        //float[] lastForceSum = getComparedForce(lastForces);
-        
-        //constant = 10;
+        float[] position = getLastPos();
         float calculatedForce, difference;
+        int sense;
 
-        for (int i = 0; i < variation.Length; i++)
-        { 
-            calculatedForce = Mathf.Sign(position[i]) * (MIN_TORQUE + Mathf.Exp(CONSTANTS[i] * Mathf.Abs(variation[i])));
-            
-            difference = Mathf.Abs(calculatedForce) - Mathf.Abs(forces[i]);
+        //Debug.Log(Mathf.Abs(variation[0]) + " " + "SOL");
 
-            if (variation[i] < 0.05)
+        for (int i = 0; i < forces.Length; i++)
+        {
+            if (positions[positions.Count - 1][i] == 0f)
+                sense = (int)Mathf.Sign(position[i]);
+            else
+                sense = (int)Mathf.Sign(positions[positions.Count - 1][i]);
+
+            if(isExiting(sense, variation[i], i))
             {
-                forces[i] = calculatedForce - MIN_TORQUE;
+                forces[i] = 0;
             }
             else
             {
-                if (difference > 50)
-                    forces[i] += 20;
+                calculatedForce = sense * (MIN_TORQUE + Mathf.Exp(CONSTANTS[i] * Mathf.Abs(variation[i])));
+
+                if (Mathf.Abs(variation[i]) < 0.02)
+                {
+                    if (i != 1)
+                        forces[i] = 0;
+                    else
+                        forces[i] = MIN_TORQUE;
+                }
+                else if (Mathf.Abs(variation[i]) < 0.02 && Mathf.Abs(variation[i]) < 0.06)
+                {
+                    if (i != 1)
+                        forces[i] = MIN_TORQUE;
+                    else
+                        forces[i] = MIN_TORQUE * 1.2f;
+                }
+                else if (Mathf.Abs(variation[i]) < 0.06 && Mathf.Abs(variation[i]) < 0.1)
+                {
+                    forces[i] = position[i] * calculatedForce;
+                }
                 else
                 {
+                    calculatedForce = calculatedForce + forces[i] / 2;
+
                     if (calculatedForce > MAX_TORQUE)
-                        forces[i] = MAX_TORQUE;
+                        forces[i] = sense * MAX_TORQUE;
                     else
                         forces[i] = calculatedForce;
                 }
+
+                difference = Mathf.Abs(calculatedForce) - Mathf.Abs(forces[i]);
+
+                if (difference > MIN_TORQUE * 1.2)
+                {
+                    forces[i] += sense * MIN_TORQUE;
+                }
+
             }
-            Debug.Log(forces[i]);
+
+
+            Debug.Log("Sense: " + sense + " " + i);
+            Debug.Log("Var: " + variation[i] + " " + i);   
+            Debug.Log("For: " + forces[i] + " " + i);
         }
-        hdSetFloatv(HDenum.HD_CURRENT_TORQUE, forces);
+
+        infoY.Add(forces[0].ToString());
+        infoX.Add(forces[1].ToString());
+        infoZ.Add(forces[2].ToString());
     }
-    
+
+    /** Detecta si tras la colisión estamos tratando de ir más profundo o si estamos tratando de ir hacia afuera */
+    public bool isExiting(int sense, float variation, int index)
+    {
+        switch (index)
+        {
+            case 0:
+                if (sense > 0)
+                    if (Mathf.Sign(variation) < 0)
+                        return false;
+                    else
+                        return true;
+                else
+                    if (Mathf.Sign(variation) < 0)
+                        return true;
+                    else
+                        return false;
+            case 1:
+                if (sense > 0)
+                    if (Mathf.Sign(variation) < 0)
+                        return true;
+                    else
+                        return false;
+                else
+                    if (Mathf.Sign(variation) < 0)
+                        return false;
+                    else
+                        return true;
+
+            case 2:
+                if (sense > 0)
+                    if (Mathf.Sign(variation) < 0)
+                        return true;
+                    else
+                        return false;
+                else
+                    if (Mathf.Sign(variation) < 0)
+                        return false;
+                    else
+                        return true;
+        }
+
+        return true;
+
+    }
+
     /** Devuelve un valor entre 0 y 1 del desplazamiento que el robot ha hecho en la articulación dada,
      es decir, devuelve de forma ponderada cual ha sido la cantidad, dentro del rango posible*/
-   public float normalizeHapticAngles(int index, float value)
+    public float normalizeHapticAngles(int index, float value)
     {
         float min;
         float max;
@@ -369,7 +484,7 @@ public class SensablePlugin : MonoBehaviour
                 max = -0.913f;
                 range = Mathf.Abs(min) + Mathf.Abs(max);
 
-                return value/range;
+                return value / range;
             case 1:
                 min = 0.330f;
                 max = 1.726f;
@@ -408,45 +523,68 @@ public class SensablePlugin : MonoBehaviour
     /** Función que retorna el índice correspondiente dada una articulación de baxter*/
     public int getBaxterArticulationIndex(GameObject baxterArticulation)
     {
-        return Array.IndexOf(mapBaxterArticulations.selectedArticulations, baxterArticulation.GetComponent<ArticulationBody>());
+        try{
+            return Array.IndexOf(mapBaxterArticulations.selectedArticulations, baxterArticulation.GetComponent<ArticulationBody>());
+        }
+        catch {
+            return -1;
+        }
     }
 
     /** Función que retorna un vector de dirección conocidos los ángulos de baxter,
      * usada para establecer feedback háptico*/
     public float[] getDirectionVector(int index) {
-        float minZCollisionValue = 0.4f;
-        float minYCollisionValue = 0.2f;
+        float minZCollisionValue = 0.15f;
+        float minYCollisionValue = 0.1f;
         float[] solution = { 0f, 0f, 0f };
         /** Importancia de la articulación iésima en el movimiento en su eje */
         float[] weightX = { 0f, 0.6f, 0.25f, 0f, 0.15f, 0f };
         float[] weightZ = { 0f, 0.2f, 0.6f, 0f, 0.2f, 0f };
+        float[] position = getLastPos();
         float value;
-       
-        for (int i = 0; i < index + 1; ++i)
+        
+        for (int i = 0; i < index; ++i)
         {
             value = normalizeHapticAngles(i, localJointAngles[i]) - normalizeHapticAngles(i, JointAngles[i]);
+            
 
             if (getArticulationAxis(i).Contains("x"))
                 solution[1] += value * weightX[i];
             if (getArticulationAxis(i).Contains("y"))
-                if (value > minYCollisionValue)
-                    solution[0] += value;
-                else
-                    solution[0] += value *0.01f;
+                solution[0] += value;
             if (getArticulationAxis(i).Contains("z"))
-                if (value > minZCollisionValue)
-                    solution[2] += value * weightZ[i];
-                else
-                    solution[2] += value * weightZ[i] * 0.1f;
+                solution[2] += value * weightZ[i];
         }
 
-        //Debug.Log(solution[0] + " " + 0);
+        if (Mathf.Abs(solution[0]) < minYCollisionValue)
+            solution[0] *= 0.1f;
+        if (Mathf.Abs(solution[2]) < minZCollisionValue)
+            solution[2] *= 0.5f;
+
+        //Debug.Log(solution[0] + " " + "SOL");
         //Debug.Log(solution[1] + " " + 1);
         //Debug.Log(solution[2] + " " + 2);
 
         return solution;
     }
 
+    public void writeInFile(List<string> toWrite, string name){
+        try
+        {
+            //Pass the filepath and filename to the StreamWriter Constructor
+            StreamWriter sw = new StreamWriter(Application.persistentDataPath + "/" + name + ".txt");
+            //Debug.Log(Application.persistentDataPath);
+            //Write a line of text
+            foreach (string line in toWrite)
+                sw.WriteLine(line);
+            //Close the file
+            sw.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Exception: " + e.Message);
+        }
+    }
     /** Devuelve el eje de acción de cada articulación por orden */
     public string getArticulationAxis(int index)
     {
@@ -473,8 +611,6 @@ public class SensablePlugin : MonoBehaviour
         forces[0] = 0;
         forces[1] = 0;
         forces[2] = 0;
-
-        hdSetFloatv(HDenum.HD_CURRENT_TORQUE, forces);
     }
     public void SetForces()
     {

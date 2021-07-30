@@ -9,7 +9,7 @@ public class baxterHapticFeedback : MonoBehaviour
     SensablePlugin sensablePlugin;
     private List<ContactPoint> contacts = new List<ContactPoint>();
     private float[] middleCollisionPoint;
-    public float thresholdCollisionDetection = 0.3f;
+    public float thresholdCollisionDetection = 0.5f;
 
     void Awake()
     {
@@ -26,26 +26,25 @@ public class baxterHapticFeedback : MonoBehaviour
         float[] position = new float[3];
         collision.GetContacts(contacts);
         position = getNormal(contacts);
-        
-        if(middleCollisionPoint==null)
-            sensablePlugin.recalculateJointAngles();
+
+        if (middleCollisionPoint == null)
+            sensablePlugin.recalculateSync();
 
         if (gameObject!=sensablePlugin.collidingBaxterArticulation  || checkDistance(middleCollisionPoint, getMiddlePoint(contacts)))
-            sensablePlugin.recalculateJointAngles();
+        {
+            if (sensablePlugin.positions.Count == sensablePlugin.positionsLength)
+                sensablePlugin.positions.Remove(sensablePlugin.positions[0]);
+
+            sensablePlugin.positions.Add(position);
+            sensablePlugin.recalculateSync();
+        }
 
         middleCollisionPoint = getMiddlePoint(contacts);
-
-        //Debug.Log(position[0] + " " + 0);
-        //Debug.Log(position[1] + " " + 1);
-        //Debug.Log(position[2] + " " + 2);
-        //position[0] *= 40;
-        //position[1] *= 40;
-        //position[2] *= 40;
 
         sensablePlugin.collidigObject = collision.collider.name;
         sensablePlugin.collidingBaxterArticulation = gameObject;
         sensablePlugin.isColliding = true;
-        sensablePlugin.position = position;
+        
     }
 
     internal void OnCollisionStayChild(Collision collision)
@@ -55,9 +54,8 @@ public class baxterHapticFeedback : MonoBehaviour
     
     internal void OnCollisionExitChild(Collision collision)
     {
-        float[] resetPos = { 0,0,0 };
+        middleCollisionPoint = null;
         sensablePlugin.isColliding = false;
-        sensablePlugin.position = resetPos;
     }
 
     public bool checkDistance(float[] point1, float[] point2)
@@ -65,7 +63,7 @@ public class baxterHapticFeedback : MonoBehaviour
         Vector3 origin = new Vector3(point1[0], point1[1], point1[2]);
         Vector3 end = new Vector3(point2[0], point2[1], point2[2]);
 
-        return Vector3.Distance(origin, end) > thresholdCollisionDetection ? true : false;
+        return Mathf.Abs(Vector3.Distance(origin, end)) > thresholdCollisionDetection ? true : false;
     }
     public float[] getNormal(List<ContactPoint> contacts)
     {
