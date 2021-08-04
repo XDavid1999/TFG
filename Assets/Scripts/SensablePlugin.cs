@@ -59,49 +59,6 @@ public class SensablePlugin : MonoBehaviour
         HD_USER_STATUS_LIGHT = 0x2900
     }
 
-    public enum HLenum
-    {
-        /* Force Effect Parameters */
-        HL_EFFECT_CALLBACK,
-        HL_EFFECT_CONSTANT,
-        HL_EFFECT_SPRING,
-        HL_EFFECT_VISCOUS,
-        HL_EFFECT_FRICTION,
-
-        HL_EFFECT_PROPERTY_TYPE,
-        HL_EFFECT_PROPERTY_GAIN,
-        HL_EFFECT_PROPERTY_MAGNITUDE,
-        HL_EFFECT_PROPERTY_FREQUENCY,
-        HL_EFFECT_PROPERTY_DURATION,
-        HL_EFFECT_PROPERTY_POSITION,
-        HL_EFFECT_PROPERTY_DIRECTION,
-        HL_EFFECT_PROPERTY_ACTIVE,
-
-        HL_EFFECT_COMPUTE_FORCE,
-        HL_EFFECT_START,
-        HL_EFFECT_STOP,
-
-        /* Proxy and Device State 
-           (in workspace coordinates) */
-        HL_PROXY_POSITION,
-        HL_PROXY_ROTATION,
-        HL_PROXY_TRANSFORM,
-        HL_DEVICE_POSITION,
-        HL_DEVICE_ROTATION,
-        HL_DEVICE_TRANSFORM,
-        HL_DEVICE_FORCE,
-        HL_DEVICE_TORQUE,
-        HL_BUTTON1_STATE,
-        HL_BUTTON2_STATE,
-        HL_BUTTON3_STATE,
-        HL_SAFETY_STATE,
-        HL_INKWELL_STATE,
-        HL_DEPTH_OF_PENETRATION,
-
-        /* Proxy State */
-        HL_PROXY_IS_TOUCHING,
-        HL_PROXY_TOUCH_NORMAL,
-    }
 
     mapBaxterArticulations mapBaxterArticulations;
     /* Minimum/Maximum value of torque we will use */
@@ -190,44 +147,7 @@ public class SensablePlugin : MonoBehaviour
     [DllImport("hd")] public static extern double hdGetSchedulerTimeStamp();
     #endregion
 
-    #region Imported hl functions
-    [DllImport("hl")] public static extern UIntPtr hlCreateContext(int hHD);
-    [DllImport("hl")] public static extern void hlDeleteContext(UIntPtr hHLRC);
-    [DllImport("hl")] public static extern void hlMakeCurrent(UIntPtr hHLRC);
-    [DllImport("hl")] public static extern void hlContextDevice(int hHD);
-    [DllImport("hl")] public static extern int hlGetCurrentContext();
-    [DllImport("hl")] public static extern int hlGetCurrentDevice();
-
-    [DllImport("hl")] public static extern void hlBeginFrame();
-    [DllImport("hl")] public static extern void hlEndFrame();
-    [DllImport("hl")] public static extern void hlEnable(HLenum cap);
-    [DllImport("hl")] public static extern void hlDisable(HLenum cap);
-    [DllImport("hl")] public static extern bool hlIsEnabled(HLenum cap);
-
-    [DllImport("hl")] public static extern void hlGetIntegerv(HLenum pname, int[] value);
-    [DllImport("hl")] public static extern void hlGetDoublev(HLenum pname, double[] values);
-    [DllImport("hl")] public static extern void hlGetBooleanv(HLenum pname, bool[] values);
-
-    /* Force effects */
-    [DllImport("hl")] public static extern void hlStartEffect(HLenum type, int effect);
-    [DllImport("hl")] public static extern void hlStopEffect(int effect);
-    [DllImport("hl")] public static extern void hlUpdateEffect(int effect);
-
-    [DllImport("hl")] public static extern int hlGenEffects(double range);
-    [DllImport("hl")] public static extern void hlDeleteEffects(int effect, double range);
-    [DllImport("hl")] public static extern void hlIsEffect(int effect);
-    [DllImport("hl")] public static extern void hlTriggerEffect(HLenum type);
-    [DllImport("hl")] public static extern void hlEffectd(HLenum pname, double param);
-    [DllImport("hl")] public static extern void hlEffecti(HLenum pname, int param);
-    [DllImport("hl")] public static extern void hlEffectdv(HLenum pname, double[] parameters);
-    [DllImport("hl")] public static extern void hlEffectiv(HLenum pname, int[] parameters);
-    [DllImport("hl")] public static extern void hlGetEffectdv(int effect, HLenum pname, double[] parameters);
-    [DllImport("hl")] public static extern void hlGetEffectiv(int effect, HLenum pname, int[] parameters);
-    [DllImport("hl")] public static extern void hlGetEffectbv(int effect, HLenum pname, bool[] param);
-    [DllImport("hl")] public static extern Exception hlGetError();
-
-    [SerializeField] private Vector3 forceInput;
-    #endregion
+ 
     private void Awake()
     {
         mapBaxterArticulations = GetComponent<mapBaxterArticulations>();
@@ -242,8 +162,8 @@ public class SensablePlugin : MonoBehaviour
 
     private void FixedUpdate()
     {
-        isTouchingObject();
         isGrabbingObject();
+        isTouchingObject();
         hdScheduleSynchronous(updateHapticContext, null, ushort.MaxValue);
     }
     private void OnApplicationQuit()
@@ -259,11 +179,12 @@ public class SensablePlugin : MonoBehaviour
         {
             getButtonStateSync();
             if (buttonActive) {
-                resetForce();
                 float mass = grabbingObjectGameobject.GetComponent<Rigidbody>().mass;
                 Vector3 position = grabbingObjectGameobject.transform.position;
 
+                resetForce();
                 setVelocity(position);
+
                 Vector3 calculatedInertia = inertia(mass);
                 Vector3 calculatedGravity = gravity(mass);
 
@@ -274,24 +195,13 @@ public class SensablePlugin : MonoBehaviour
                     if (Math.Abs(grabbingForce) > MAX_TORQUE)
                         forces[i] = Mathf.Sign(grabbingForce) * MAX_TORQUE;
                     else
-                        forces[i] = grabbingForce;
-
-                    
+                        forces[i] = grabbingForce;                  
                 }
 
-                lastGameobjectPosition = position;
-                lastVelocity[0] = currentVelocity[0];
-                lastVelocity[1] = currentVelocity[1];
-                lastVelocity[2] = currentVelocity[2];
-
-                if (Mathf.Abs(forces[0]) < 10000)
-                    infoY.Add(forces[0].ToString());
-
-                if (Mathf.Abs(forces[1]) < 10000)
-                    infoX.Add(forces[1].ToString());
-
-                if (Mathf.Abs(forces[2]) < 10000)
-                    infoZ.Add(forces[2].ToString());
+                updatePositionAndVelocity(position);
+                infoY.Add(forces[0].ToString());
+                infoX.Add(forces[1].ToString());
+                infoZ.Add(forces[2].ToString());
             }
             else
             {
@@ -305,7 +215,13 @@ public class SensablePlugin : MonoBehaviour
         }
     }
 
-
+    public void updatePositionAndVelocity(Vector3 position)
+    {
+        lastGameobjectPosition = position;
+        lastVelocity[0] = currentVelocity[0];
+        lastVelocity[1] = currentVelocity[1];
+        lastVelocity[2] = currentVelocity[2];
+    }
     public Vector3 fromFloatArrToVector3(float[] array)
     {
         if (array.Length != 3)
@@ -360,7 +276,7 @@ public class SensablePlugin : MonoBehaviour
     {
         Vector3 gravity = new Vector3();
         float[] weight = { 0, 0.7f, 0.3f };
-        const float GRAVITY_SCALE = 0.2f;
+        const float GRAVITY_SCALE = 0.3f;
 
         gravity[0] = weight[0] * GRAVITY_SCALE * mass * Physics.gravity[0];
         gravity[1] = weight[1] * GRAVITY_SCALE * mass * Physics.gravity[1];
@@ -371,7 +287,7 @@ public class SensablePlugin : MonoBehaviour
     public Vector3 inertia(float mass)
     {
         float FLIP_TORQUE_SENSE = -1f;
-        float INERTIA_SCALE = -0.2f;
+        float INERTIA_SCALE = -0.15f;
         float DISTANCE_TO_ORIGIN = -1.1f;
 
         float acceleration;
@@ -510,16 +426,13 @@ public class SensablePlugin : MonoBehaviour
     * La razón de usar esta función es sencilla: queremos un feedback suave al tocar y alto cuando tratemos 
     * de penetrar un objeto. Trataremos de suavizar el cambio de fuerza comparando los valores actuales de 
     * fuerza con los anteriores, haciendo así transiciones más suaves */
-    public void setVariableForce() {
-        //int index = getBaxterArticulationIndex(collidingBaxterArticulation);
-        //Debug.Log(index);
-        int index = 5;
+    public void setVariableForce() 
+    {
+        int index = collidingArticulationIndex();
         float[] variation = getDirectionVector(index);
         float[] position = getLastPos();
         float calculatedForce, difference;
         int sense;
-
-        //Debug.Log(Mathf.Abs(variation[0]) + " " + "SOL");
 
         for (int i = 0; i < forces.Length; i++)
         {
@@ -572,16 +485,18 @@ public class SensablePlugin : MonoBehaviour
                 }
 
             }
+        }
+    }
 
-
-            //Debug.Log("Sense: " + sense + " " + i);
-            //Debug.Log("Var: " + variation[i] + " " + i);   
-            //Debug.Log("For: " + forces[i] + " " + i);
+    public int collidingArticulationIndex()
+    {
+        for (int i = 0; i < mapBaxterArticulations.selectedArticulations.Length; i++)
+        {
+            if (mapBaxterArticulations.selectedArticulations[i] == collidingBaxterArticulation.GetComponent<ArticulationBody>())
+                return i;
         }
 
-        //infoY.Add(forces[0].ToString());
-        //infoX.Add(forces[1].ToString());
-        //infoZ.Add(forces[2].ToString());
+        return -1;
     }
 
     /** Detecta si tras la colisión estamos tratando de ir más profundo o si estamos tratando de ir hacia afuera */
@@ -681,27 +596,15 @@ public class SensablePlugin : MonoBehaviour
         return -1;
     }
 
-    /** Función que retorna el índice correspondiente dada una articulación de baxter*/
-    public int getBaxterArticulationIndex(GameObject baxterArticulation)
-    {
-        try{
-            return Array.IndexOf(mapBaxterArticulations.selectedArticulations, baxterArticulation.GetComponent<ArticulationBody>());
-        }
-        catch {
-            return -1;
-        }
-    }
-
     /** Función que retorna un vector de dirección conocidos los ángulos de baxter,
      * usada para establecer feedback háptico*/
     public float[] getDirectionVector(int index) {
-        float minZCollisionValue = 0.15f;
+        float minZCollisionValue = 0.25f;
         float minYCollisionValue = 0.1f;
         float[] solution = { 0f, 0f, 0f };
         /** Importancia de la articulación iésima en el movimiento en su eje */
         float[] weightX = { 0f, 0.6f, 0.25f, 0f, 0.15f, 0f };
         float[] weightZ = { 0f, 0.2f, 0.6f, 0f, 0.2f, 0f };
-        float[] position = getLastPos();
         float value;
         
         for (int i = 0; i < index; ++i)
@@ -730,7 +633,6 @@ public class SensablePlugin : MonoBehaviour
         {
             //Pass the filepath and filename to the StreamWriter Constructor
             StreamWriter sw = new StreamWriter(Application.persistentDataPath + "/" + name + ".txt");
-            //Debug.Log(Application.persistentDataPath);
             //Write a line of text
             foreach (string line in toWrite)
                 sw.WriteLine(line);
