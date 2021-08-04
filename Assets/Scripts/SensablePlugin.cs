@@ -242,7 +242,7 @@ public class SensablePlugin : MonoBehaviour
 
     private void FixedUpdate()
     {
-        SetForces();
+        isTouchingObject();
         isGrabbingObject();
         hdScheduleSynchronous(updateHapticContext, null, ushort.MaxValue);
     }
@@ -305,22 +305,6 @@ public class SensablePlugin : MonoBehaviour
         }
     }
 
-    public float filterForces(float calculated, int index)
-    {
-        float MAX_VARIATION = MIN_TORQUE * 2;
-        float MIN_VARIATION = MIN_TORQUE;
-        float moduleCalculated = Mathf.Abs(calculated);
-
-        //if (moduleCalculated > MAX_VARIATION)
-        //    return Mathf.Sign(calculated) * (forces[index] + MIN_TORQUE);
-        //if (moduleCalculated < MIN_VARIATION)
-        //    return 0;
-        //else
-
-            return calculated;
-
-
-    }
 
     public Vector3 fromFloatArrToVector3(float[] array)
     {
@@ -352,7 +336,7 @@ public class SensablePlugin : MonoBehaviour
     public Vector3 getVelocityFromPosition(Vector3 newPosition)
     {
         Vector3 solution = Vector3.zero;
-        float MIN_VARIATION = 0.0075f;
+        float MIN_VARIATION = 0.0055f;
 
         if (lastGameobjectPosition != Vector3.zero)
         {
@@ -386,11 +370,22 @@ public class SensablePlugin : MonoBehaviour
     }
     public Vector3 inertia(float mass)
     {
+        float FLIP_TORQUE_SENSE = -1f;
+        float INERTIA_SCALE = -0.2f;
+        float DISTANCE_TO_ORIGIN = -1.1f;
+
+        float acceleration;
+        float force;
+        float torque;
         Vector3 inertia = new Vector3();
 
         for (int i = 0; i < forces.Length; ++i)
         {
-            inertia[i] = -0.2f * filterForces(getAcceleration(i, mass) * mass, i);
+            acceleration = getAcceleration(i, mass);
+            force = acceleration * mass;
+            torque = force * DISTANCE_TO_ORIGIN;
+
+            inertia[i] = FLIP_TORQUE_SENSE * INERTIA_SCALE * torque;
         }
 
         return inertia;
@@ -398,7 +393,7 @@ public class SensablePlugin : MonoBehaviour
 
     public float getAcceleration(int i, float mass)
     {
-        float MIN_ACCELERATION = 0.1f;
+        float MIN_ACCELERATION = 0.001f;
         float MAX_ACCELERATION = MAX_TORQUE/mass;
 
         float acceleration = (lastVelocity[i] - currentVelocity[i]) / Time.deltaTime;
@@ -774,7 +769,7 @@ public class SensablePlugin : MonoBehaviour
         forces[1] = 0;
         forces[2] = 0;
     }
-    public void SetForces()
+    public void isTouchingObject()
     {
         if (isColliding)
         {
