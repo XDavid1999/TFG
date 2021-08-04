@@ -242,7 +242,7 @@ public class SensablePlugin : MonoBehaviour
 
     private void FixedUpdate()
     {
-        SetForces();
+        //SetForces();
         isGrabbingObject();
         hdScheduleSynchronous(updateHapticContext, null, ushort.MaxValue);
     }
@@ -263,26 +263,43 @@ public class SensablePlugin : MonoBehaviour
                 Vector3 position = grabbingObjectGameobject.transform.position;
 
                 setVelocity(position);
+                Vector3 calculatedInertia = inertia(mass);
+                Vector3 calculatedGravity = gravity(mass);
 
-                if(lastGameobjectPosition != Vector3.zero || Vector3.Distance(lastGameobjectPosition, position) > 0.02)
-                    inertia(mass);
+                for (int i = 0; i < forces.Length; ++i)
+                {
+                    float grabbingForce = calculatedInertia[i];
 
-                gravity(mass);
+                    if (Math.Abs(grabbingForce) > MAX_TORQUE)
+                        forces[i] = Mathf.Sign(grabbingForce) * MAX_TORQUE;
+                    else
+                        forces[i] = grabbingForce;
+
+                    Debug.Log(forces[i] + " " + i);
+                    
+                }
 
                 lastGameobjectPosition = position;
                 lastVelocity[0] = currentVelocity[0];
                 lastVelocity[1] = currentVelocity[1];
                 lastVelocity[2] = currentVelocity[2];
+                
+                if(Mathf.Abs(forces[0]) < 10000)
+                    infoY.Add(forces[0].ToString());
 
-                infoY.Add(forces[0].ToString());
-                infoX.Add(forces[1].ToString());
-                infoZ.Add(forces[2].ToString());
+                if (Mathf.Abs(forces[1]) < 10000)
+                    infoX.Add(forces[1].ToString());
+
+                if (Mathf.Abs(forces[2]) < 10000)
+                    infoZ.Add(forces[2].ToString());
+
             }
             else
             {
                 lastGameobjectPosition = Vector3.zero;
                 grabbingObject = false;
                 Destroy(grabbingObjectGameobject.GetComponent<childCollider>());
+                grabbingObjectGameobject.layer = 0;
                 grabbingObjectGameobject.transform.SetParent(null);
             }
         }
@@ -290,12 +307,24 @@ public class SensablePlugin : MonoBehaviour
 
     public float filterForces(float calculated, int index)
     {
-        if (Mathf.Abs(forces[index] - calculated) > MIN_TORQUE)
-            return MIN_TORQUE;
-        else if (Mathf.Abs(forces[index] - calculated) < MIN_TORQUE * 0.2)
+        float MAX_VARIATION = MIN_TORQUE * 2;
+        float MIN_VARIATION = MIN_TORQUE * 0.1f;
+        float difference = Mathf.Abs(forces[index] - calculated);
+
+        if ( difference > MAX_VARIATION)
+            return Mathf.Sign(calculated) * (Mathf.Abs(forces[index]) + MIN_TORQUE * 2);
+        else if (difference > MAX_VARIATION && difference < MIN_VARIATION)
             return forces[index];
         else
-            return forces[index] * 0.25f + calculated * 0.75f; 
+            return Mathf.Abs(forces[index]) * 0.2f + Mathf.Abs(calculated) * 0.8f; 
+    }
+
+    public Vector3 fromFloatArrToVector3(float[] array)
+    {
+        if (array.Length != 3)
+            return new Vector3(array[0], array[1], array[2]);
+
+        return Vector3.zero;
     }
 
     public void deleteData()
@@ -310,44 +339,61 @@ public class SensablePlugin : MonoBehaviour
     }
     public void setVelocity(Vector3 newPosition)
     {
-        float[] velocity = getVelocityFromPosition(newPosition);
+        Vector3 velocity = getVelocityFromPosition(newPosition);
 
         currentVelocity[0] = velocity[0]; 
         currentVelocity[1] = velocity[1]; 
         currentVelocity[2] = velocity[2]; 
     }
 
-    public float[] getVelocityFromPosition(Vector3 newPosition)
+    public Vector3 getVelocityFromPosition(Vector3 newPosition)
     {
-        float[] solution = { 0, 0, 0 };
+        Vector3 solution = Vector3.zero;
+        float MIN_VARIATION = 0.0075f;
 
-        if(lastGameobjectPosition != Vector3.zero){
-            solution[0] = (lastGameobjectPosition[0] * newPosition[0]) / Time.deltaTime;
-            solution[1] = (lastGameobjectPosition[1] * newPosition[1]) / Time.deltaTime;
-            solution[2] = (lastGameobjectPosition[2] * newPosition[2]) / Time.deltaTime;
-        }    
+        if (Vector3.Distance(lastGameobjectPosition, newPosition) > MIN_VARIATION)
+        {
+            solution[0] = (lastGameobjectPosition[0] - newPosition[0]) / Time.deltaTime;
+            solution[1] = (lastGameobjectPosition[1] - newPosition[1]) / Time.deltaTime;
+            solution[2] = (lastGameobjectPosition[2] - newPosition[2]) / Time.deltaTime;
+        }
+        else
+        {
+            solution = fromFloatArrToVector3(currentVelocity);
+        }
 
         return solution;
     }
-    public void gravity(float mass)
+    public Vector3 gravity(float mass)
     {
-        const float GRAVITY_SCALE = 0.4f;
+        Vector3 gravity = new Vector3();
+        float[] weight = { 0, 0.7f, 0.3f };
+        const float GRAVITY_SCALE = 0.2f;
 
-        forces[0] += GRAVITY_SCALE * mass * Physics.gravity[0];
-        forces[1] += GRAVITY_SCALE * mass * Physics.gravity[1];
-        forces[2] += GRAVITY_SCALE * mass * Physics.gravity[1];
+        gravity[0] = weight[0] * GRAVITY_SCALE * mass * Physics.gravity[0];
+        gravity[1] = weight[1] * GRAVITY_SCALE * mass * Physics.gravity[1];
+        gravity[2] = weight[2] * GRAVITY_SCALE * mass * Physics.gravity[1];
+
+        return gravity;
     }
-    public void inertia(float mass)
+    public Vector3 inertia(float mass)
     {
-        for (int i = 0; i < currentVelocity.Length; ++i)
+        Vector3 inertia = new Vector3();
+
+        for (int i = 0; i < forces.Length; ++i)
         {
-            forces[i] = 2 * filterForces(getAcceleration(i) * mass, i);
-        } 
+            inertia[i] = -1f * filterForces(getAcceleration(i, mass) * mass, i);
+        }
+
+        return inertia;
     }
 
-    public float getAcceleration(int i)
+    public float getAcceleration(int i, float mass)
     {
-        return (currentVelocity[i] - lastVelocity[i]) /  Time.deltaTime;
+        float MIN_ACCELERATION = 0.1f;
+        float acceleration = (lastVelocity[i] - currentVelocity[i]) / Time.deltaTime;
+
+        return acceleration > MIN_ACCELERATION ? acceleration : forces[i]/mass;
     }
 
     /** Función para inicializar el dispositivo háptico */
@@ -452,7 +498,9 @@ public class SensablePlugin : MonoBehaviour
 
         return sol;
     }
-    /** La fuerza variable se seteará con una función exponencial: f(x) = MIN_TORQUE * (e^(50*variación))
+    /** La fuerza variable se seteará con una función exponencial: 
+     * f(x) = MIN_TORQUE * (e^(log((MAX_TORQUE - MIN_TORQUE)/MAX_PENETRATION)* variación))
+     * 
     * La razón de usar esta función es sencilla: queremos un feedback suave al tocar y alto cuando tratemos 
     * de penetrar un objeto. Trataremos de suavizar el cambio de fuerza comparando los valores actuales de 
     * fuerza con los anteriores, haciendo así transiciones más suaves */
@@ -525,9 +573,9 @@ public class SensablePlugin : MonoBehaviour
             //Debug.Log("For: " + forces[i] + " " + i);
         }
 
-        infoY.Add(forces[0].ToString());
-        infoX.Add(forces[1].ToString());
-        infoZ.Add(forces[2].ToString());
+        //infoY.Add(forces[0].ToString());
+        //infoX.Add(forces[1].ToString());
+        //infoZ.Add(forces[2].ToString());
     }
 
     /** Detecta si tras la colisión estamos tratando de ir más profundo o si estamos tratando de ir hacia afuera */

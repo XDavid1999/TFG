@@ -51,8 +51,7 @@ public class baxterHapticFeedback : MonoBehaviour
                 sensablePlugin.recalculateSync();
             }
 
-            middleCollisionPoint = getMiddlePoint(contacts);   
-
+            middleCollisionPoint = getMiddlePoint(contacts);
             sensablePlugin.collidingBaxterArticulation = gameObject;
             sensablePlugin.isColliding = true;
         }
@@ -66,6 +65,7 @@ public class baxterHapticFeedback : MonoBehaviour
             sensablePlugin.isColliding = false;
             sensablePlugin.grabbingObject = true;
             collidingObject.transform.SetParent(baxterArticulation.transform);
+            collidingObject.layer = 9;
             collidingObject.AddComponent<childCollider>();
 
         }
