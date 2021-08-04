@@ -242,7 +242,7 @@ public class SensablePlugin : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //SetForces();
+        SetForces();
         isGrabbingObject();
         hdScheduleSynchronous(updateHapticContext, null, ushort.MaxValue);
     }
@@ -259,6 +259,7 @@ public class SensablePlugin : MonoBehaviour
         {
             getButtonStateSync();
             if (buttonActive) {
+                resetForce();
                 float mass = grabbingObjectGameobject.GetComponent<Rigidbody>().mass;
                 Vector3 position = grabbingObjectGameobject.transform.position;
 
@@ -268,14 +269,13 @@ public class SensablePlugin : MonoBehaviour
 
                 for (int i = 0; i < forces.Length; ++i)
                 {
-                    float grabbingForce = calculatedInertia[i];
+                    float grabbingForce = calculatedInertia[i] + calculatedGravity[i];
 
                     if (Math.Abs(grabbingForce) > MAX_TORQUE)
                         forces[i] = Mathf.Sign(grabbingForce) * MAX_TORQUE;
                     else
                         forces[i] = grabbingForce;
 
-                    Debug.Log(forces[i] + " " + i);
                     
                 }
 
@@ -283,8 +283,8 @@ public class SensablePlugin : MonoBehaviour
                 lastVelocity[0] = currentVelocity[0];
                 lastVelocity[1] = currentVelocity[1];
                 lastVelocity[2] = currentVelocity[2];
-                
-                if(Mathf.Abs(forces[0]) < 10000)
+
+                if (Mathf.Abs(forces[0]) < 10000)
                     infoY.Add(forces[0].ToString());
 
                 if (Mathf.Abs(forces[1]) < 10000)
@@ -292,7 +292,6 @@ public class SensablePlugin : MonoBehaviour
 
                 if (Mathf.Abs(forces[2]) < 10000)
                     infoZ.Add(forces[2].ToString());
-
             }
             else
             {
@@ -301,6 +300,7 @@ public class SensablePlugin : MonoBehaviour
                 Destroy(grabbingObjectGameobject.GetComponent<childCollider>());
                 grabbingObjectGameobject.layer = 0;
                 grabbingObjectGameobject.transform.SetParent(null);
+                resetForce();
             }
         }
     }
@@ -308,15 +308,18 @@ public class SensablePlugin : MonoBehaviour
     public float filterForces(float calculated, int index)
     {
         float MAX_VARIATION = MIN_TORQUE * 2;
-        float MIN_VARIATION = MIN_TORQUE * 0.1f;
-        float difference = Mathf.Abs(forces[index] - calculated);
+        float MIN_VARIATION = MIN_TORQUE;
+        float moduleCalculated = Mathf.Abs(calculated);
 
-        if ( difference > MAX_VARIATION)
-            return Mathf.Sign(calculated) * (Mathf.Abs(forces[index]) + MIN_TORQUE * 2);
-        else if (difference > MAX_VARIATION && difference < MIN_VARIATION)
-            return forces[index];
-        else
-            return Mathf.Abs(forces[index]) * 0.2f + Mathf.Abs(calculated) * 0.8f; 
+        //if (moduleCalculated > MAX_VARIATION)
+        //    return Mathf.Sign(calculated) * (forces[index] + MIN_TORQUE);
+        //if (moduleCalculated < MIN_VARIATION)
+        //    return 0;
+        //else
+
+            return calculated;
+
+
     }
 
     public Vector3 fromFloatArrToVector3(float[] array)
@@ -351,15 +354,20 @@ public class SensablePlugin : MonoBehaviour
         Vector3 solution = Vector3.zero;
         float MIN_VARIATION = 0.0075f;
 
-        if (Vector3.Distance(lastGameobjectPosition, newPosition) > MIN_VARIATION)
+        if (lastGameobjectPosition != Vector3.zero)
         {
-            solution[0] = (lastGameobjectPosition[0] - newPosition[0]) / Time.deltaTime;
-            solution[1] = (lastGameobjectPosition[1] - newPosition[1]) / Time.deltaTime;
-            solution[2] = (lastGameobjectPosition[2] - newPosition[2]) / Time.deltaTime;
-        }
-        else
-        {
-            solution = fromFloatArrToVector3(currentVelocity);
+            if (Vector3.Distance(lastGameobjectPosition, newPosition) > MIN_VARIATION)
+            {
+                solution[0] = (lastGameobjectPosition[0] - newPosition[0]) / Time.deltaTime;
+                solution[1] = (lastGameobjectPosition[1] - newPosition[1]) / Time.deltaTime;
+                solution[2] = (lastGameobjectPosition[2] - newPosition[2]) / Time.deltaTime;
+            }
+            else
+            {
+                solution[0] = 0.5f * (lastGameobjectPosition[0] - newPosition[0]) / Time.deltaTime;
+                solution[1] = 0.5f * (lastGameobjectPosition[1] - newPosition[1]) / Time.deltaTime;
+                solution[2] = 0.5f * (lastGameobjectPosition[2] - newPosition[2]) / Time.deltaTime;
+            }
         }
 
         return solution;
@@ -382,7 +390,7 @@ public class SensablePlugin : MonoBehaviour
 
         for (int i = 0; i < forces.Length; ++i)
         {
-            inertia[i] = -1f * filterForces(getAcceleration(i, mass) * mass, i);
+            inertia[i] = -0.2f * filterForces(getAcceleration(i, mass) * mass, i);
         }
 
         return inertia;
@@ -391,9 +399,12 @@ public class SensablePlugin : MonoBehaviour
     public float getAcceleration(int i, float mass)
     {
         float MIN_ACCELERATION = 0.1f;
+        float MAX_ACCELERATION = MAX_TORQUE/mass;
+
         float acceleration = (lastVelocity[i] - currentVelocity[i]) / Time.deltaTime;
 
-        return acceleration > MIN_ACCELERATION ? acceleration : forces[i]/mass;
+        return Mathf.Abs(acceleration) > MAX_ACCELERATION ? 0 : Mathf.Abs(acceleration) > MIN_ACCELERATION ? acceleration : 0f;
+
     }
 
     /** Función para inicializar el dispositivo háptico */
@@ -769,7 +780,7 @@ public class SensablePlugin : MonoBehaviour
         {
             setVariableForce();
         }
-        else
+        else if(!grabbingObject && !isColliding)   
         {
             resetForce();
         }
