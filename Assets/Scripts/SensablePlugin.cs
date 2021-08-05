@@ -61,10 +61,10 @@ public class SensablePlugin : MonoBehaviour
 
 
     mapBaxterArticulations mapBaxterArticulations;
+    baxterHapticFeedback baxterHapticFeedback;
     /* Minimum/Maximum value of torque we will use */
     public const float MIN_TORQUE = 40;
     public const float MAX_TORQUE = 1200;
-    public float GRABBING_CORRECTOR = 0.5f;
     public static float[] MAX_PENETRATIONS = { 0.3f, 0.2f, 0.3f };
 
     float[] CONSTANTS = { Mathf.Log(MAX_TORQUE - MIN_TORQUE) / MAX_PENETRATIONS[0], Mathf.Log(MAX_TORQUE - MIN_TORQUE) / MAX_PENETRATIONS[1], Mathf.Log(MAX_TORQUE - MIN_TORQUE) / MAX_PENETRATIONS[2] };
@@ -79,12 +79,16 @@ public class SensablePlugin : MonoBehaviour
     /* Name of the object we are colliding with */
     public GameObject collidingBaxterArticulation;
     public GameObject grabbingObjectGameobject = null;
+    public float collidedRigidBodymass = 0;
     /* Current forces set in haptic device */
     public float[] forces = new float[3];
+    public List<Vector3> lastInertiaValues = new List<Vector3>();
+    public List<Vector3> lastCollisionForceValues = new List<Vector3>();
     /* Position and velocities when grabbing an object */
     public Vector3 lastGameobjectPosition = new Vector3();
     public float[] currentVelocity = { 0, 0, 0 };
     public float[] lastVelocity = { 0, 0, 0 };
+    public float DISTANCE_TO_ROTATION_AXE = 1.1f;
     /* Collision's direction */
     public List<float[]> positions = new List<float[]>();
     public int positionsLength = 2;
@@ -151,6 +155,7 @@ public class SensablePlugin : MonoBehaviour
     private void Awake()
     {
         mapBaxterArticulations = GetComponent<mapBaxterArticulations>();
+        baxterHapticFeedback = GetComponent<baxterHapticFeedback>();
         HDenum[] capabilities = { HDenum.HD_FORCE_OUTPUT };
         hapticDevice = initDevice(capabilities);
     }
@@ -178,15 +183,15 @@ public class SensablePlugin : MonoBehaviour
         if (grabbingObject)
         {
             getButtonStateSync();
-            if (buttonActive) {
-                float mass = grabbingObjectGameobject.GetComponent<Rigidbody>().mass;
+            if (buttonActive) 
+            {
                 Vector3 position = grabbingObjectGameobject.transform.position;
-
+                DISTANCE_TO_ROTATION_AXE = calculateDistanceToRotationAxe(position);
                 resetForce();
                 setVelocity(position);
 
-                Vector3 calculatedInertia = inertia(mass);
-                Vector3 calculatedGravity = gravity(mass);
+                Vector3 calculatedInertia = inertia();
+                Vector3 calculatedGravity = gravity();
 
                 for (int i = 0; i < forces.Length; ++i)
                 {
@@ -198,21 +203,48 @@ public class SensablePlugin : MonoBehaviour
                         forces[i] = grabbingForce;                  
                 }
 
+                updateLastInertiaValues(forces);
+
                 updatePositionAndVelocity(position);
                 infoY.Add(forces[0].ToString());
                 infoX.Add(forces[1].ToString());
                 infoZ.Add(forces[2].ToString());
             }
             else
-            {
-                lastGameobjectPosition = Vector3.zero;
-                grabbingObject = false;
-                Destroy(grabbingObjectGameobject.GetComponent<childCollider>());
-                grabbingObjectGameobject.layer = 0;
-                grabbingObjectGameobject.transform.SetParent(null);
-                resetForce();
-            }
+                resetGrabbing();
         }
+    }
+
+    public void updateLastInertiaValues(float [] forces)
+    {
+        int MAX_LAST_INERTIA_VALUES_LENGTH = 4;
+
+        if (lastInertiaValues.Count == MAX_LAST_INERTIA_VALUES_LENGTH)
+            lastInertiaValues.Remove(lastInertiaValues[0]);
+
+        lastInertiaValues.Add(fromFloatArrToVector3(forces));
+    }
+    public float calculateDistanceToRotationAxe(Vector3 position)
+    {
+        Vector3 baseArmPos = mapBaxterArticulations.selectedArticulations[0].transform.position;
+        return Vector3.Distance(baseArmPos, position);
+    }
+    public void resetGrabbing()
+    {
+        baxterHapticFeedback.unityResetArticulationAddingBugFix(false);
+        grabbingObjectGameobject.AddComponent<Rigidbody>();
+        grabbingObjectGameobject.GetComponent<Rigidbody>().mass = collidedRigidBodymass;
+        grabbingObjectGameobject.GetComponent<Rigidbody>().isKinematic = true;
+        grabbingObjectGameobject.GetComponent<Rigidbody>().useGravity = false;
+        Destroy(grabbingObjectGameobject.GetComponent<childCollider>());
+        grabbingObjectGameobject.transform.SetParent(null);
+        grabbingObjectGameobject.layer = 0;
+        collidedRigidBodymass = 0;
+        lastGameobjectPosition = Vector3.zero;
+        lastInertiaValues.Clear();
+        grabbingObject = false;
+        grabbingObjectGameobject = null;
+        resetForce();
     }
 
     public void updatePositionAndVelocity(Vector3 position)
@@ -252,70 +284,71 @@ public class SensablePlugin : MonoBehaviour
     public Vector3 getVelocityFromPosition(Vector3 newPosition)
     {
         Vector3 solution = Vector3.zero;
-        float MIN_VARIATION = 0.0055f;
 
-        if (lastGameobjectPosition != Vector3.zero)
-        {
-            if (Vector3.Distance(lastGameobjectPosition, newPosition) > MIN_VARIATION)
-            {
-                solution[0] = (lastGameobjectPosition[0] - newPosition[0]) / Time.deltaTime;
-                solution[1] = (lastGameobjectPosition[1] - newPosition[1]) / Time.deltaTime;
-                solution[2] = (lastGameobjectPosition[2] - newPosition[2]) / Time.deltaTime;
-            }
-            else
-            {
-                solution[0] = 0.5f * (lastGameobjectPosition[0] - newPosition[0]) / Time.deltaTime;
-                solution[1] = 0.5f * (lastGameobjectPosition[1] - newPosition[1]) / Time.deltaTime;
-                solution[2] = 0.5f * (lastGameobjectPosition[2] - newPosition[2]) / Time.deltaTime;
-            }
-        }
+        solution[0] = (lastGameobjectPosition[0] - newPosition[0]) / Time.deltaTime;
+        solution[1] = (lastGameobjectPosition[1] - newPosition[1]) / Time.deltaTime;
+        solution[2] = (lastGameobjectPosition[2] - newPosition[2]) / Time.deltaTime;
+
 
         return solution;
     }
-    public Vector3 gravity(float mass)
+    public Vector3 gravity()
     {
         Vector3 gravity = new Vector3();
         float[] weight = { 0, 0.7f, 0.3f };
-        const float GRAVITY_SCALE = 0.3f;
+        const float GRAVITY_SCALE = 0.2f;
 
-        gravity[0] = weight[0] * GRAVITY_SCALE * mass * Physics.gravity[0];
-        gravity[1] = weight[1] * GRAVITY_SCALE * mass * Physics.gravity[1];
-        gravity[2] = weight[2] * GRAVITY_SCALE * mass * Physics.gravity[1];
+        gravity[0] = weight[0] * GRAVITY_SCALE * collidedRigidBodymass * Physics.gravity[0];
+        gravity[1] = weight[1] * GRAVITY_SCALE * collidedRigidBodymass * Physics.gravity[1];
+        gravity[2] = weight[2] * GRAVITY_SCALE * collidedRigidBodymass * Physics.gravity[1];
 
         return gravity;
     }
-    public Vector3 inertia(float mass)
+    public Vector3 inertia()
     {
         float FLIP_TORQUE_SENSE = -1f;
-        float INERTIA_SCALE = -0.15f;
-        float DISTANCE_TO_ORIGIN = -1.1f;
+        float INERTIA_SCALE = 0.2f;
 
         float acceleration;
         float force;
         float torque;
+        float calculatedInertia;
         Vector3 inertia = new Vector3();
 
         for (int i = 0; i < forces.Length; ++i)
         {
-            acceleration = getAcceleration(i, mass);
-            force = acceleration * mass;
-            torque = force * DISTANCE_TO_ORIGIN;
+            acceleration = getAcceleration(i, INERTIA_SCALE);
+            force = acceleration * collidedRigidBodymass;
+            torque = force * DISTANCE_TO_ROTATION_AXE;
+            calculatedInertia = FLIP_TORQUE_SENSE * INERTIA_SCALE * torque;
 
-            inertia[i] = FLIP_TORQUE_SENSE * INERTIA_SCALE * torque;
+            inertia[i] = getAverageInertiaForce(calculatedInertia, i);
         }
 
         return inertia;
     }
 
-    public float getAcceleration(int i, float mass)
+    public float getAverageInertiaForce(float force, int axe)
     {
-        float MIN_ACCELERATION = 0.001f;
-        float MAX_ACCELERATION = MAX_TORQUE/mass;
+        float average = force;
 
+        if (lastInertiaValues.Count == 0)
+            return average;
+        else
+        {
+            for (int i = 0; i < lastInertiaValues.Count; i++)
+                average += lastInertiaValues[i][axe];
+
+            return average / lastInertiaValues.Count + 1;
+        }
+        
+    }
+    public float getAcceleration(int i, float INERTIA_SCALE)
+    {
+        float MAX_ACCELERATION = MAX_TORQUE/(collidedRigidBodymass * INERTIA_SCALE);
         float acceleration = (lastVelocity[i] - currentVelocity[i]) / Time.deltaTime;
-
-        return Mathf.Abs(acceleration) > MAX_ACCELERATION ? 0 : Mathf.Abs(acceleration) > MIN_ACCELERATION ? acceleration : 0f;
-
+        
+        return Mathf.Abs(acceleration) > MAX_ACCELERATION ? MAX_ACCELERATION : acceleration;
     }
 
     /** Función para inicializar el dispositivo háptico */
@@ -358,6 +391,7 @@ public class SensablePlugin : MonoBehaviour
 
         return (int)HDenum.HD_CALLBACK_DONE;
     }
+
 
     public void getButtonStateSync()
     {
@@ -447,7 +481,7 @@ public class SensablePlugin : MonoBehaviour
             }
             else
             {
-                calculatedForce = sense * (MIN_TORQUE + Mathf.Exp(CONSTANTS[i] * Mathf.Abs(variation[i])));
+                calculatedForce = getAverageCollisionForce(sense * (MIN_TORQUE + Mathf.Exp(CONSTANTS[i] * Mathf.Abs(variation[i]))), i);
 
                 if (Mathf.Abs(variation[i]) < 0.02)
                 {
@@ -469,8 +503,6 @@ public class SensablePlugin : MonoBehaviour
                 }
                 else
                 {
-                    calculatedForce = calculatedForce + forces[i] / 2;
-
                     if (calculatedForce > MAX_TORQUE)
                         forces[i] = sense * MAX_TORQUE;
                     else
@@ -483,9 +515,35 @@ public class SensablePlugin : MonoBehaviour
                 {
                     forces[i] += sense * MIN_TORQUE;
                 }
-
             }
         }
+
+
+    }
+
+    public float getAverageCollisionForce(float force, int axe)
+    {
+        float average = force;
+
+        if (lastCollisionForceValues.Count == 0)
+            return average;
+        else
+        {
+            for (int i = 0; i < lastCollisionForceValues.Count; i++)
+                average += lastCollisionForceValues[i][axe];
+
+            return average / lastCollisionForceValues.Count + 1;
+        }
+
+    }
+    public void updateLastCollisionForceValues(float[] forces)
+    {
+        int MAX_LAST_COLLISION_FORCE_VALUES_LENGTH = 2;
+
+        if (lastCollisionForceValues.Count == MAX_LAST_COLLISION_FORCE_VALUES_LENGTH)
+            lastCollisionForceValues.Remove(lastCollisionForceValues[0]);
+
+        lastCollisionForceValues.Add(fromFloatArrToVector3(forces));
     }
 
     public int collidingArticulationIndex()

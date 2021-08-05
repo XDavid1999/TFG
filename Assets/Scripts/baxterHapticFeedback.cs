@@ -13,6 +13,7 @@ public class baxterHapticFeedback : MonoBehaviour
     private float[] middleCollisionPoint;
     public float thresholdCollisionDetection = 0.5f;
 
+
     void Awake()
     {
         sensablePlugin = GetComponent<SensablePlugin>();
@@ -67,13 +68,16 @@ public class baxterHapticFeedback : MonoBehaviour
             collidingObject.transform.SetParent(baxterArticulation.transform);
             collidingObject.layer = 9;
             collidingObject.AddComponent<childCollider>();
-
+            sensablePlugin.collidedRigidBodymass = sensablePlugin.grabbingObjectGameobject.GetComponent<Rigidbody>().mass;
+            Destroy(sensablePlugin.grabbingObjectGameobject.GetComponent<Rigidbody>());
+            unityResetArticulationAddingBugFix(true);
         }
     }
 
     internal void OnCollisionStayChild(Collision collision, GameObject gameObject)
     {
         sensablePlugin.getButtonStateSync();
+
         if (sensablePlugin.buttonActive && collision.gameObject.tag == "Grabbable" && !sensablePlugin.grabbingObject)
             grabbingObject(collision.gameObject, gameObject);
         else
@@ -84,8 +88,30 @@ public class baxterHapticFeedback : MonoBehaviour
     {
         middleCollisionPoint = null;
         sensablePlugin.isColliding = false;
+        sensablePlugin.lastCollisionForceValues.Clear();
     }
+    public void unityResetArticulationAddingBugFix( bool action)
+    {
+        List<Vector3> velocities = new List<Vector3>();
+        List<ArticulationReducedSpace> positions = new List<ArticulationReducedSpace>();
 
+        foreach (ArticulationBody articulation in mapBaxterArticulations.selectedArticulations)
+        {
+            velocities.Add(articulation.velocity);
+            positions.Add(articulation.jointPosition);
+        }
+
+        if(action)
+            sensablePlugin.grabbingObjectGameobject.AddComponent<ArticulationBody>();
+        else
+            Destroy(sensablePlugin.grabbingObjectGameobject.GetComponent<ArticulationBody>());
+
+        for (int i = 0; i < mapBaxterArticulations.selectedArticulations.Length; i++)
+        {
+            mapBaxterArticulations.selectedArticulations[i].velocity = velocities[i];
+            mapBaxterArticulations.selectedArticulations[i].jointPosition = positions[i];
+        }
+    }
     public bool checkDistance(float[] point1, float[] point2)
     {
         Vector3 origin = new Vector3(point1[0], point1[1], point1[2]);
