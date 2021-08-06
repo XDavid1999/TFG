@@ -206,9 +206,9 @@ public class SensablePlugin : MonoBehaviour
                 updateLastInertiaValues(forces);
 
                 updatePositionAndVelocity(position);
-                infoY.Add(forces[0].ToString());
-                infoX.Add(forces[1].ToString());
-                infoZ.Add(forces[2].ToString());
+                //infoY.Add(forces[0].ToString());
+                //infoX.Add(forces[1].ToString());
+                //infoZ.Add(forces[2].ToString());
             }
             else
                 resetGrabbing();
@@ -217,7 +217,7 @@ public class SensablePlugin : MonoBehaviour
 
     public void updateLastInertiaValues(float [] forces)
     {
-        int MAX_LAST_INERTIA_VALUES_LENGTH = 4;
+        int MAX_LAST_INERTIA_VALUES_LENGTH = 10;
 
         if (lastInertiaValues.Count == MAX_LAST_INERTIA_VALUES_LENGTH)
             lastInertiaValues.Remove(lastInertiaValues[0]);
@@ -295,8 +295,8 @@ public class SensablePlugin : MonoBehaviour
     public Vector3 gravity()
     {
         Vector3 gravity = new Vector3();
-        float[] weight = { 0, 0.7f, 0.3f };
-        const float GRAVITY_SCALE = 0.2f;
+        float[] weight = { 0, 0.9f, 0.1f };
+        const float GRAVITY_SCALE = 0.25f;
 
         gravity[0] = weight[0] * GRAVITY_SCALE * collidedRigidBodymass * Physics.gravity[0];
         gravity[1] = weight[1] * GRAVITY_SCALE * collidedRigidBodymass * Physics.gravity[1];
@@ -307,7 +307,7 @@ public class SensablePlugin : MonoBehaviour
     public Vector3 inertia()
     {
         float FLIP_TORQUE_SENSE = -1f;
-        float INERTIA_SCALE = 0.2f;
+        float INERTIA_SCALE = 0.5f;
 
         float acceleration;
         float force;
@@ -328,7 +328,7 @@ public class SensablePlugin : MonoBehaviour
         return inertia;
     }
 
-    public float getAverageInertiaForce(float force, int axe)
+    public float getAverageInertiaForce(float force, int axis)
     {
         float average = force;
 
@@ -337,7 +337,7 @@ public class SensablePlugin : MonoBehaviour
         else
         {
             for (int i = 0; i < lastInertiaValues.Count; i++)
-                average += lastInertiaValues[i][axe];
+                average += lastInertiaValues[i][axis];
 
             return average / lastInertiaValues.Count + 1;
         }
@@ -346,9 +346,10 @@ public class SensablePlugin : MonoBehaviour
     public float getAcceleration(int i, float INERTIA_SCALE)
     {
         float MAX_ACCELERATION = MAX_TORQUE/(collidedRigidBodymass * INERTIA_SCALE);
+        float JUMP_THRESHOLD = MAX_ACCELERATION * 2;
+
         float acceleration = (lastVelocity[i] - currentVelocity[i]) / Time.deltaTime;
-        
-        return Mathf.Abs(acceleration) > MAX_ACCELERATION ? MAX_ACCELERATION : acceleration;
+        return Mathf.Abs(acceleration) < MAX_ACCELERATION ? acceleration : Mathf.Abs(acceleration) > JUMP_THRESHOLD ? 0 : MAX_ACCELERATION;
     }
 
     /** Función para inicializar el dispositivo háptico */
@@ -518,7 +519,9 @@ public class SensablePlugin : MonoBehaviour
             }
         }
 
-
+        infoY.Add(forces[0].ToString());
+        infoX.Add(forces[1].ToString());
+        infoZ.Add(forces[2].ToString());
     }
 
     public float getAverageCollisionForce(float force, int axe)
