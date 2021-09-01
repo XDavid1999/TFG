@@ -65,7 +65,7 @@ public class SensablePlugin : MonoBehaviour
     /* Minimum/Maximum value of torque we will use */
     public const float MIN_TORQUE = 40;
     public const float MAX_TORQUE = 1200;
-    public static float[] MAX_PENETRATIONS = { 0.3f, 0.2f, 0.3f };
+    public static float[] MAX_PENETRATIONS = { 0.1f, 0.1f, 0.1f };
 
     float[] CONSTANTS = { Mathf.Log(MAX_TORQUE - MIN_TORQUE) / MAX_PENETRATIONS[0], Mathf.Log(MAX_TORQUE - MIN_TORQUE) / MAX_PENETRATIONS[1], Mathf.Log(MAX_TORQUE - MIN_TORQUE) / MAX_PENETRATIONS[2] };
     /* ID of the initialized device */
@@ -104,6 +104,9 @@ public class SensablePlugin : MonoBehaviour
     public List<string> infoX = new List<string>();
     public List<string> infoY = new List<string>();
     public List<string> infoZ = new List<string>();
+    public List<string> varx = new List<string>();
+    public List<string> vary = new List<string>();
+    public List<string> varz = new List<string>();
 
     #region Device Angles
     public static readonly float S0_MinAngle = Mathf.Rad2Deg * -1f;
@@ -176,6 +179,9 @@ public class SensablePlugin : MonoBehaviour
         writeInFile(infoX, "infoX");
         writeInFile(infoY, "infoY");
         writeInFile(infoZ, "infoZ");
+        writeInFile(varx, "tim");
+        writeInFile(vary, "tim");
+        writeInFile(varz, "tim");
         disableDevice();
     }
     public void isGrabbingObject()
@@ -267,10 +273,16 @@ public class SensablePlugin : MonoBehaviour
         writeInFile(infoX, "infoX");
         writeInFile(infoY, "infoY");
         writeInFile(infoZ, "infoZ");
+        writeInFile(varx, "varx");
+        writeInFile(vary, "vary");
+        writeInFile(varz, "varz");
 
         infoY.Clear();
         infoX.Clear();
         infoZ.Clear();
+        varx.Clear();
+        vary.Clear();
+        varz.Clear();
     }
     public void setVelocity(Vector3 newPosition)
     {
@@ -496,7 +508,7 @@ public class SensablePlugin : MonoBehaviour
                     if (i != 1)
                         forces[i] = MIN_TORQUE;
                     else
-                        forces[i] = MIN_TORQUE * 1.2f;
+                        forces[i] =sense * (MIN_TORQUE + Mathf.Exp(CONSTANTS[i] * 0.06f));
                 }
                 else if (Mathf.Abs(variation[i]) < 0.06 && Mathf.Abs(variation[i]) < 0.1)
                 {
@@ -504,7 +516,7 @@ public class SensablePlugin : MonoBehaviour
                 }
                 else
                 {
-                    if (calculatedForce > MAX_TORQUE)
+                    if (Mathf.Abs(calculatedForce) > MAX_TORQUE)
                         forces[i] = sense * MAX_TORQUE;
                     else
                         forces[i] = calculatedForce;
@@ -518,10 +530,14 @@ public class SensablePlugin : MonoBehaviour
                 }
             }
         }
+        float time = Time.deltaTime;
 
         infoY.Add(forces[0].ToString());
         infoX.Add(forces[1].ToString());
         infoZ.Add(forces[2].ToString());
+        varx.Add(variation[0].ToString());
+        vary.Add(variation[1].ToString());
+        varz.Add(variation[2].ToString());
     }
 
     public float getAverageCollisionForce(float force, int axe)
@@ -665,7 +681,7 @@ public class SensablePlugin : MonoBehaviour
         float[] solution = { 0f, 0f, 0f };
         /** Importancia de la articulación iésima en el movimiento en su eje */
         float[] weightX = { 0f, 0.6f, 0.25f, 0f, 0.15f, 0f };
-        float[] weightZ = { 0f, 0.2f, 0.6f, 0f, 0.2f, 0f };
+        float[] weightZ = { 0f, 0.1f, 0.7f, 0f, 0.2f, 0f };
         float value;
         
         for (int i = 0; i < index; ++i)
@@ -681,10 +697,10 @@ public class SensablePlugin : MonoBehaviour
                 solution[2] += value * weightZ[i];
         }
 
-        if (Mathf.Abs(solution[0]) < minYCollisionValue)
-            solution[0] *= 0.1f;
-        if (Mathf.Abs(solution[2]) < minZCollisionValue)
-            solution[2] *= 0.5f;
+        //if (Mathf.Abs(solution[0]) < minYCollisionValue)
+        //    solution[0] *= 0.1f;
+        //if (Mathf.Abs(solution[2]) < minZCollisionValue)
+        //    solution[2] *= 0.5f;
 
         return solution;
     }

@@ -11,7 +11,7 @@ public class baxterHapticFeedback : MonoBehaviour
     childCollider childCollider;
     private List<ContactPoint> contacts = new List<ContactPoint>();
     private float[] middleCollisionPoint;
-    public float thresholdCollisionDetection = 0.5f;
+    public float thresholdCollisionDetection = 0.7f;
 
 
     void Awake()
