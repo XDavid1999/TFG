@@ -65,7 +65,7 @@ public class SensablePlugin : MonoBehaviour
     /* Minimum/Maximum value of torque we will use */
     public const float MIN_TORQUE = 40;
     public const float MAX_TORQUE = 1200;
-    public static float[] MAX_PENETRATIONS = { 0.1f, 0.1f, 0.1f };
+    public static float[] MAX_PENETRATIONS = { 0.2f, 0.2f, 0.2f };
 
     float[] CONSTANTS = { Mathf.Log(MAX_TORQUE - MIN_TORQUE) / MAX_PENETRATIONS[0], Mathf.Log(MAX_TORQUE - MIN_TORQUE) / MAX_PENETRATIONS[1], Mathf.Log(MAX_TORQUE - MIN_TORQUE) / MAX_PENETRATIONS[2] };
     /* ID of the initialized device */
@@ -308,7 +308,7 @@ public class SensablePlugin : MonoBehaviour
     {
         Vector3 gravity = new Vector3();
         float[] weight = { 0, 0.9f, 0.1f };
-        const float GRAVITY_SCALE = 0.25f;
+        const float GRAVITY_SCALE = 0.2f;
 
         gravity[0] = weight[0] * GRAVITY_SCALE * collidedRigidBodymass * Physics.gravity[0];
         gravity[1] = weight[1] * GRAVITY_SCALE * collidedRigidBodymass * Physics.gravity[1];
@@ -319,7 +319,7 @@ public class SensablePlugin : MonoBehaviour
     public Vector3 inertia()
     {
         float FLIP_TORQUE_SENSE = -1f;
-        float INERTIA_SCALE = 0.5f;
+        float INERTIA_SCALE = 0.4f;
 
         float acceleration;
         float force;
@@ -557,7 +557,7 @@ public class SensablePlugin : MonoBehaviour
     }
     public void updateLastCollisionForceValues(float[] forces)
     {
-        int MAX_LAST_COLLISION_FORCE_VALUES_LENGTH = 2;
+        int MAX_LAST_COLLISION_FORCE_VALUES_LENGTH = 5;
 
         if (lastCollisionForceValues.Count == MAX_LAST_COLLISION_FORCE_VALUES_LENGTH)
             lastCollisionForceValues.Remove(lastCollisionForceValues[0]);
@@ -607,9 +607,9 @@ public class SensablePlugin : MonoBehaviour
             case 2:
                 if (sense > 0)
                     if (Mathf.Sign(variation) < 0)
-                        return true;
-                    else
                         return false;
+                    else
+                        return true;
                 else
                     if (Mathf.Sign(variation) < 0)
                         return false;
