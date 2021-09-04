@@ -1,0 +1,50 @@
+\chapter{Conclusiones}
+Es usual, en todo estudio o texto científico, la inclusión de una última inspección del trabajo realizado para poder ofrecer una visión en perspectiva del conocimiento con el que se inició la susodicha actividad y el adquirido tras la misma. De este modo, se sintetizan brevemente algunos de los puntos más relevantes para su breve revisión y matización.
+
+Tras la realización de esta obra poseemos una opinión técnica fundamentada acerca de los temas englobados por este estudio. A tal efecto, es ostensible el alcance de esta línea de investigación y su importancia en el ámbito del desarrollo de la ciencia en lugares que, por nuestra naturaleza, no podemos visitar actualmente. La información a la que no tenemos acceso en nuestro planeta sumada la existente en el resto del cosmos es ingente, y puede contribuir a distintos avances que nos permitan conocer en mayor medida el origen de la vida  o su funcionamiento para avanzar como especie. 
+
+Es por ello que la contribución de la teleoperación y la inmersión en la manipulación a distancia poseen un alto potencial para el descubrimiento de nueva ciencia y nuevas metodologías que tratan de mejorar nuestras condiciones de vida en La Tierra y el cuidado del medio en el que vivimos. 
+
+Así pues, en este epígrafe final de la obra, realizaremos una disertación en lo que al trabajo de investigación realizado respecta junto con una revisión de los objetivos que se plantearon al inicio, destacando como estos han sufrido cambios en el desarrollo del proyecto y los motivos de estas decisiones. En último lugar, cerraremos esta memoria con el trabajo futuro con el que podría continuarse esta línea de investigación, indicando algunas vías de desarrollo o ideas con las que poder completar el trabajo ejecutado.
+
+\vfill
+
+\section{Discusión Crítica de los Resultados y Revisión de Objetivos}
+Se define la discusión crítica como un alegato argumentativo ideal que trata de exponer los razonamientos a favor y en contra de un tema determinando para la obtención de conclusiones, como cuáles son los puntos fuertes, las carencias y posibles soluciones para las mismas. En nuestro caso, juzgaremos el trabajo realizado para plantear hasta qué punto se han logrado los objetivos perseguidos y sus defectos. 
+
+En primer lugar en esta investigación tratamos de implementar un control de Baxter a través de Touch X. Podríamos calificar el dominio del mismo como bastante bueno, ya que resulta preciso y no encontramos dificultades por su parte para el desempeño de las tareas de manipulación. No obstante, no utilizamos todas las articulaciones disponibles en el robot controlado, ya que el dispositivo háptico supone un cuello de botella al tener un grado menos de movimiento. Para mitigar este pequeño defecto, que no nos ha impedido la realización de ninguna de las actividades que hemos tratado de desarrollar en absoluto, podríamos hacer uso de otro dispositivo háptico controlador como lo son $HD^2$ u Omega 7 -con siete grados de libertad-, presentados entre las alternativas al dispositivo utilizado en esta investigación. Sin embargo, podríamos perder la naturalidad en el control que nos ofrece Touch X por su construcción, por lo que podría ser objeto de estudio investigar cual es el idóneo para la susodicha tarea.
+
+Por otro lado, las herramientas que se plantean para la comunicación entre Unity y Baxter pueden no ser las óptimas. Así pues, pese a que ROS es el middleware de código abierto para el control de robots más extendido -contando con una alta reactividad y una baja latencia-, este no es un sistema diseñado para el trabajo en tiempo real en sí, si bien es posible su integración con actividades que necesiten de la actuación vivo. Sin embargo, esta carencia del sistema elegido ha sido abordada en la creación de ROS 2.0. Esta problemática debería ser objeto de la realización de pruebas para considerar si los retrasos en tiempo son o no un verdadero problema.
+
+En lo que respecta a la propia implementación, y no a las tecnologías de las que se ha hecho uso, como comentábamos hasta ahora, consideramos que es cuestión de tiempo la mejora de la misma. Por ende, planteamos que la implementación de la gravedad puede mejorarse con una ponderación acorde con los ángulos en que se encuentren las articulaciones del dispositivo háptico. De este modo, simplemente deberíamos de calcular el vector perpendicular al suelo en función de la posición de las articulaciones responsables de la respuesta háptica en los ejes X y Z para una representación más fiel a la realidad. Adicionalmente, en lo que a la puesta en práctica del feedback del momento de fuerza atañe, tomando como referencia el efecto logrado por el plugin desarrollado por 3DSystems, no encontramos una diferencia abrumadora con el mismo; aunque siempre podrían calibrarse los rangos de fuerzas con las que trabajamos  y reescalados para resultar más agradables al usuario a través del testeo.
+
+Asimismo, cabe comentar que finalmente no se ha llevado a cabo la implementación del control del robot Baxter real. La razón de ello se encuentra en una redistribución del tiempo dedicado a las distintas actividades, como se comenta en el apartado de planificación, ya que en el desarrollo de esta investigación es suficiente la información proporcionada por la simulación para las tareas a realizar. Además de ello, era prioritaria la programación de los efectos cinestésicos interpretados por el antedicho robot háptico, ya que era uno de los puntos decisivos del estudio. Sin embargo es una tarea obligada a realiza en la continuación de este estudio.
+
+Finalmente, aludiendo a la realimentación que se recibe en el impacto con objetos, consideramos que la sensación es adecuada en líneas generales. No obstante, deben ser pulidas algunas respuestas proporcionadas por el dispositivo, ya que en algunos casos recibimos golpes de fuerza en momentos inesperados. También es posible una mejora en la cobertura de un mayor rango de la casuística posible, ya que si pudiera resultar de ayuda debería poder inferirse a través del contacto con las superficies su condición de rugosidad, elasticidad e incluso propiedades magnéticas. Para ello puede hacerse uso de la mencionada HDApi, con funciones dedicadas a estos propósitos en concreto. 
+
+\section{Trabajo Futuro}
+ Durante el desarrollo de este trabajo de final de grado han surgido algunas vías que plantean incógnitas respecto a los distintos temas aludidos. En consecuencia, para la consecución de conclusiones sólidas, destacaremos en este apartado algunas de las posibles líneas de investigación que quedan abiertas y pueden seguirse tras esta, sean directamente relacionadas con la misma o de un carácter más general.
+ 
+ Presentamos por consiguiente, para concluir esta obra,una lista de las posibles cuestiones a tratar que han resultado exceder el alcance del trabajo realizado y no se han tratado con la suficiente profundidad.
+ 
+ \begin{itemize}
+    \item Realización de pruebas comparativas con una muestra de personas del torque idóneo a proporcionar como salida, logrando así que la representación resulte cómoda y natural para el trabajador.
+    
+    \item Pulido y testeo de las funciones implementadas para este estudio.
+     
+    \item Ejecución de test comparativos con distintas muestras de población, entrenadas y no entrenadas, para conocer si realmente la realimentación táctil implementada es de ayuda.
+     
+    \item Probar la realización de las tareas de mantenimiento con dispositivos hápticos \textit{wearables} en lugar de agarrables.
+     
+    \item Comparación entre distintos dispositivos hápticos agarrables para conocer cual es el idóneo para el mantenimiento teleoperado en IFMIF-DONES.
+     
+    \item Comprobación de la fiabilidad y viabilidad de la conexión entre Unity y ROS en los casos de uso que puedan darse en este contexto e implementar otros métodos de comunicación en caso contrario.
+     
+    \item Cotejo de los distintos modelos de robots colaborativos para conocer cuál es el idóneo en este marco de trabajo.
+     
+    \item Implementación del movimiento del Baxter real en consecuencia a los hechos sucedidos en la simulación y comparación de la fiabilidad del mismo comparando con las lecturas de sus sensores.
+     
+    \item Rastreo tridimensional de la zona de actuación del robot de mantenimiento en tiempo real, para máquinas capaces de moverse por el espacio de trabajo siendo teleoperadas. Permitiendo al manipulador conocer los cambios en el entorno en tiempo real.
+     
+    \item Inclusión de gafas de realidad virtual y aumentada para una completa inmersión del teleoperador, junto a la comprobación de si ello es realmente de ayuda.
+ \end{itemize}
