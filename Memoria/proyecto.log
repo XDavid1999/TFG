@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.2)  4 SEP 2021 14:13
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.2)  5 SEP 2021 19:55
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -658,27 +658,27 @@ LaTeX Info: Redefining \% on input line 26.
 )
 \openout1 = `proyecto.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 181.
-LaTeX Font Info:    ... okay on input line 181.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 181.
-LaTeX Font Info:    ... okay on input line 181.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 181.
-LaTeX Font Info:    ... okay on input line 181.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 181.
-LaTeX Font Info:    ... okay on input line 181.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 181.
-LaTeX Font Info:    ... okay on input line 181.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 181.
-LaTeX Font Info:    ... okay on input line 181.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 181.
-LaTeX Font Info:    ... okay on input line 181.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 181.
-LaTeX Font Info:    ... okay on input line 181.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 181.
-LaTeX Font Info:    ... okay on input line 181.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 186.
+LaTeX Font Info:    ... okay on input line 186.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 186.
+LaTeX Font Info:    ... okay on input line 186.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 186.
+LaTeX Font Info:    ... okay on input line 186.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 186.
+LaTeX Font Info:    ... okay on input line 186.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 186.
+LaTeX Font Info:    ... okay on input line 186.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 186.
+LaTeX Font Info:    ... okay on input line 186.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 186.
+LaTeX Font Info:    ... okay on input line 186.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 186.
+LaTeX Font Info:    ... okay on input line 186.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 186.
+LaTeX Font Info:    ... okay on input line 186.
 \c@lstlisting=\count326
-LaTeX Info: Redefining \. on input line 181.
-LaTeX Info: Redefining \% on input line 181.
+LaTeX Info: Redefining \. on input line 186.
+LaTeX Info: Redefining \% on input line 186.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -736,7 +736,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Package hyperref Info: Link coloring OFF on input line 181.
+Package hyperref Info: Link coloring OFF on input line 186.
 
 (c:/texlive/2021/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
@@ -749,9 +749,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count333
 )
-LaTeX Info: Redefining \ref on input line 181.
-LaTeX Info: Redefining \pageref on input line 181.
-LaTeX Info: Redefining \nameref on input line 181.
+LaTeX Info: Redefining \ref on input line 186.
+LaTeX Info: Redefining \pageref on input line 186.
+LaTeX Info: Redefining \nameref on input line 186.
 
 (./proyecto.out) (./proyecto.out)
 \@outlinefile=\write4
@@ -768,12 +768,12 @@ Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 )
 (./portada/portada.tex
 \centeroffset=\skip74
-<imagenes/logo_ugr.jpg, id=195, 777.90625pt x 231.86626pt>
+<imagenes/logo_ugr.jpg, id=199, 777.90625pt x 231.86626pt>
 File: imagenes/logo_ugr.jpg Graphic file (type jpg)
 <use imagenes/logo_ugr.jpg>
 Package pdftex.def Info: imagenes/logo_ugr.jpg  used on input line 12.
 (pdftex.def)             Requested size: 340.57687pt x 101.51552pt.
-<imagenes/etsiit_logo.png, id=196, 110.814pt x 40.4712pt>
+<imagenes/etsiit_logo.png, id=200, 110.814pt x 40.4712pt>
 File: imagenes/etsiit_logo.png Graphic file (type png)
 <use imagenes/etsiit_logo.png>
 Package pdftex.def Info: imagenes/etsiit_logo.png  used on input line 31.
@@ -816,10 +816,16 @@ Underfull \hbox (badness 10000) in paragraph at lines 70--71
 
  []
 
-[9] [10
+<imagenes/firmaDavidHeredia.jpg, id=243, 1139.25626pt x 931.48pt>
+File: imagenes/firmaDavidHeredia.jpg Graphic file (type jpg)
+<use imagenes/firmaDavidHeredia.jpg>
+Package pdftex.def Info: imagenes/firmaDavidHeredia.jpg  used on input line 81.
+
+(pdftex.def)             Requested size: 132.44977pt x 108.29053pt.
+[9 <./imagenes/firmaDavidHeredia.jpg>] [10
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 91--92
+Underfull \hbox (badness 10000) in paragraph at lines 96--97
 
  []
 
@@ -839,14 +845,14 @@ LaTeX Info: Redefining \% on input line 1.
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/bx/sc' undefined
-(Font)              using `OT1/cmr/bx/n' instead on input line 186.
+(Font)              using `OT1/cmr/bx/n' instead on input line 191.
 
 
 Package spanish Warning: Replacing `OT1/cmr/bx/sc' by 
-(spanish)                faked small caps on input line 186.
+(spanish)                faked small caps on input line 191.
 
-LaTeX Info: Redefining \. on input line 186.
-LaTeX Info: Redefining \% on input line 186.
+LaTeX Info: Redefining \. on input line 191.
+LaTeX Info: Redefining \% on input line 191.
 [2] (./proyecto.lof
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
@@ -859,10 +865,10 @@ LaTeX Info: Redefining \% on input line 1.
 
 
 Package spanish Warning: Replacing `OT1/cmr/bx/sc' by 
-(spanish)                faked small caps on input line 187.
+(spanish)                faked small caps on input line 192.
 
-LaTeX Info: Redefining \. on input line 187.
-LaTeX Info: Redefining \% on input line 187.
+LaTeX Info: Redefining \. on input line 192.
+LaTeX Info: Redefining \% on input line 192.
 [4] (./proyecto.lot
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
@@ -874,38 +880,51 @@ LaTeX Info: Redefining \% on input line 1.
 
 ] [6
 
-] (./capitulos/01_Introduccion.tex
+] (./capitulos/Acronimos.tex)
+(./capitulos/01_Introduccion.texpdfTeX warning (ext4): destination with the sam
+e identifier (name{page.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1 \chapter
+            {Introducción} [1
+
+]pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has
+ been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1 \chapter
+            {Introducción} [2
+
+]
 Cap\'{\i }tulo 1.
-pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
+pdfTeX warning (ext4): destination with the same identifier (name{page.3}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.16 
-      [1
-
-]
+      [3]
 LaTeX Info: Redefining \. on input line 24.
 LaTeX Info: Redefining \% on input line 24.
-pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has 
+pdfTeX warning (ext4): destination with the same identifier (name{page.4}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.24 
-      [2]
-<imagenes/canadarm2.jpg, id=470, 77.088pt x 115.632pt>
+      [4]
+<imagenes/canadarm2.jpg, id=483, 77.088pt x 115.632pt>
 File: imagenes/canadarm2.jpg Graphic file (type jpg)
 <use imagenes/canadarm2.jpg>
 Package pdftex.def Info: imagenes/canadarm2.jpg  used on input line 29.
 (pdftex.def)             Requested size: 94.60533pt x 141.91068pt.
 LaTeX Info: Redefining \. on input line 41.
 LaTeX Info: Redefining \% on input line 41.
-pdfTeX warning (ext4): destination with the same identifier (name{page.3}) has 
+pdfTeX warning (ext4): destination with the same identifier (name{page.5}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.41 
-      [3 <./imagenes/canadarm2.jpg>]
-<imagenes/global-energy-substitution.png, id=479, 3412.75pt x 2409.0pt>
+      [5 <./imagenes/canadarm2.jpg>]
+<imagenes/global-energy-substitution.png, id=493, 3412.75pt x 2409.0pt>
 File: imagenes/global-energy-substitution.png Graphic file (type png)
 <use imagenes/global-energy-substitution.png>
 Package pdftex.def Info: imagenes/global-energy-substitution.png  used on input
@@ -913,46 +932,46 @@ Package pdftex.def Info: imagenes/global-energy-substitution.png  used on input
 (pdftex.def)             Requested size: 283.816pt x 200.33292pt.
 LaTeX Info: Redefining \. on input line 64.
 LaTeX Info: Redefining \% on input line 64.
-pdfTeX warning (ext4): destination with the same identifier (name{page.4}) has 
+pdfTeX warning (ext4): destination with the same identifier (name{page.6}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.64 D
       escrito el contexto que engloba a este estudio, el trabajo de investig...
-[4]
+[6]
 LaTeX Info: Redefining \. on input line 75.
 LaTeX Info: Redefining \% on input line 75.
-pdfTeX warning (ext4): destination with the same identifier (name{page.5}) has 
+pdfTeX warning (ext4): destination with the same identifier (name{page.7}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.75     \item C
                 onseguir conectar el dispositivo háptico con Unity y acto s...
-[5 <./imagenes/global-energy-substitution.png>]
-<imagenes/DiagramaGantt.png, id=491, 3212.0pt x 2409.0pt>
+[7 <./imagenes/global-energy-substitution.png>]
+<imagenes/DiagramaGantt.png, id=505, 3212.0pt x 2409.0pt>
 File: imagenes/DiagramaGantt.png Graphic file (type png)
 <use imagenes/DiagramaGantt.png>
 Package pdftex.def Info: imagenes/DiagramaGantt.png  used on input line 90.
 (pdftex.def)             Requested size: 378.42133pt x 283.81108pt.
 LaTeX Info: Redefining \. on input line 97.
 LaTeX Info: Redefining \% on input line 97.
-pdfTeX warning (ext4): destination with the same identifier (name{page.6}) has 
+pdfTeX warning (ext4): destination with the same identifier (name{page.8}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.97 T
       ras ello, tratamos de realizar la conexión entre Baxter y Unity, expl...
-[6]
+[8]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 LaTeX Info: Redefining \. on input line 103.
 LaTeX Info: Redefining \% on input line 103.
-pdfTeX warning (ext4): destination with the same identifier (name{page.7}) has 
+pdfTeX warning (ext4): destination with the same identifier (name{page.9}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.103 
-       [7 <./imagenes/DiagramaGantt.png (PNG copy)>]
+       [9 <./imagenes/DiagramaGantt.png (PNG copy)>]
 Underfull \hbox (badness 2443) in paragraph at lines 133--133
 \OT1/cmr/m/n/10.95 ren-de-ri-za-do y si-mu-la-
  []
@@ -964,92 +983,83 @@ Underfull \hbox (badness 1377) in paragraph at lines 134--134
 
 LaTeX Info: Redefining \. on input line 145.
 LaTeX Info: Redefining \% on input line 145.
-pdfTeX warning (ext4): destination with the same identifier (name{page.8}) has 
-been already used, duplicate ignored
+pdfTeX warning (ext4): destination with the same identifier (name{page.10}) has
+ been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.145 P
        ara el sueldo del investigador se tiene en cuenta un salario base de ...
-[8]) (./capitulos/02_Estado_del_Arte.tex
+[10]) (./capitulos/02_Estado_del_Arte.tex
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
-pdfTeX warning (ext4): destination with the same identifier (name{page.9}) has 
-been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1 \chapter
-            {Estado del Arte} [9]pdfTeX warning (ext4): destination with the sa
-me identifier (name{page.10}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1 \chapter
-            {Estado del Arte} [10
-
-]
-Cap\'{\i }tulo 2.
 pdfTeX warning (ext4): destination with the same identifier (name{page.11}) has
  been already used, duplicate ignored
 <to be read again> 
                    \relax 
+l.1 \chapter
+            {Estado del Arte} [11]pdfTeX warning (ext4): destination with the s
+ame identifier (name{page.12}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1 \chapter
+            {Estado del Arte} [12
+
+]
+Cap\'{\i }tulo 2.
+pdfTeX warning (ext4): destination with the same identifier (name{page.13}) has
+ been already used, duplicate ignored
+<to be read again> 
+                   \relax 
 l.14 
-      [11]
-<imagenes/Perseverance.jpg, id=515, 1204.5pt x 677.53125pt>
+      [13]
+<imagenes/Perseverance.jpg, id=528, 1204.5pt x 677.53125pt>
 File: imagenes/Perseverance.jpg Graphic file (type jpg)
 <use imagenes/Perseverance.jpg>
 Package pdftex.def Info: imagenes/Perseverance.jpg  used on input line 22.
 (pdftex.def)             Requested size: 189.21066pt x 106.42226pt.
 LaTeX Info: Redefining \. on input line 30.
 LaTeX Info: Redefining \% on input line 30.
-pdfTeX warning (ext4): destination with the same identifier (name{page.12}) has
- been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.30 
-      [12 <./imagenes/Perseverance.jpg>]
-LaTeX Info: Redefining \. on input line 44.
-LaTeX Info: Redefining \% on input line 44.
-pdfTeX warning (ext4): destination with the same identifier (name{page.13}) has
- been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.44 
-      [13]
-LaTeX Info: Redefining \. on input line 65.
-LaTeX Info: Redefining \% on input line 65.
 pdfTeX warning (ext4): destination with the same identifier (name{page.14}) has
  been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.65 
-      [14]
+l.30 
+      [14 <./imagenes/Perseverance.jpg>]
+LaTeX Info: Redefining \. on input line 44.
+LaTeX Info: Redefining \% on input line 44.
+ [15]
+LaTeX Info: Redefining \. on input line 65.
+LaTeX Info: Redefining \% on input line 65.
+ [16]
 LaTeX Info: Redefining \. on input line 79.
 LaTeX Info: Redefining \% on input line 79.
- [15]
+ [17]
 LaTeX Info: Redefining \. on input line 99.
 LaTeX Info: Redefining \% on input line 99.
- [16]
+ [18]
 LaTeX Info: Redefining \. on input line 117.
 LaTeX Info: Redefining \% on input line 117.
- [17]
+ [19]
 LaTeX Info: Redefining \. on input line 132.
 LaTeX Info: Redefining \% on input line 132.
- [18]
+ [20]
 LaTeX Info: Redefining \. on input line 146.
 LaTeX Info: Redefining \% on input line 146.
- [19]
+ [21]
 LaTeX Info: Redefining \. on input line 165.
 LaTeX Info: Redefining \% on input line 165.
- [20]
+
+[22]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 LaTeX Info: Redefining \. on input line 182.
 LaTeX Info: Redefining \% on input line 182.
- [21]
+ [23]
 LaTeX Info: Redefining \. on input line 200.
 LaTeX Info: Redefining \% on input line 200.
 
-[22]
-<imagenes/Deuterium-tritium_fusion.png, id=641, 501.875pt x 602.25pt>
+[24]
+<imagenes/Deuterium-tritium_fusion.png, id=658, 501.875pt x 602.25pt>
 File: imagenes/Deuterium-tritium_fusion.png Graphic file (type png)
 <use imagenes/Deuterium-tritium_fusion.png>
 Package pdftex.def Info: imagenes/Deuterium-tritium_fusion.png  used on input l
@@ -1057,32 +1067,32 @@ ine 206.
 (pdftex.def)             Requested size: 113.52754pt x 136.22638pt.
 LaTeX Info: Redefining \. on input line 216.
 LaTeX Info: Redefining \% on input line 216.
- [23 <./imagenes/Deuterium-tritium_fusion.png>]
-LaTeX Info: Redefining \. on input line 237.
-LaTeX Info: Redefining \% on input line 237.
- [24]
-Underfull \vbox (badness 2318) has occurred while \output is active []
+ [25 <./imagenes/Deuterium-tritium_fusion.png>]
+LaTeX Info: Redefining \. on input line 234.
+LaTeX Info: Redefining \% on input line 234.
+ [26]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 253.
-LaTeX Info: Redefining \% on input line 253.
- [25])
+LaTeX Info: Redefining \. on input line 249.
+LaTeX Info: Redefining \% on input line 249.
+ [27])
 (./capitulos/03_Especificación_de_Servicios_Utilizados.tex
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
- [26]
+ [28]
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
- [27] [28
+ [29] [30
 
 ]
 Cap\'{\i }tulo 3.
-[29]
+[31]
 LaTeX Info: Redefining \. on input line 36.
 LaTeX Info: Redefining \% on input line 36.
- [30]
+ [32]
 LaTeX Info: Redefining \. on input line 59.
 LaTeX Info: Redefining \% on input line 59.
- [31]
+ [33]
 Underfull \hbox (badness 4254) in paragraph at lines 96--97
 []|\OT1/cmr/m/n/10.95 C#, Vi-sual Scrip-ting
  []
@@ -1139,23 +1149,23 @@ Underfull \hbox (badness 10000) in paragraph at lines 104--105
 
 LaTeX Info: Redefining \. on input line 120.
 LaTeX Info: Redefining \% on input line 120.
-[32]
+[34]
 LaTeX Info: Redefining \. on input line 123.
 LaTeX Info: Redefining \% on input line 123.
- [33]
+ [35]
 Overfull \hbox (7.83936pt too wide) in paragraph at lines 134--178
  [][] 
  []
 
 LaTeX Info: Redefining \. on input line 184.
 LaTeX Info: Redefining \% on input line 184.
-[34]
+[36]
 LaTeX Info: Redefining \. on input line 191.
 LaTeX Info: Redefining \% on input line 191.
- [35]
+ [37]
 LaTeX Info: Redefining \. on input line 234.
 LaTeX Info: Redefining \% on input line 234.
- [36]
+ [38]
 Overfull \hbox (9.64278pt too wide) in paragraph at lines 241--241
 []|\OT1/cmr/bx/sc/10.95 Dof| 
  []
@@ -1167,7 +1177,7 @@ Overfull \hbox (35.70433pt too wide) in paragraph at lines 239--286
 
 LaTeX Info: Redefining \. on input line 293.
 LaTeX Info: Redefining \% on input line 293.
-[37]
+[39]
 Underfull \hbox (badness 10000) in paragraph at lines 326--327
 []|\OT1/cmr/m/n/10.95 Procesador prin-ci-pal
  []
@@ -1192,111 +1202,111 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 LaTeX Info: Redefining \. on input line 339.
 LaTeX Info: Redefining \% on input line 339.
- [38])
+ [40])
 (./capitulos/04_Diseño_e_Implementación.tex
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
- [39] [40
+ [41] [42
 
 ]
 Cap\'{\i }tulo 4.
-[41]
-LaTeX Info: Redefining \. on input line 41.
-LaTeX Info: Redefining \% on input line 41.
- [42]
-LaTeX Info: Redefining \. on input line 58.
-LaTeX Info: Redefining \% on input line 58.
- [43]
+[43]
+LaTeX Info: Redefining \. on input line 43.
+LaTeX Info: Redefining \% on input line 43.
+ [44]
+LaTeX Info: Redefining \. on input line 60.
+LaTeX Info: Redefining \% on input line 60.
+ [45]
 Underfull \vbox (badness 1028) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 71.
-LaTeX Info: Redefining \% on input line 71.
- [44]
-LaTeX Info: Redefining \. on input line 84.
-LaTeX Info: Redefining \% on input line 84.
+LaTeX Info: Redefining \. on input line 73.
+LaTeX Info: Redefining \% on input line 73.
+ [46]
+LaTeX Info: Redefining \. on input line 86.
+LaTeX Info: Redefining \% on input line 86.
 
-[45]
-<imagenes/unity_ros.png, id=841, 644.4075pt x 323.2075pt>
+[47]
+<imagenes/unity_ros.png, id=856, 644.4075pt x 323.2075pt>
 File: imagenes/unity_ros.png Graphic file (type png)
 <use imagenes/unity_ros.png>
-Package pdftex.def Info: imagenes/unity_ros.png  used on input line 93.
+Package pdftex.def Info: imagenes/unity_ros.png  used on input line 95.
 (pdftex.def)             Requested size: 283.816pt x 142.35475pt.
-LaTeX Info: Redefining \. on input line 107.
-LaTeX Info: Redefining \% on input line 107.
- [46 <./imagenes/unity_ros.png>]
-LaTeX Info: Redefining \. on input line 129.
-LaTeX Info: Redefining \% on input line 129.
- [47]
-LaTeX Info: Redefining \. on input line 149.
-LaTeX Info: Redefining \% on input line 149.
- [48]
-Overfull \hbox (22.71922pt too wide) detected at line 167
+LaTeX Info: Redefining \. on input line 109.
+LaTeX Info: Redefining \% on input line 109.
+ [48 <./imagenes/unity_ros.png>]
+LaTeX Info: Redefining \. on input line 131.
+LaTeX Info: Redefining \% on input line 131.
+ [49]
+LaTeX Info: Redefining \. on input line 151.
+LaTeX Info: Redefining \% on input line 151.
+ [50]
+Overfull \hbox (22.71922pt too wide) detected at line 169
 \OML/cmm/m/it/10.95 f\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 x\OT1/cmr/m/n/10.9
 5 ) = []
  []
 
-LaTeX Info: Redefining \. on input line 170.
-LaTeX Info: Redefining \% on input line 170.
-[49]
-<imagenes/forceEvolution0.2penetration.png, id=878, 526.96875pt x 395.4775pt>
+LaTeX Info: Redefining \. on input line 172.
+LaTeX Info: Redefining \% on input line 172.
+[51]
+<imagenes/forceEvolution0.2penetration.png, id=892, 526.96875pt x 395.4775pt>
 File: imagenes/forceEvolution0.2penetration.png Graphic file (type png)
 <use imagenes/forceEvolution0.2penetration.png>
 Package pdftex.def Info: imagenes/forceEvolution0.2penetration.png  used on inp
-ut line 174.
+ut line 176.
 (pdftex.def)             Requested size: 170.28844pt x 127.79848pt.
-<imagenes/forceEvolution0.3penetration.png, id=879, 526.96875pt x 395.4775pt>
+<imagenes/forceEvolution0.3penetration.png, id=893, 526.96875pt x 395.4775pt>
 File: imagenes/forceEvolution0.3penetration.png Graphic file (type png)
 <use imagenes/forceEvolution0.3penetration.png>
 Package pdftex.def Info: imagenes/forceEvolution0.3penetration.png  used on inp
-ut line 180.
+ut line 182.
 (pdftex.def)             Requested size: 170.28844pt x 127.79848pt.
-LaTeX Info: Redefining \. on input line 195.
-LaTeX Info: Redefining \% on input line 195.
- [50 <./imagenes/forceEvolution0.2penetration.png> <./imagenes/forceEvolution0.
+LaTeX Info: Redefining \. on input line 197.
+LaTeX Info: Redefining \% on input line 197.
+ [52 <./imagenes/forceEvolution0.2penetration.png> <./imagenes/forceEvolution0.
 3penetration.png>]
-LaTeX Info: Redefining \. on input line 206.
-LaTeX Info: Redefining \% on input line 206.
- [51]
-LaTeX Info: Redefining \. on input line 218.
-LaTeX Info: Redefining \% on input line 218.
- [52]
-LaTeX Info: Redefining \. on input line 229.
-LaTeX Info: Redefining \% on input line 229.
- [53]) (./capitulos/05_Resultados.tex
+LaTeX Info: Redefining \. on input line 208.
+LaTeX Info: Redefining \% on input line 208.
+ [53]
+LaTeX Info: Redefining \. on input line 220.
+LaTeX Info: Redefining \% on input line 220.
+ [54]
+LaTeX Info: Redefining \. on input line 231.
+LaTeX Info: Redefining \% on input line 231.
+ [55]) (./capitulos/05_Resultados.tex
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
- [54]
+ [56]
 Cap\'{\i }tulo 5.
-[55
+[57
 
 ]
-LaTeX Info: Redefining \. on input line 23.
-LaTeX Info: Redefining \% on input line 23.
- [56]
-<imagenes/Baxter_Grabbing/FrontViewGrabbing.png, id=926, 638.385pt x 452.4403pt
+LaTeX Info: Redefining \. on input line 32.
+LaTeX Info: Redefining \% on input line 32.
+ [58]
+<imagenes/Baxter_Grabbing/FrontViewGrabbing.png, id=940, 638.385pt x 452.4403pt
 >
 File: imagenes/Baxter_Grabbing/FrontViewGrabbing.png Graphic file (type png)
 <use imagenes/Baxter_Grabbing/FrontViewGrabbing.png>
 Package pdftex.def Info: imagenes/Baxter_Grabbing/FrontViewGrabbing.png  used o
-n input line 30.
+n input line 39.
 (pdftex.def)             Requested size: 112.39099pt x 79.64769pt.
-<imagenes/Baxter_Grabbing/TopViewGrabbing.png, id=927, 450.18187pt x 409.53pt>
+<imagenes/Baxter_Grabbing/TopViewGrabbing.png, id=941, 450.18187pt x 409.53pt>
 File: imagenes/Baxter_Grabbing/TopViewGrabbing.png Graphic file (type png)
 <use imagenes/Baxter_Grabbing/TopViewGrabbing.png>
 Package pdftex.def Info: imagenes/Baxter_Grabbing/TopViewGrabbing.png  used on 
-input line 35.
+input line 44.
 (pdftex.def)             Requested size: 99.90416pt x 90.87799pt.
-<imagenes/Baxter_Grabbing/LateralViewGrabbing.png, id=928, 411.03563pt x 434.37
+<imagenes/Baxter_Grabbing/LateralViewGrabbing.png, id=942, 411.03563pt x 434.37
 282pt>
 File: imagenes/Baxter_Grabbing/LateralViewGrabbing.png Graphic file (type png)
 <use imagenes/Baxter_Grabbing/LateralViewGrabbing.png>
 Package pdftex.def Info: imagenes/Baxter_Grabbing/LateralViewGrabbing.png  used
- on input line 40.
+ on input line 49.
 (pdftex.def)             Requested size: 90.0629pt x 95.17125pt.
 Package svg Info: Last page of `./svg-inkscape/Movimiento_en_X_frente_a_Tiempo_
-svg-tex.pdf' is 1 on input line 53.
+svg-tex.pdf' is 1 on input line 62.
  (./svg-inkscape/Movimiento_en_X_frente_a_Tiempo_svg-tex.pdf_tex
-<./svg-inkscape/Movimiento_en_X_frente_a_Tiempo_svg-tex.pdf, id=930, page=1, 45
+<./svg-inkscape/Movimiento_en_X_frente_a_Tiempo_svg-tex.pdf, id=944, page=1, 45
 1.6875pt x 279.29344pt>
 File: ./svg-inkscape/Movimiento_en_X_frente_a_Tiempo_svg-tex.pdf Graphic file (
 type pdf)
@@ -1306,10 +1316,10 @@ Package pdftex.def Info: ./svg-inkscape/Movimiento_en_X_frente_a_Tiempo_svg-tex
 (pdftex.def)             Requested size: 124.87973pt x 77.21718pt.
 )
 Package svg Info: Last page of `./svg-inkscape/Movimiento_en_Y_frente_a_Tiempo_
-svg-tex.pdf' is 1 on input line 58.
+svg-tex.pdf' is 1 on input line 67.
 
 (./svg-inkscape/Movimiento_en_Y_frente_a_Tiempo_svg-tex.pdf_tex
-<./svg-inkscape/Movimiento_en_Y_frente_a_Tiempo_svg-tex.pdf, id=932, page=1, 45
+<./svg-inkscape/Movimiento_en_Y_frente_a_Tiempo_svg-tex.pdf, id=946, page=1, 45
 1.6875pt x 279.29344pt>
 File: ./svg-inkscape/Movimiento_en_Y_frente_a_Tiempo_svg-tex.pdf Graphic file (
 type pdf)
@@ -1319,10 +1329,10 @@ Package pdftex.def Info: ./svg-inkscape/Movimiento_en_Y_frente_a_Tiempo_svg-tex
 (pdftex.def)             Requested size: 124.87973pt x 77.21718pt.
 )
 Package svg Info: Last page of `./svg-inkscape/Movimiento_en_Z_frente_a_Tiempo_
-svg-tex.pdf' is 1 on input line 63.
+svg-tex.pdf' is 1 on input line 72.
 
 (./svg-inkscape/Movimiento_en_Z_frente_a_Tiempo_svg-tex.pdf_tex
-<./svg-inkscape/Movimiento_en_Z_frente_a_Tiempo_svg-tex.pdf, id=934, page=1, 45
+<./svg-inkscape/Movimiento_en_Z_frente_a_Tiempo_svg-tex.pdf, id=948, page=1, 45
 1.6875pt x 279.29344pt>
 File: ./svg-inkscape/Movimiento_en_Z_frente_a_Tiempo_svg-tex.pdf Graphic file (
 type pdf)
@@ -1332,10 +1342,10 @@ Package pdftex.def Info: ./svg-inkscape/Movimiento_en_Z_frente_a_Tiempo_svg-tex
 (pdftex.def)             Requested size: 124.87973pt x 77.21718pt.
 )
 Package svg Info: Last page of `./svg-inkscape/Movimiento_en_X_Media_ponderada_
-con_1_svg-tex.pdf' is 1 on input line 82.
+con_1_svg-tex.pdf' is 1 on input line 91.
 
 (./svg-inkscape/Movimiento_en_X_Media_ponderada_con_1_svg-tex.pdf_tex
-<./svg-inkscape/Movimiento_en_X_Media_ponderada_con_1_svg-tex.pdf, id=939, page
+<./svg-inkscape/Movimiento_en_X_Media_ponderada_con_1_svg-tex.pdf, id=953, page
 =1, 451.6875pt x 279.29344pt>
 File: ./svg-inkscape/Movimiento_en_X_Media_ponderada_con_1_svg-tex.pdf Graphic 
 file (type pdf)
@@ -1345,10 +1355,10 @@ vg-tex.pdf , page1 used on input line 56.
 (pdftex.def)             Requested size: 124.87973pt x 77.21718pt.
 )
 Package svg Info: Last page of `./svg-inkscape/Movimiento_en_Y_Media_ponderada_
-con_1_svg-tex.pdf' is 1 on input line 86.
+con_1_svg-tex.pdf' is 1 on input line 95.
 
 (./svg-inkscape/Movimiento_en_Y_Media_ponderada_con_1_svg-tex.pdf_tex
-<./svg-inkscape/Movimiento_en_Y_Media_ponderada_con_1_svg-tex.pdf, id=941, page
+<./svg-inkscape/Movimiento_en_Y_Media_ponderada_con_1_svg-tex.pdf, id=955, page
 =1, 451.6875pt x 279.29344pt>
 File: ./svg-inkscape/Movimiento_en_Y_Media_ponderada_con_1_svg-tex.pdf Graphic 
 file (type pdf)
@@ -1358,10 +1368,10 @@ vg-tex.pdf , page1 used on input line 56.
 (pdftex.def)             Requested size: 124.87973pt x 77.21718pt.
 )
 Package svg Info: Last page of `./svg-inkscape/Movimiento_en_Z_Media_ponderada_
-con_1_svg-tex.pdf' is 1 on input line 90.
+con_1_svg-tex.pdf' is 1 on input line 99.
 
 (./svg-inkscape/Movimiento_en_Z_Media_ponderada_con_1_svg-tex.pdf_tex
-<./svg-inkscape/Movimiento_en_Z_Media_ponderada_con_1_svg-tex.pdf, id=943, page
+<./svg-inkscape/Movimiento_en_Z_Media_ponderada_con_1_svg-tex.pdf, id=957, page
 =1, 451.6875pt x 279.29344pt>
 File: ./svg-inkscape/Movimiento_en_Z_Media_ponderada_con_1_svg-tex.pdf Graphic 
 file (type pdf)
@@ -1370,9 +1380,9 @@ Package pdftex.def Info: ./svg-inkscape/Movimiento_en_Z_Media_ponderada_con_1_s
 vg-tex.pdf , page1 used on input line 56.
 (pdftex.def)             Requested size: 124.87973pt x 77.21718pt.
 )
-LaTeX Info: Redefining \. on input line 95.
-LaTeX Info: Redefining \% on input line 95.
- [57 <./imagenes/Baxter_Grabbing/FrontViewGrabbing.png> <./imagenes/Baxter_Grab
+LaTeX Info: Redefining \. on input line 104.
+LaTeX Info: Redefining \% on input line 104.
+ [59 <./imagenes/Baxter_Grabbing/FrontViewGrabbing.png> <./imagenes/Baxter_Grab
 bing/TopViewGrabbing.png> <./imagenes/Baxter_Grabbing/LateralViewGrabbing.png> 
 <./svg-inkscape/Movimiento_en_X_frente_a_Tiempo_svg-tex.pdf> <./svg-inkscape/Mo
 vimiento_en_Y_frente_a_Tiempo_svg-tex.pdf
@@ -1387,9 +1397,9 @@ po_svg-tex.pdf): PDF inclusion: multiple pdfs with page group included in a sin
 gle page
 >]
 Package svg Info: Last page of `./svg-inkscape/Movimiento_en_X_Media_ponderada_
-con_2_svg-tex.pdf' is 1 on input line 101.
+con_2_svg-tex.pdf' is 1 on input line 110.
  (./svg-inkscape/Movimiento_en_X_Media_ponderada_con_2_svg-tex.pdf_tex
-<./svg-inkscape/Movimiento_en_X_Media_ponderada_con_2_svg-tex.pdf, id=10030, pa
+<./svg-inkscape/Movimiento_en_X_Media_ponderada_con_2_svg-tex.pdf, id=10045, pa
 ge=1, 451.6875pt x 279.29344pt>
 File: ./svg-inkscape/Movimiento_en_X_Media_ponderada_con_2_svg-tex.pdf Graphic 
 file (type pdf)
@@ -1399,10 +1409,10 @@ vg-tex.pdf , page1 used on input line 56.
 (pdftex.def)             Requested size: 124.87973pt x 77.21718pt.
 )
 Package svg Info: Last page of `./svg-inkscape/Movimiento_en_Y_Media_ponderada_
-con_2_svg-tex.pdf' is 1 on input line 105.
+con_2_svg-tex.pdf' is 1 on input line 114.
 
 (./svg-inkscape/Movimiento_en_Y_Media_ponderada_con_2_svg-tex.pdf_tex
-<./svg-inkscape/Movimiento_en_Y_Media_ponderada_con_2_svg-tex.pdf, id=10032, pa
+<./svg-inkscape/Movimiento_en_Y_Media_ponderada_con_2_svg-tex.pdf, id=10047, pa
 ge=1, 451.6875pt x 279.29344pt>
 File: ./svg-inkscape/Movimiento_en_Y_Media_ponderada_con_2_svg-tex.pdf Graphic 
 file (type pdf)
@@ -1412,10 +1422,10 @@ vg-tex.pdf , page1 used on input line 56.
 (pdftex.def)             Requested size: 124.87973pt x 77.21718pt.
 )
 Package svg Info: Last page of `./svg-inkscape/Movimiento_en_Z_Media_ponderada_
-con_2_svg-tex.pdf' is 1 on input line 109.
+con_2_svg-tex.pdf' is 1 on input line 118.
 
 (./svg-inkscape/Movimiento_en_Z_Media_ponderada_con_2_svg-tex.pdf_tex
-<./svg-inkscape/Movimiento_en_Z_Media_ponderada_con_2_svg-tex.pdf, id=10034, pa
+<./svg-inkscape/Movimiento_en_Z_Media_ponderada_con_2_svg-tex.pdf, id=10049, pa
 ge=1, 451.6875pt x 279.29344pt>
 File: ./svg-inkscape/Movimiento_en_Z_Media_ponderada_con_2_svg-tex.pdf Graphic 
 file (type pdf)
@@ -1425,10 +1435,10 @@ vg-tex.pdf , page1 used on input line 56.
 (pdftex.def)             Requested size: 124.87973pt x 77.21718pt.
 )
 Package svg Info: Last page of `./svg-inkscape/Movimiento_en_X_Media_ponderada_
-con_4_svg-tex.pdf' is 1 on input line 120.
+con_4_svg-tex.pdf' is 1 on input line 129.
 
 (./svg-inkscape/Movimiento_en_X_Media_ponderada_con_4_svg-tex.pdf_tex
-<./svg-inkscape/Movimiento_en_X_Media_ponderada_con_4_svg-tex.pdf, id=10039, pa
+<./svg-inkscape/Movimiento_en_X_Media_ponderada_con_4_svg-tex.pdf, id=10054, pa
 ge=1, 451.6875pt x 279.29344pt>
 File: ./svg-inkscape/Movimiento_en_X_Media_ponderada_con_4_svg-tex.pdf Graphic 
 file (type pdf)
@@ -1438,10 +1448,10 @@ vg-tex.pdf , page1 used on input line 56.
 (pdftex.def)             Requested size: 124.87973pt x 77.21718pt.
 )
 Package svg Info: Last page of `./svg-inkscape/Movimiento_en_Y_Media_ponderada_
-con_4_svg-tex.pdf' is 1 on input line 124.
+con_4_svg-tex.pdf' is 1 on input line 133.
 
 (./svg-inkscape/Movimiento_en_Y_Media_ponderada_con_4_svg-tex.pdf_tex
-<./svg-inkscape/Movimiento_en_Y_Media_ponderada_con_4_svg-tex.pdf, id=10041, pa
+<./svg-inkscape/Movimiento_en_Y_Media_ponderada_con_4_svg-tex.pdf, id=10056, pa
 ge=1, 451.6875pt x 279.29344pt>
 File: ./svg-inkscape/Movimiento_en_Y_Media_ponderada_con_4_svg-tex.pdf Graphic 
 file (type pdf)
@@ -1451,10 +1461,10 @@ vg-tex.pdf , page1 used on input line 56.
 (pdftex.def)             Requested size: 124.87973pt x 77.21718pt.
 )
 Package svg Info: Last page of `./svg-inkscape/Movimiento_en_Z_Media_ponderada_
-con_4_svg-tex.pdf' is 1 on input line 128.
+con_4_svg-tex.pdf' is 1 on input line 137.
 
 (./svg-inkscape/Movimiento_en_Z_Media_ponderada_con_4_svg-tex.pdf_tex
-<./svg-inkscape/Movimiento_en_Z_Media_ponderada_con_4_svg-tex.pdf, id=10043, pa
+<./svg-inkscape/Movimiento_en_Z_Media_ponderada_con_4_svg-tex.pdf, id=10058, pa
 ge=1, 451.6875pt x 279.29344pt>
 File: ./svg-inkscape/Movimiento_en_Z_Media_ponderada_con_4_svg-tex.pdf Graphic 
 file (type pdf)
@@ -1464,10 +1474,10 @@ vg-tex.pdf , page1 used on input line 56.
 (pdftex.def)             Requested size: 124.87973pt x 77.21718pt.
 )
 Package svg Info: Last page of `./svg-inkscape/Movimiento_en_X_Media_ponderada_
-con_8_svg-tex.pdf' is 1 on input line 136.
+con_8_svg-tex.pdf' is 1 on input line 145.
 
 (./svg-inkscape/Movimiento_en_X_Media_ponderada_con_8_svg-tex.pdf_tex
-<./svg-inkscape/Movimiento_en_X_Media_ponderada_con_8_svg-tex.pdf, id=10045, pa
+<./svg-inkscape/Movimiento_en_X_Media_ponderada_con_8_svg-tex.pdf, id=10060, pa
 ge=1, 451.6875pt x 279.29344pt>
 File: ./svg-inkscape/Movimiento_en_X_Media_ponderada_con_8_svg-tex.pdf Graphic 
 file (type pdf)
@@ -1477,10 +1487,10 @@ vg-tex.pdf , page1 used on input line 56.
 (pdftex.def)             Requested size: 124.87973pt x 77.21718pt.
 )
 Package svg Info: Last page of `./svg-inkscape/Movimiento_en_Y_Media_ponderada_
-con_8_svg-tex.pdf' is 1 on input line 140.
+con_8_svg-tex.pdf' is 1 on input line 149.
 
 (./svg-inkscape/Movimiento_en_Y_Media_ponderada_con_8_svg-tex.pdf_tex
-<./svg-inkscape/Movimiento_en_Y_Media_ponderada_con_8_svg-tex.pdf, id=10047, pa
+<./svg-inkscape/Movimiento_en_Y_Media_ponderada_con_8_svg-tex.pdf, id=10062, pa
 ge=1, 451.6875pt x 279.29344pt>
 File: ./svg-inkscape/Movimiento_en_Y_Media_ponderada_con_8_svg-tex.pdf Graphic 
 file (type pdf)
@@ -1490,10 +1500,10 @@ vg-tex.pdf , page1 used on input line 56.
 (pdftex.def)             Requested size: 124.87973pt x 77.21718pt.
 )
 Package svg Info: Last page of `./svg-inkscape/Movimiento_en_Z_Media_ponderada_
-con_8_svg-tex.pdf' is 1 on input line 144.
+con_8_svg-tex.pdf' is 1 on input line 153.
 
 (./svg-inkscape/Movimiento_en_Z_Media_ponderada_con_8_svg-tex.pdf_tex
-<./svg-inkscape/Movimiento_en_Z_Media_ponderada_con_8_svg-tex.pdf, id=10049, pa
+<./svg-inkscape/Movimiento_en_Z_Media_ponderada_con_8_svg-tex.pdf, id=10064, pa
 ge=1, 451.6875pt x 279.29344pt>
 File: ./svg-inkscape/Movimiento_en_Z_Media_ponderada_con_8_svg-tex.pdf Graphic 
 file (type pdf)
@@ -1502,9 +1512,9 @@ Package pdftex.def Info: ./svg-inkscape/Movimiento_en_Z_Media_ponderada_con_8_s
 vg-tex.pdf , page1 used on input line 56.
 (pdftex.def)             Requested size: 124.87973pt x 77.21718pt.
 )
-LaTeX Info: Redefining \. on input line 149.
-LaTeX Info: Redefining \% on input line 149.
- [58 <./svg-inkscape/Movimiento_en_X_Media_ponderada_con_1_svg-tex.pdf> <./svg-
+LaTeX Info: Redefining \. on input line 158.
+LaTeX Info: Redefining \% on input line 158.
+ [60 <./svg-inkscape/Movimiento_en_X_Media_ponderada_con_1_svg-tex.pdf> <./svg-
 inkscape/Movimiento_en_Y_Media_ponderada_con_1_svg-tex.pdf
 
 pdfTeX warning: pdflatex.exe (file ./svg-inkscape/Movimiento_en_Y_Media_pondera
@@ -1547,9 +1557,9 @@ da_con_4_svg-tex.pdf): PDF inclusion: multiple pdfs with page group included in
  a single page
 >]
 Package svg Info: Last page of `./svg-inkscape/Movimiento_en_X_Media_ponderada_
-con_10_svg-tex.pdf' is 1 on input line 155.
+con_10_svg-tex.pdf' is 1 on input line 164.
  (./svg-inkscape/Movimiento_en_X_Media_ponderada_con_10_svg-tex.pdf_tex
-<./svg-inkscape/Movimiento_en_X_Media_ponderada_con_10_svg-tex.pdf, id=23332, p
+<./svg-inkscape/Movimiento_en_X_Media_ponderada_con_10_svg-tex.pdf, id=23347, p
 age=1, 451.6875pt x 279.29344pt>
 File: ./svg-inkscape/Movimiento_en_X_Media_ponderada_con_10_svg-tex.pdf Graphic
  file (type pdf)
@@ -1560,10 +1570,10 @@ svg-tex.pdf , page1 used on input line 56.
 (pdftex.def)             Requested size: 124.87973pt x 77.21718pt.
 )
 Package svg Info: Last page of `./svg-inkscape/Movimiento_en_Y_Media_ponderada_
-con_10_svg-tex.pdf' is 1 on input line 159.
+con_10_svg-tex.pdf' is 1 on input line 168.
 
 (./svg-inkscape/Movimiento_en_Y_Media_ponderada_con_10_svg-tex.pdf_tex
-<./svg-inkscape/Movimiento_en_Y_Media_ponderada_con_10_svg-tex.pdf, id=23334, p
+<./svg-inkscape/Movimiento_en_Y_Media_ponderada_con_10_svg-tex.pdf, id=23349, p
 age=1, 451.6875pt x 279.29344pt>
 File: ./svg-inkscape/Movimiento_en_Y_Media_ponderada_con_10_svg-tex.pdf Graphic
  file (type pdf)
@@ -1574,10 +1584,10 @@ svg-tex.pdf , page1 used on input line 56.
 (pdftex.def)             Requested size: 124.87973pt x 77.21718pt.
 )
 Package svg Info: Last page of `./svg-inkscape/Movimiento_en_Z_Media_ponderada_
-con_10_svg-tex.pdf' is 1 on input line 163.
+con_10_svg-tex.pdf' is 1 on input line 172.
 
 (./svg-inkscape/Movimiento_en_Z_Media_ponderada_con_10_svg-tex.pdf_tex
-<./svg-inkscape/Movimiento_en_Z_Media_ponderada_con_10_svg-tex.pdf, id=23336, p
+<./svg-inkscape/Movimiento_en_Z_Media_ponderada_con_10_svg-tex.pdf, id=23351, p
 age=1, 451.6875pt x 279.29344pt>
 File: ./svg-inkscape/Movimiento_en_Z_Media_ponderada_con_10_svg-tex.pdf Graphic
  file (type pdf)
@@ -1588,10 +1598,10 @@ svg-tex.pdf , page1 used on input line 56.
 (pdftex.def)             Requested size: 124.87973pt x 77.21718pt.
 )
 Package svg Info: Last page of `./svg-inkscape/Movimiento_en_X_Media_ponderada_
-con_12_svg-tex.pdf' is 1 on input line 174.
+con_12_svg-tex.pdf' is 1 on input line 194.
 
 (./svg-inkscape/Movimiento_en_X_Media_ponderada_con_12_svg-tex.pdf_tex
-<./svg-inkscape/Movimiento_en_X_Media_ponderada_con_12_svg-tex.pdf, id=23341, p
+<./svg-inkscape/Movimiento_en_X_Media_ponderada_con_12_svg-tex.pdf, id=23356, p
 age=1, 451.6875pt x 279.29344pt>
 File: ./svg-inkscape/Movimiento_en_X_Media_ponderada_con_12_svg-tex.pdf Graphic
  file (type pdf)
@@ -1602,10 +1612,10 @@ svg-tex.pdf , page1 used on input line 56.
 (pdftex.def)             Requested size: 124.87973pt x 77.21718pt.
 )
 Package svg Info: Last page of `./svg-inkscape/Movimiento_en_Y_Media_ponderada_
-con_12_svg-tex.pdf' is 1 on input line 178.
+con_12_svg-tex.pdf' is 1 on input line 198.
 
 (./svg-inkscape/Movimiento_en_Y_Media_ponderada_con_12_svg-tex.pdf_tex
-<./svg-inkscape/Movimiento_en_Y_Media_ponderada_con_12_svg-tex.pdf, id=23343, p
+<./svg-inkscape/Movimiento_en_Y_Media_ponderada_con_12_svg-tex.pdf, id=23358, p
 age=1, 451.6875pt x 279.29344pt>
 File: ./svg-inkscape/Movimiento_en_Y_Media_ponderada_con_12_svg-tex.pdf Graphic
  file (type pdf)
@@ -1616,10 +1626,10 @@ svg-tex.pdf , page1 used on input line 56.
 (pdftex.def)             Requested size: 124.87973pt x 77.21718pt.
 )
 Package svg Info: Last page of `./svg-inkscape/Movimiento_en_Z_Media_ponderada_
-con_12_svg-tex.pdf' is 1 on input line 182.
+con_12_svg-tex.pdf' is 1 on input line 202.
 
 (./svg-inkscape/Movimiento_en_Z_Media_ponderada_con_12_svg-tex.pdf_tex
-<./svg-inkscape/Movimiento_en_Z_Media_ponderada_con_12_svg-tex.pdf, id=23345, p
+<./svg-inkscape/Movimiento_en_Z_Media_ponderada_con_12_svg-tex.pdf, id=23360, p
 age=1, 451.6875pt x 279.29344pt>
 File: ./svg-inkscape/Movimiento_en_Z_Media_ponderada_con_12_svg-tex.pdf Graphic
  file (type pdf)
@@ -1629,10 +1639,10 @@ Package pdftex.def Info: ./svg-inkscape/Movimiento_en_Z_Media_ponderada_con_12_
 svg-tex.pdf , page1 used on input line 56.
 (pdftex.def)             Requested size: 124.87973pt x 77.21718pt.
 )
-LaTeX Info: Redefining \. on input line 190.
-LaTeX Info: Redefining \% on input line 190.
+LaTeX Info: Redefining \. on input line 207.
+LaTeX Info: Redefining \% on input line 207.
 
-[59 <./svg-inkscape/Movimiento_en_X_Media_ponderada_con_8_svg-tex.pdf> <./svg-i
+[61 <./svg-inkscape/Movimiento_en_X_Media_ponderada_con_8_svg-tex.pdf> <./svg-i
 nkscape/Movimiento_en_Y_Media_ponderada_con_8_svg-tex.pdf
 
 pdfTeX warning: pdflatex.exe (file ./svg-inkscape/Movimiento_en_Y_Media_pondera
@@ -1659,9 +1669,9 @@ pdfTeX warning: pdflatex.exe (file ./svg-inkscape/Movimiento_en_Z_Media_pondera
 da_con_10_svg-tex.pdf): PDF inclusion: multiple pdfs with page group included i
 n a single page
 >]
-LaTeX Info: Redefining \. on input line 201.
-LaTeX Info: Redefining \% on input line 201.
- [60 <./svg-inkscape/Movimiento_en_X_Media_ponderada_con_12_svg-tex.pdf> <./svg
+LaTeX Info: Redefining \. on input line 217.
+LaTeX Info: Redefining \% on input line 217.
+ [62 <./svg-inkscape/Movimiento_en_X_Media_ponderada_con_12_svg-tex.pdf> <./svg
 -inkscape/Movimiento_en_Y_Media_ponderada_con_12_svg-tex.pdf
 
 pdfTeX warning: pdflatex.exe (file ./svg-inkscape/Movimiento_en_Y_Media_pondera
@@ -1673,35 +1683,35 @@ pdfTeX warning: pdflatex.exe (file ./svg-inkscape/Movimiento_en_Z_Media_pondera
 da_con_12_svg-tex.pdf): PDF inclusion: multiple pdfs with page group included i
 n a single page
 >]
-<imagenes/Baxter_Colliding/FrontViewCollidingX.png, id=37632, 534.99875pt x 256
+<imagenes/Baxter_Colliding/FrontViewCollidingX.png, id=37646, 534.99875pt x 256
 .45813pt>
 File: imagenes/Baxter_Colliding/FrontViewCollidingX.png Graphic file (type png)
 
 <use imagenes/Baxter_Colliding/FrontViewCollidingX.png>
 Package pdftex.def Info: imagenes/Baxter_Colliding/FrontViewCollidingX.png  use
-d on input line 207.
+d on input line 227.
 (pdftex.def)             Requested size: 99.90416pt x 47.8901pt.
-<imagenes/Baxter_Colliding/FrontViewCollidingY.png, id=37633, 569.62813pt x 213
+<imagenes/Baxter_Colliding/FrontViewCollidingY.png, id=37647, 569.62813pt x 213
 .79875pt>
 File: imagenes/Baxter_Colliding/FrontViewCollidingY.png Graphic file (type png)
 
 <use imagenes/Baxter_Colliding/FrontViewCollidingY.png>
 Package pdftex.def Info: imagenes/Baxter_Colliding/FrontViewCollidingY.png  use
-d on input line 212.
+d on input line 232.
 (pdftex.def)             Requested size: 124.87973pt x 46.86948pt.
-<imagenes/Baxter_Colliding/LateralViewCollidingZ.png, id=37634, 373.89688pt x 3
+<imagenes/Baxter_Colliding/LateralViewCollidingZ.png, id=37648, 373.89688pt x 3
 15.1775pt>
 File: imagenes/Baxter_Colliding/LateralViewCollidingZ.png Graphic file (type pn
 g)
 <use imagenes/Baxter_Colliding/LateralViewCollidingZ.png>
 Package pdftex.def Info: imagenes/Baxter_Colliding/LateralViewCollidingZ.png  u
-sed on input line 217.
+sed on input line 237.
 (pdftex.def)             Requested size: 77.19789pt x 65.07349pt.
 Package svg Info: Last page of `./svg-inkscape/Torque_frente_a_ Penetracion_en_
-X_Maximo_10_svg-tex.pdf' is 1 on input line 227.
+X_Maximo_10_svg-tex.pdf' is 1 on input line 247.
  (./svg-inkscape/Torque_frente_a_ Penetracion_en_X_Maximo_10_svg-tex.pdf_tex
 <./svg-inkscape/Torque_frente_a_ Penetracion_en_X_Maximo_10_svg-tex.pdf, id=376
-36, page=1, 451.6875pt x 279.29344pt>
+50, page=1, 451.6875pt x 279.29344pt>
 File: ./svg-inkscape/Torque_frente_a_ Penetracion_en_X_Maximo_10_svg-tex.pdf Gr
 aphic file (type pdf)
 <use ./svg-inkscape/Torque_frente_a_ Penetracion_en_X_Maximo_10_svg-tex.pdf, pa
@@ -1711,10 +1721,10 @@ o_10_svg-tex.pdf , page1 used on input line 56.
 (pdftex.def)             Requested size: 124.87973pt x 77.21718pt.
 )
 Package svg Info: Last page of `./svg-inkscape/Torque_frente_a_ Penetracion_en_
-Y_Maximo_10_svg-tex.pdf' is 1 on input line 231.
+Y_Maximo_10_svg-tex.pdf' is 1 on input line 251.
 (./svg-inkscape/Torque_frente_a_ Penetracion_en_Y_Maximo_10_svg-tex.pdf_tex
 <./svg-inkscape/Torque_frente_a_ Penetracion_en_Y_Maximo_10_svg-tex.pdf, id=376
-38, page=1, 451.6875pt x 279.29344pt>
+52, page=1, 451.6875pt x 279.29344pt>
 File: ./svg-inkscape/Torque_frente_a_ Penetracion_en_Y_Maximo_10_svg-tex.pdf Gr
 aphic file (type pdf)
 <use ./svg-inkscape/Torque_frente_a_ Penetracion_en_Y_Maximo_10_svg-tex.pdf, pa
@@ -1724,11 +1734,11 @@ o_10_svg-tex.pdf , page1 used on input line 56.
 (pdftex.def)             Requested size: 124.87973pt x 77.21718pt.
 )
 Package svg Info: Last page of `./svg-inkscape/Torque_frente_a_ Penetracion_en_
-Z_Maximo_10_svg-tex.pdf' is 1 on input line 235.
+Z_Maximo_10_svg-tex.pdf' is 1 on input line 255.
 
 (./svg-inkscape/Torque_frente_a_ Penetracion_en_Z_Maximo_10_svg-tex.pdf_tex
 <./svg-inkscape/Torque_frente_a_ Penetracion_en_Z_Maximo_10_svg-tex.pdf, id=376
-40, page=1, 451.6875pt x 279.29344pt>
+54, page=1, 451.6875pt x 279.29344pt>
 File: ./svg-inkscape/Torque_frente_a_ Penetracion_en_Z_Maximo_10_svg-tex.pdf Gr
 aphic file (type pdf)
 <use ./svg-inkscape/Torque_frente_a_ Penetracion_en_Z_Maximo_10_svg-tex.pdf, pa
@@ -1738,11 +1748,11 @@ o_10_svg-tex.pdf , page1 used on input line 56.
 (pdftex.def)             Requested size: 124.87973pt x 77.21718pt.
 )
 Package svg Info: Last page of `./svg-inkscape/Torque_frente_a_ Penetracion_en_
-X_Maximo_20_svg-tex.pdf' is 1 on input line 242.
+X_Maximo_20_svg-tex.pdf' is 1 on input line 262.
 
 (./svg-inkscape/Torque_frente_a_ Penetracion_en_X_Maximo_20_svg-tex.pdf_tex
 <./svg-inkscape/Torque_frente_a_ Penetracion_en_X_Maximo_20_svg-tex.pdf, id=376
-42, page=1, 451.6875pt x 279.29344pt>
+56, page=1, 451.6875pt x 279.29344pt>
 File: ./svg-inkscape/Torque_frente_a_ Penetracion_en_X_Maximo_20_svg-tex.pdf Gr
 aphic file (type pdf)
 <use ./svg-inkscape/Torque_frente_a_ Penetracion_en_X_Maximo_20_svg-tex.pdf, pa
@@ -1752,11 +1762,11 @@ o_20_svg-tex.pdf , page1 used on input line 56.
 (pdftex.def)             Requested size: 124.87973pt x 77.21718pt.
 )
 Package svg Info: Last page of `./svg-inkscape/Torque_frente_a_ Penetracion_en_
-Y_Maximo_20_svg-tex.pdf' is 1 on input line 246.
+Y_Maximo_20_svg-tex.pdf' is 1 on input line 266.
 
 (./svg-inkscape/Torque_frente_a_ Penetracion_en_Y_Maximo_20_svg-tex.pdf_tex
 <./svg-inkscape/Torque_frente_a_ Penetracion_en_Y_Maximo_20_svg-tex.pdf, id=376
-44, page=1, 451.6875pt x 279.29344pt>
+58, page=1, 451.6875pt x 279.29344pt>
 File: ./svg-inkscape/Torque_frente_a_ Penetracion_en_Y_Maximo_20_svg-tex.pdf Gr
 aphic file (type pdf)
 <use ./svg-inkscape/Torque_frente_a_ Penetracion_en_Y_Maximo_20_svg-tex.pdf, pa
@@ -1766,11 +1776,11 @@ o_20_svg-tex.pdf , page1 used on input line 56.
 (pdftex.def)             Requested size: 124.87973pt x 77.21718pt.
 )
 Package svg Info: Last page of `./svg-inkscape/Torque_frente_a_ Penetracion_en_
-Z_Maximo_20_svg-tex.pdf' is 1 on input line 250.
+Z_Maximo_20_svg-tex.pdf' is 1 on input line 270.
 
 (./svg-inkscape/Torque_frente_a_ Penetracion_en_Z_Maximo_20_svg-tex.pdf_tex
 <./svg-inkscape/Torque_frente_a_ Penetracion_en_Z_Maximo_20_svg-tex.pdf, id=376
-46, page=1, 451.6875pt x 279.29344pt>
+60, page=1, 451.6875pt x 279.29344pt>
 File: ./svg-inkscape/Torque_frente_a_ Penetracion_en_Z_Maximo_20_svg-tex.pdf Gr
 aphic file (type pdf)
 <use ./svg-inkscape/Torque_frente_a_ Penetracion_en_Z_Maximo_20_svg-tex.pdf, pa
@@ -1779,10 +1789,10 @@ Package pdftex.def Info: ./svg-inkscape/Torque_frente_a_ Penetracion_en_Z_Maxim
 o_20_svg-tex.pdf , page1 used on input line 56.
 (pdftex.def)             Requested size: 124.87973pt x 77.21718pt.
 )
-LaTeX Info: Redefining \. on input line 255.
-LaTeX Info: Redefining \% on input line 255.
+LaTeX Info: Redefining \. on input line 275.
+LaTeX Info: Redefining \% on input line 275.
 
-[61 <./imagenes/Baxter_Colliding/FrontViewCollidingX.png> <./imagenes/Baxter_Co
+[63 <./imagenes/Baxter_Colliding/FrontViewCollidingX.png> <./imagenes/Baxter_Co
 lliding/FrontViewCollidingY.png> <./imagenes/Baxter_Colliding/LateralViewCollid
 ingZ.png> <./svg-inkscape/Torque_frente_a_ Penetracion_en_X_Maximo_10_svg-tex.p
 df> <./svg-inkscape/Torque_frente_a_ Penetracion_en_Y_Maximo_10_svg-tex.pdf
@@ -1795,12 +1805,11 @@ ded in a single page
 pdfTeX warning: pdflatex.exe (file ./svg-inkscape/Torque_frente_a_ Penetracion_
 en_Z_Maximo_10_svg-tex.pdf): PDF inclusion: multiple pdfs with page group inclu
 ded in a single page
-> <./svg-inkscape/Torque_frente_a_ Penetracion_en_X_Maximo_20_svg-tex.pdf
-
-pdfTeX warning: pdflatex.exe (file ./svg-inkscape/Torque_frente_a_ Penetracion_
-en_X_Maximo_20_svg-tex.pdf): PDF inclusion: multiple pdfs with page group inclu
-ded in a single page
-> <./svg-inkscape/Torque_frente_a_ Penetracion_en_Y_Maximo_20_svg-tex.pdf
+>]) (./capitulos/06_Conclusiones.tex
+LaTeX Info: Redefining \. on input line 1.
+LaTeX Info: Redefining \% on input line 1.
+ [64 <./svg-inkscape/Torque_frente_a_ Penetracion_en_X_Maximo_20_svg-tex.pdf> <
+./svg-inkscape/Torque_frente_a_ Penetracion_en_Y_Maximo_20_svg-tex.pdf
 
 pdfTeX warning: pdflatex.exe (file ./svg-inkscape/Torque_frente_a_ Penetracion_
 en_Y_Maximo_20_svg-tex.pdf): PDF inclusion: multiple pdfs with page group inclu
@@ -1810,334 +1819,329 @@ ded in a single page
 pdfTeX warning: pdflatex.exe (file ./svg-inkscape/Torque_frente_a_ Penetracion_
 en_Z_Maximo_20_svg-tex.pdf): PDF inclusion: multiple pdfs with page group inclu
 ded in a single page
->]) (./capitulos/06_Conclusiones.tex
-LaTeX Info: Redefining \. on input line 1.
-LaTeX Info: Redefining \% on input line 1.
- [62]
+>]
 Cap\'{\i }tulo 6.
-[63
+[65
 
 ]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 LaTeX Info: Redefining \. on input line 20.
 LaTeX Info: Redefining \% on input line 20.
- [64]
+ [66]
 LaTeX Info: Redefining \. on input line 38.
 LaTeX Info: Redefining \% on input line 38.
 
-[65]) (./capitulos/07_Referencias.tex
-LaTeX Info: Redefining \. on input line 1.
-LaTeX Info: Redefining \% on input line 1.
- [66]
-Cap\'{\i }tulo 7.
-[67
-
-] [68
+[67]
+LaTeX Info: Redefining \. on input line 52.
+LaTeX Info: Redefining \% on input line 52.
+ [68]) (./capitulos/07_Referencias.tex [69] [70
 
 ]
-Underfull \hbox (badness 1205) in paragraph at lines 11--12
+Underfull \hbox (badness 1205) in paragraph at lines 10--11
 []\OT1/cmr/m/n/10.95 FAAC. 2021. Mi-li-tary Trai-ning Si-mu-la-tors | Air & Arm
 y Trai-ning
  []
 
-[69]
-Underfull \hbox (badness 1062) in paragraph at lines 13--14
+[71]
+Underfull \hbox (badness 1062) in paragraph at lines 12--13
 \OT1/cmr/m/n/10.95 pe-dia li-bre. [on-li-ne] Avai-la-ble at: $\OML/cmm/m/it/10.
 95 <$[]$\OT1/cmtt/m/n/10.95 https : / / es . wikipedia . org / wiki /
  []
 
 
-Underfull \hbox (badness 4634) in paragraph at lines 15--16
+Underfull \hbox (badness 4634) in paragraph at lines 14--15
 []\OT1/cmr/m/n/10.95 2021. [on-li-ne] Avai-la-ble at: $\OML/cmm/m/it/10.95 <$[]
 \OT1/cmr/m/n/10.95 https://www.sdpnoticias.com/estilo-de-
  []
 
 
-Underfull \hbox (badness 2662) in paragraph at lines 15--16
+Underfull \hbox (badness 2662) in paragraph at lines 14--15
 \OT1/cmr/m/n/10.95 vida/video-desde-londres-medico-opera-platano-estados-unidos
 .html[]$\OML/cmm/m/it/10.95 >$ \OT1/cmr/m/n/10.95 [Ac-
  []
 
-LaTeX Info: Redefining \. on input line 26.
-LaTeX Info: Redefining \% on input line 26.
-[70]
-Underfull \hbox (badness 10000) in paragraph at lines 30--31
+LaTeX Info: Redefining \. on input line 25.
+LaTeX Info: Redefining \% on input line 25.
+[72]
+Underfull \hbox (badness 10000) in paragraph at lines 29--30
 []\OT1/cmr/m/n/10.95 Hospimedica.es. 2021. Pla-ta-for-ma de en-tre-na-mien-to d
 e RV
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 30--31
+Underfull \hbox (badness 10000) in paragraph at lines 29--30
 \OT1/cmr/m/n/10.95 dis-mi-nu-ye los erro-res quir^^Surgi-cos cr^^S^^Pti-cos a l
 a mi-tad. [on-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 30--31
+Underfull \hbox (badness 10000) in paragraph at lines 29--30
 \OT1/cmr/m/n/10.95 li-ne] Avai-la-ble at: $\OML/cmm/m/it/10.95 <$[]\OT1/cmr/m/n
 /10.95 https://www.hospimedica.es/tecnicas-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 30--31
+Underfull \hbox (badness 10000) in paragraph at lines 29--30
 \OT1/cmr/m/n/10.95 quirurgicas/articles/294786664/plataforma-de-entrenamiento-d
 e-rv-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 30--31
+Underfull \hbox (badness 10000) in paragraph at lines 29--30
 \OT1/cmr/m/n/10.95 disminuye-los-errores-quirurgicos-criticos-a-la-mitad.html[]
 $\OML/cmm/m/it/10.95 >$ \OT1/cmr/m/n/10.95 [Ac-ces-sed 2
  []
 
-LaTeX Info: Redefining \. on input line 36.
-LaTeX Info: Redefining \% on input line 36.
-[71]
-Underfull \hbox (badness 4608) in paragraph at lines 36--37
+LaTeX Info: Redefining \. on input line 35.
+LaTeX Info: Redefining \% on input line 35.
+[73]
+Underfull \hbox (badness 4608) in paragraph at lines 35--36
 []\OT1/cmr/m/n/10.95 D^^S^^Paz Tri-bal-dos, M^^Soni-ca Roc^^S^^Po, Es-co-bar oc
 am-po, Jos^^Se Ma-nuel y
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 36--37
+Underfull \hbox (badness 10000) in paragraph at lines 35--36
 \OT1/cmr/m/n/10.95 Vi-vas Alb^^San, []Oscar Andr^^Ses. (2015). IN-TER-FAZ H[]AP
 TI-CA TI-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 36--37
+Underfull \hbox (badness 10000) in paragraph at lines 35--36
 \OT1/cmr/m/n/10.95 PO GA-RANT[]IA CON RE-ALI-MEN-TA-CI[]ON VI-BRA-TO-RIA. Re-
  []
 
 
-Underfull \hbox (badness 1748) in paragraph at lines 36--37
+Underfull \hbox (badness 1748) in paragraph at lines 35--36
 \OT1/cmr/m/n/10.95 vis-ta EIA , (23), 29-39. Ob-te-ni-do el 2 de sep-tiem-bre d
 e 2021 de
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 36--37
+Underfull \hbox (badness 10000) in paragraph at lines 35--36
 []$\OT1/cmtt/m/n/10.95 http : / / www . scielo . org . co / scielo . php ? scri
 pt = sci _ arttext & pid =
  []
 
 
-Underfull \hbox (badness 4647) in paragraph at lines 47--48
+Underfull \hbox (badness 4647) in paragraph at lines 46--47
 []\OT1/cmr/m/n/10.95 Energy.gov. 2021. DOE Explains...Deuterium-Tritium Fu-sion
  Reac-
  []
 
 
-Underfull \hbox (badness 2653) in paragraph at lines 47--48
+Underfull \hbox (badness 2653) in paragraph at lines 46--47
 \OT1/cmr/m/n/10.95 tor Fuel. [on-li-ne] Avai-la-ble at: $\OML/cmm/m/it/10.95 <$
 []$\OT1/cmtt/m/n/10.95 https : / / www . energy . gov / science /
  []
 
 
-Underfull \hbox (badness 2351) in paragraph at lines 47--48
+Underfull \hbox (badness 2351) in paragraph at lines 46--47
 \OT1/cmtt/m/n/10.95 doe-[]explainsdeuterium-[]tritium-[]fusion-[]reactor-[]fuel
 $[]$\OML/cmm/m/it/10.95 >$ \OT1/cmr/m/n/10.95 [Ac-ces-sed 2
  []
 
-LaTeX Info: Redefining \. on input line 49.
-LaTeX Info: Redefining \% on input line 49.
-[72]
-Underfull \hbox (badness 10000) in paragraph at lines 53--54
+LaTeX Info: Redefining \. on input line 48.
+LaTeX Info: Redefining \% on input line 48.
+[74]
+Underfull \hbox (badness 10000) in paragraph at lines 52--53
 []\OT1/cmr/m/n/10.95 Pharmaceutical-technology.com. 2020. Un-real En-gi-ne: fro
 m
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 53--54
+Underfull \hbox (badness 10000) in paragraph at lines 52--53
 \OT1/cmr/m/n/10.95 ga-ming to ground-breaking cu-res. [on-li-ne] Avai-la-ble at
 :
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 53--54
+Underfull \hbox (badness 10000) in paragraph at lines 52--53
 \OML/cmm/m/it/10.95 <$[]$\OT1/cmtt/m/n/10.95 https : / / www . pharmaceutical-[
 ]technology . com / features /
  []
 
 
-Underfull \hbox (badness 5331) in paragraph at lines 53--54
+Underfull \hbox (badness 5331) in paragraph at lines 52--53
 \OT1/cmtt/m/n/10.95 unreal-[]engine-[]gaming-[]ground-[]breaking-[]cures/$[]$\O
 ML/cmm/m/it/10.95 >$ \OT1/cmr/m/n/10.95 [Ac-ces-sed 2 Sep-
  []
 
 
-Underfull \hbox (badness 6396) in paragraph at lines 59--60
+Underfull \hbox (badness 6396) in paragraph at lines 58--59
 []\OT1/cmr/m/n/10.95 Smithsonian Ma-ga-zi-ne. 2021. He-re's What the Fu-tu-re o
 f Hap-
  []
 
 
-Underfull \hbox (badness 1281) in paragraph at lines 59--60
+Underfull \hbox (badness 1281) in paragraph at lines 58--59
 \OT1/cmr/m/n/10.95 tic Tech-no-logy Looks (Or Rather, Feels) Li-ke. [on-li-ne] 
 Avai-la-ble at:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 59--60
+Underfull \hbox (badness 10000) in paragraph at lines 58--59
 \OML/cmm/m/it/10.95 <$[]\OT1/cmr/m/n/10.95 https://www.smithsonianmag.com/innov
 ation/heres-what-future-haptic-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 59--60
+Underfull \hbox (badness 10000) in paragraph at lines 58--59
 \OT1/cmr/m/n/10.95 technology-looks-or-rather-feels-180971097/.[]$\OML/cmm/m/it
 /10.95 >$ \OT1/cmr/m/n/10.95 [Ac-ces-sed 2 Sep-tem-ber
  []
 
-LaTeX Info: Redefining \. on input line 61.
-LaTeX Info: Redefining \% on input line 61.
-[73]
-Underfull \hbox (badness 1902) in paragraph at lines 68--69
+LaTeX Info: Redefining \. on input line 60.
+LaTeX Info: Redefining \% on input line 60.
+[75]
+Underfull \hbox (badness 1902) in paragraph at lines 67--68
 \OT1/cmr/m/n/10.95 BOT MAN-FRED. [ebook] JA-VIER V. G[]OMEZ GONZ[]ALEZ. Avai-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 70--71
+Underfull \hbox (badness 10000) in paragraph at lines 69--70
 []\OT1/cmr/m/n/10.95 GitHub. 2021. GitHub - Unity-Technologies/URDF-Importer:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 70--71
+Underfull \hbox (badness 10000) in paragraph at lines 69--70
 \OT1/cmr/m/n/10.95 URDF im-por-ter. [on-li-ne] Avai-la-ble at: $\OML/cmm/m/it/1
 0.95 <$[]$\OT1/cmtt/m/n/10.95 https : / / github . com /
  []
 
-LaTeX Info: Redefining \. on input line 73.
-LaTeX Info: Redefining \% on input line 73.
-[74]
-Underfull \hbox (badness 10000) in paragraph at lines 75--76
+LaTeX Info: Redefining \. on input line 72.
+LaTeX Info: Redefining \% on input line 72.
+[76]
+Underfull \hbox (badness 10000) in paragraph at lines 74--75
 []\OT1/cmr/m/n/10.95 2016. [on-li-ne] Avai-la-ble at: $\OML/cmm/m/it/10.95 <$[]
 $\OT1/cmtt/m/n/10.95 https : / / assetstore .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 75--76
+Underfull \hbox (badness 10000) in paragraph at lines 74--75
 \OT1/cmtt/m/n/10.95 unity . com / packages / essentials / tutorial-[]projects /
 
  []
 
 
-Overfull \hbox (43.53949pt too wide) in paragraph at lines 75--76
+Overfull \hbox (43.53949pt too wide) in paragraph at lines 74--75
 \OT1/cmtt/m/n/10.95 unity-[]5-[]haptic-[]plugin-[]for-[]geomagic-[]openhaptics-
 []3-[]3-[]hlapi-[]hdapi-[]34393$[]$\OML/cmm/m/it/10.95 >$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 76--77
+Underfull \hbox (badness 10000) in paragraph at lines 75--76
 \OT1/cmtt/m/n/10.95 tools / integration / 3d-[]systems-[]openhaptics-[]unity-[]
 plugin-[]134024$[]$\OML/cmm/m/it/10.95 >$
  []
 
 
-Underfull \hbox (badness 3428) in paragraph at lines 79--80
+Underfull \hbox (badness 3428) in paragraph at lines 78--79
 []\OT1/cmr/m/n/10.95 2020. OpenHap-tics\TS1/cmr/m/n/10.95 � \OT1/cmr/m/n/10.95 
 Tool-kit Ver-sion 3.5.0 API Re-fe-ren-ce Gui-de.
  []
 
 
-Underfull \hbox (badness 2435) in paragraph at lines 79--80
+Underfull \hbox (badness 2435) in paragraph at lines 78--79
 \OT1/cmr/m/n/10.95 [ebook] 3D Sys-tems. Avai-la-ble at: $\OML/cmm/m/it/10.95 <$
 []$\OT1/cmtt/m/n/10.95 https : / / s3 . amazonaws . com / dl .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 79--80
+Underfull \hbox (badness 10000) in paragraph at lines 78--79
 \OT1/cmtt/m/n/10.95 3dsystems . com / binaries / Sensable / OH / 3 . 5 / OpenHa
 ptics _ Toolkit _
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 83--84
+Underfull \hbox (badness 10000) in paragraph at lines 82--83
 []\OT1/cmr/m/n/10.95 Nasa.gov. 2021. [on-li-ne] Avai-la-ble at: $\OML/cmm/m/it/
 10.95 <$[]$\OT1/cmtt/m/n/10.95 https : / / www . nasa . gov /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 83--84
+Underfull \hbox (badness 10000) in paragraph at lines 82--83
 \OT1/cmtt/m/n/10.95 sites / default / files / styles / side _ image / public / 
 thumbnails / image /
  []
 
 
-Underfull \hbox (badness 1515) in paragraph at lines 84--85
+Underfull \hbox (badness 1515) in paragraph at lines 83--84
 []\OT1/cmr/m/n/10.95 Our World in Da-ta. 2021. Glo-bal pri-mary energy con-sum-
 ption by
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 85--86
+Underfull \hbox (badness 10000) in paragraph at lines 84--85
 \OT1/cmtt/m/n/10.95 title = File : Perseverance _ selfie ,[] _looking _ at _ WA
 TSON _ (PIA24542 )
  []
 
-LaTeX Info: Redefining \. on input line 86.
-LaTeX Info: Redefining \% on input line 86.
-[75]
-Underfull \hbox (badness 1721) in paragraph at lines 86--87
+LaTeX Info: Redefining \. on input line 85.
+LaTeX Info: Redefining \% on input line 85.
+[77]
+Underfull \hbox (badness 1721) in paragraph at lines 85--86
 []\OT1/cmr/m/n/10.95 File:Deuterium-tritium fu-sion.svg. (2021, July 21). Wi-ki
 -me-dia Com-
  []
 
 
-Underfull \hbox (badness 6859) in paragraph at lines 86--87
+Underfull \hbox (badness 6859) in paragraph at lines 85--86
 \OT1/cmr/m/n/10.95 mons, the free me-dia re-po-si-tory. Re-trie-ved 23:13, Sep-
 tem-ber 2,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 89--90
+Underfull \hbox (badness 10000) in paragraph at lines 88--89
 \OT1/cmr/m/n/10.95 RO-BOTS. Avai-la-ble at: $\OML/cmm/m/it/10.95 <$[]\OT1/cmr/m
 /n/10.95 https://revistaderobots.com/cobots/cobots-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 89--90
+Underfull \hbox (badness 10000) in paragraph at lines 88--89
 \OT1/cmr/m/n/10.95 o-robots-colaborativos-caracteristicas-ventajas-y-fabricante
 s-de-brazos-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 90--91
+Underfull \hbox (badness 10000) in paragraph at lines 89--90
 \OT1/cmtt/m/n/10.95 web / 20140826071530 / http : / / www . rethinkrobotics . c
 om / products /
  []
 
 
-Underfull \hbox (badness 3780) in paragraph at lines 91--92
+Underfull \hbox (badness 3780) in paragraph at lines 90--91
 []\OT1/cmr/m/n/10.95 GitHub. 2021. Unity-Robotics-Hub/unity[]ros.png at main \T
 S1/cmr/m/n/10.95 � \OT1/cmr/m/n/10.95 Unity-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 91--92
+Underfull \hbox (badness 10000) in paragraph at lines 90--91
 \OT1/cmr/m/n/10.95 Technologies/Unity-Robotics-Hub. [on-li-ne] Avai-la-ble at: 
 $\OML/cmm/m/it/10.95 <$[]$\OT1/cmtt/m/n/10.95 https :
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 91--92
+Underfull \hbox (badness 10000) in paragraph at lines 90--91
 \OT1/cmtt/m/n/10.95 / / github . com / Unity-[]Technologies / Unity-[]Robotics-
 []Hub / blob / main /
  []
 
 
-Underfull \hbox (badness 1867) in paragraph at lines 91--92
+Underfull \hbox (badness 1867) in paragraph at lines 90--91
 \OT1/cmtt/m/n/10.95 tutorials / ros _ unity _ integration / images / unity _ ro
 s . png$[]$\OML/cmm/m/it/10.95 >$ \OT1/cmr/m/n/10.95 [Ac-ces-sed
  []
 
-)
-LaTeX Info: Redefining \. on input line 222.
-LaTeX Info: Redefining \% on input line 222.
- [76] [77
+LaTeX Info: Redefining \. on input line 95.
+LaTeX Info: Redefining \% on input line 95.
+[78])
+LaTeX Info: Redefining \. on input line 230.
+LaTeX Info: Redefining \% on input line 230.
+ [79] [80
 
-] (./proyecto.aux
+] [81] (./proyecto.aux
 LaTeX Info: Redefining \. on input line 26.
 LaTeX Info: Redefining \% on input line 26.
 )
@@ -2145,16 +2149,16 @@ LaTeX Info: Redefining \% on input line 26.
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `proyecto.out' has not changed.
-(rerunfilecheck)             Checksum: 08775DFB11F4C7D370874E82849CF6A5;8014.
+(rerunfilecheck)             Checksum: 7FEDAD1996B844779F6E257C2EEBD76C;8044.
  ) 
 Here is how much of TeX's memory you used:
- 17590 strings out of 478599
- 296497 string characters out of 5858102
- 653540 words of memory out of 5000000
- 34664 multiletter control sequences out of 15000+600000
+ 17609 strings out of 478599
+ 296940 string characters out of 5858102
+ 653570 words of memory out of 5000000
+ 34675 multiletter control sequences out of 15000+600000
  411815 words of font info for 56 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 94i,14n,94p,1248b,681s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 94i,14n,94p,1248b,708s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<c:/tex
 live/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2021
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2021/texmf-di
@@ -2172,10 +2176,10 @@ fonts/cm/cmsy8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/c
 mti10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb
 ><c:/texlive/2021/texmf-dist/fonts/type1/public/eurosym/feymr10.pfb><c:/texlive
 /2021/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on proyecto.pdf (97 pages, 9355202 bytes).
+Output written on proyecto.pdf (101 pages, 9561794 bytes).
 PDF statistics:
- 41990 PDF objects out of 45951 (max. 8388607)
- 28049 compressed objects within 281 object streams
- 312 named destinations out of 1000 (max. 500000)
- 739 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 42016 PDF objects out of 45951 (max. 8388607)
+ 28070 compressed objects within 281 object streams
+ 316 named destinations out of 1000 (max. 500000)
+ 752 words of extra memory for PDF output out of 10000 (max. 10000000)
 

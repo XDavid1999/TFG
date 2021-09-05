@@ -7,7 +7,11 @@
 \usepackage{svg}
 \usepackage{amsmath}
 \usepackage{eurosym}
-% \usepackage[style=list, number=none]{glossary} %
+\usepackage[utf8]{inputenc}
+%\usepackage[acronym]{glossaries}
+
+
+%\usepackage[style=list, number=none]{glossary} %
 %\usepackage{titlesec}
 %\usepackage{pailatino}
 
@@ -176,8 +180,9 @@ pdfproducer = {pdflatex}
   \penalty -\@Mi
 }
 \makeatother
-
+%\makeglossaries
 \usepackage{pdfpages}
+%\input{capitulos/Acronimos}
 \begin{document}
 \input{portada/portada}
 \input{prefacios/prefacio}
@@ -188,6 +193,9 @@ pdfproducer = {pdflatex}
 %
 \mainmatter
 \setlength{\parskip}{5pt}
+
+
+\input{capitulos/Acronimos}
 
 \input{capitulos/01_Introduccion}
 %
@@ -216,9 +224,9 @@ pdfproducer = {pdflatex}
 %\appendix
 %\input{apendices/manual_usuario/manual_usuario}
 %%\input{apendices/paper/paper}
-%\input{glosario/entradas_glosario}
-% \addcontentsline{toc}{chapter}{Glosario}
-% \printglossary
+
+%\addcontentsline{toc}{chapter}{Glosario}
+%\printglossary
 \chapter*{}
 \thispagestyle{empty}
 
