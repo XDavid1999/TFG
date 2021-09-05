@@ -1,0 +1,341 @@
+\chapter{Especificación de Servicios Utilizados}
+
+En este capítulo haremos mención de las principales herramientas empleadas en el desarrollo del proyecto, detallando su papel dentro del mismo y justificando las razones de su elección.
+
+En primer lugar, describiremos qué es exactamente un motor gráfico para acto seguido realizar una pequeña comparativa de las distintas herramientas software de este tipo que consideramos previamente a la realización del estudio, para finalmente justificar la elección del finalmente seleccionado.
+
+Del mismo modo, aclararemos y debatiremos cuáles son los distintos dispositivos hápticos y robots colaborativos que se presentan como alternativa para el propósito de este estudio, justificando finalmente la elección de los que utilizaremos, aclarando sus especificaciones técnicas y pormenores en el epígrafe de cada subsección.
+
+\vfill
+
+\section{Motor Gráfico}
+
+Como señalamos en secciones precedentes, la realidad virtual o aumentada son componentes necesarios para el testeo y desempeño de diversas tareas. Es por ello que el uso de un motor gráfico para la posterior creación de entornos inmersivos y simulación de Baxter en un entorno ficticio con el objetivo final de la realización de pruebas se hace necesario en el seno de nuestro proyecto. 
+
+
+Podemos especificar el concepto de motor gráfico como un marco de software que incluye e implementa distintas rutinas de programación y bibliotecas relevantes para el desarrollo y ejecución de aplicaciones cuyo propósito se centra en la representación de elementos de este tipo, como lo son las simulaciones y videojuegos. 
+
+De esta necesidad, surgen motores gráficos o de juego capaces de operar en distintos sistemas operativos, desde ordenadores hasta consolas. Así pues, entre las funcionalidades básicas que estos deben proporcionar para que el usuario pueda desarrollar la actividad deseada, se encuentran: la capacidad de representación gráfica del motor o render, un motor capaz de simular la física del mundo que se creará, el sonido, la animación, IA, etc. \cite{49}.
+
+
+
+\subsection{Problema y Alternativas}
+
+Antes de trasladar los resultados de una investigación a entornos reales, es preciso realizar tareas previas de testeo en modelos virtuales para evitar posibles daños o deterioros en los equipos por los posibles fallos de implementación. Es por ello que, previo al uso del Baxter real, realizaremos pruebas en un entorno simulado.
+
+
+\subsubsection{Unreal}
+
+Unreal Engine, motor gráfico creado por Epic Games en 1998, fue desarrollado para el soporte de creación de juegos de tipo shooter en sus inicios. Más allá de ello, en la actualidad, ha encontrado lugar tanto en la industria de la televisión como del cine además de en la creación de gran variedad de videojuegos tridimensionales de distinta índole \cite{50}.
+
+La capacidad de esta herramienta es destacada por su calidad de renderizado y eficiencia, pero además ha sido empleada en el campo científico por su fidelidad y funcionalidades al alcance del desarrollador. En este caso, ha sido aprovechado como base para una herramienta de exploración y manipulación de moléculas con realidad virtual, en el campo de la farmacia, añadiendo la posibilidad de interacción entre los investigadores colaboradores en cualquier parte del mundo además de la posibilidad de observar simulaciones complejas de distinto carácter\cite{51}.
+
+\subsubsection{Game Maker Studio}
+
+Definimos Game Maker como una serie de motores gráficos multiplataforma altamente adaptables para la creación de videojuegos del mismo tipo, utilizando un lenguaje de programación visual o el suyo propio, para un control más avanzado. Este motor fue creado en sus inicios para que los programadores con corta experiencia pudieran crear juegos gracias a su intuitiva interfaz.
+
+Principalmente este motor está diseñado para la creación de contenido en dos dimensiones, aunque es posible el uso de gráficos 3D haciendo un control avanzado de las funcionalidades disponibles \cite{52}.
+
+\subsubsection{Gazebo}
+
+Esta herramienta está puramente destinada a la simulación de robots en entornos virtuales, postulándose como el más específico de los citados. Este software permite el testeo de algoritmos, el diseño de robots, las pruebas de regresión o el entrenamiento de sistemas con Inteligencia Artificial en escenarios altamente realistas. 
+
+Además de ello, este software gratuito provee un robusto motor de física, gráficos de gran calidad e intuitivas interfaces de programación \cite{53}.
+
+\subsubsection{Unity}
+
+Por último tratamos el motor de juego multiplataforma desarrollado por Unity Technologies, con grandes capacidades para la creación de juegos y entornos simulados 2D y 3D. Este provee una API para el scripting en C\#, para Unity y sus complementos, además de intuitivas maneras de tratar con los mismos desde la vista principal de los componentes gráficos.
+
+Este motor multiplataforma es compatible con los principales sistemas operativos -Windows, MacOS y Linux- y permite la creación de videojuegos para más de 19 plataformas, como lo son los dispositivos móviles , los computadores o las consolas \cite{54}. 
+
+
+
+
+\subsection{Unity}		
+
+Tras hacer un pequeño inciso en el análisis de las opciones disponibles para el desarrollo de este proyecto elegimos Unity. Tras un análisis de ventajas e inconvenientes del uso de los motores contemplados consideramos que Unity es el que más virtudes nos ofrece, como detallamos a continuación.
+
+En primer lugar, tras un pequeño trabajo de estudio, encontramos distintos casos de uso en los que este motor ha sido usado para la simulación de robots con éxito \cite{55}. Por esta razón, hallamos algunas herramientas software que nos son útiles tanto para la sencilla importación de los componentes del robot como para su posterior comunicación con el dispositivo real.
+
+Asimismo, la integración del dispositivo háptico con este entorno de trabajo es magnífica, ya que algunos de los programas que se ofrecen para la demostración de las capacidades del instrumento se ejecutan en este entorno. De igual manera, encontramos reseñas de plugins que se han desarrollado para la integración de este dispositivo en este entorno de trabajo.
+
+Además de ello, advertimos de que Unity cuenta con una gran y activa comunidad de usuarios, lo que resulta como un punto muy positivo de cara a la resolución de distintos problemas que pudieran presentarse en el desarrollo e implementación de las funcionalidades propuestas.
+
+Igualmente, es conocida la buena y sencilla integración que Unity hace tanto de la realidad virtual como de la realidad aumentada y  los dispositivos que se usan para ello -como las gafas de realidad virtual y realidad aumentada-, lo que resulta muy atractivo para el futuro desarrollo de la investigación que llevamos a cabo.
+
+Finalmente, sumada a las razones anteriormente descritas, que producen en general una gran sinergia entre los componentes que utilizaremos en el proyecto, encontramos la de mayor peso. El proyecto que desarrolla este grupo de investigación es conjunto, por tanto, para la correcta integración de los avances realizados en el presente trabajo con las partes realizadas por los demás integrantes, que hacen uso de Unity, es necesario su uso \cite{54}.
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+
+
+\begin{table}[!hbt]
+	\subsubsection{Especificaciones técnicas}
+	\bigskip
+	\bigskip
+    \centering
+    \begin{tabular}{l p{0.3\linewidth} c c}
+        \specialrule{.1em}{.05em}{.05em} 
+        \textbf{Lenguaje en que está programado} & C++ \\
+        \hline
+        \textbf{Scripting} & C\#, Visual Scripting (Bolt) \\
+        \hline
+        \textbf{¿Es Cross Platform?} & Sí \\
+        \hline
+        \textbf{Orientación de Desarrollo} & 2D, 2.5D, 3D \\
+        \hline
+        \textbf{Plataformas Soportadas} &  Windows, macOS, Linux, Xbox 360, Xbox One, Wii U, New 3DS, Nintendo Switch, PlayStation 4, PlayStation Vita, Windows Phone, iOS, Android, BlackBerry 10, Tizen, Unity Web Player, Windows Store, WebGL, Oculus Rift, Gear VR, Android TV, Samsung Smart TV\\
+        \hline
+        \textbf{Videojuegos Destacados} & Hearthstone: Heroes of Warcraft, Assassin’s Creed: Identity \\
+        \hline
+        \textbf{Licencia} & Propietaria \\
+        \hline
+        \textbf{Última Versión Lanzada} & 2021.1.17 -  16 de Agosto de 2021 \\
+        \specialrule{.1em}{.05em}{.05em}
+    \end{tabular}
+    \caption{Especificaciones Técnicas de Unity \cite{85}}
+    \label{tab:caracteristicas_unity}
+\end{table}
+
+
+\subsection{Control de Versiones}
+En un inicio, no se planteó el uso de tecnologías para el control de versiones. Sin embargo, es necesario conocer al detalle los cambios que se realizan, ya que en su desarrollo el funcionamiento del código comenzaba a ser más tedioso y difícil de trazar. Consecuentemente, utilizamos un software completamente adaptado y dedicado a la descrita tarea para el rastreo de cambios en conjuntos de archivos, git.
+
+Esta herramienta, con altas capacidades de rendimiento, seguridad, flexibilidad e intuitividad en su uso, resulta idónea para el fin que tratamos de lograr. Además, gracias a la plataforma de desarrollo en la que hospedamos el software desarrollado, github, podemos compartir el conocimiento adquirido con los demás usuarios de la plataforma, liberando el código construido \cite{56}.
+
+\section{Dispositivos hápticos}
+Cómo motivamos anteriormente, el uso de la retroalimentación háptica en conjunción con las tecnologías de realidad virtual o realidad aumentada, hacen que la experiencia de un usuario teleoperador de cualquier tipo de dispositivo sea más satisfactoria, precisa y eficiente. Es por esta razón que se incluye en nuestro proyecto, y es por ello que detallamos en esta sección la selección del hardware háptico empleado.
+
+En primer lugar, podemos clasificar los dispositivos hápticos en tres distintas categorías: agarrables, vestibles y táctiles. Las diferencias entre ellos son claras, ya que es evidente que son distintos los propósitos de joysticks, guantes o pantallas táctiles, como ejemplo de cada una de las categorías respectivamente \cite{57}.
+
+El tipo de dispositivos más apropiados para nuestro contexto son los denominados como grabbables en el inglés, aunque sería interesante realizar pruebas comparativas con los que se sitúan en el propio brazo del manipulador para seguir sus movimientos. Respecto a los primeros, encontramos una amplia variedad de los mismos, aunque estén dedicados a fines que difieren de lo que se trata de lograr en nuestro estudio.
+
+\subsection{Problema y Alternativas}
+En consecuencia, tras esta breve introducción, será necesario un pequeño análisis respecto a las posibilidades dentro del tipo de  dispositivos hápticos que pueden ser prendidos para su control. De este modo, presentamos un listado con los distintos robots de este tipo más populares para tareas de micromanipulación o  que necesitan de la detección de rugosidad, rigidez o propiedades cinestésicas de los cuerpos manipulados en actividades de operación virtual o teleoperación. En esta, especificaremos el nombre o denominación del artefacto junto al número de grados de libertad que tiene disponibles, aclarándose en algunos casos cuántos de ellos son capaces de representar la fuerza o torque que les llega seguidos de la marca que los desarolla, \ref{tab:dispositivos_hapticos}.
+
+
+\begin{table}[!htb]
+    \centering
+    \begin{tabular}{l p{0.3\linewidth} c c}
+        \specialrule{.1em}{.05em}{.05em} 
+        \textbf{Nombre} & \textbf{DoF} & \textbf{Desarrollador} \\
+        \specialrule{.1em}{.05em}{.05em}
+        HapticMaster & 3 & Moog FCS Robotic\\
+        \hline
+        Virtuose™ 6D Desktop & 6 & Haption\\
+        \hline
+        Virtuose™ 3D Desktop & 3/6 & Haption\\
+        \hline
+        Virtuose™ 6D & 6 & Haption\\
+        \hline
+        MAT™ 6D & 6 & Haption\\
+        \hline
+        Inca™ 6D & 6 & Haption\\
+        \hline
+        Scale 1™ & 3/4 & Haption\\
+        \hline
+        Novint Falcon™ & 3 & Novint\\
+        \hline
+        Haptic Planar Pantograph & 3 & Quanser\\
+        \hline
+        Haptic Wand & 5 & Quanser\\
+        \hline
+        $HD^2$ & 6 + 1 & Quanser\\
+        \hline
+        Omega 3 & 3 & Force dimension\\
+        \hline
+        Omega 6 & 6 & Force dimension\\
+        \hline
+        Omega 7 & 6 + 1 & Force dimension\\
+        \hline
+        MouseCat & 2 & Haptic Technologies\\
+        \hline
+        Freedom 6S & 6 & MPB Technologies\\
+        \hline
+        Touch & 3/6 & 3DSystems\\
+        \hline
+        Touch X & 3/6 & 3DSystems\\
+        \hline
+        Phantom Premium 3.0/6DoF & 6 & 3DSystems\\
+        \hline
+        \specialrule{.1em}{.05em}{.05em}
+    \end{tabular}
+    \caption{Dispositivos Hápticos Populares en 2021 \cite{86}}
+    \label{tab:dispositivos_hapticos}
+\end{table}
+
+
+Tras citar algunos de los dispositivos más cotizados en el mercado, de tipo agarrable, son evidentes algunas características comunes que pueden resultar decisivas a la hora de elegir cualquiera de ellos. Por ejemplo, vemos que gran parte de los mismos cuentan con 6 grados de libertad, lo que resulta en una gran ventaja para el manejo del dispositivo en distintos escenarios posibles. De este modo, uno de los aspectos más relevantes, además de las dimensiones y el precio, cuando comparamos este tipo de artefactos es el número de articulaciones que poseen la capacidad de representar fuerza o torque. A ese respecto, en nuestro caso -tras la experiencia de trabajo con Touch X y haciendo referencia a los grados de libertad en los que recibimos realimentación háptica-, podríamos concluir que la información de táctil recibida solamente en tres ejes puede resultar suficiente para nuestro caso de uso.   
+
+\subsection{Touch X}
+Tras la comparativa y el análisis de los distintos dispositivos disponibles, se elige Touch X para la representación del antedicho feedback háptico, necesario para la teleoperación en el marco de trabajo descrito por este proyecto. Este robot, disponible en el laboratorio en el que se realizó este estudio, ha sido galardonado y posee elevadas capacidades para proporcionar una lectura del posicionamiento altamente precisa, además de una retroalimentación háptica firme y con una alta fidelidad \cite{58}. 
+
+En líneas generales, este modelo es usado en el montaje virtual de componentes, modelado tridimensional, formación quirúrgica y usualmente en procedimientos que requieren un alto grado de precisión. Así pues, este permite recrear la sensación cinestésica de la interacción humana con cuerpos tridimensionales, brindando al usuario una sensación fluida con una bajo efecto de fricción \cite{59}.
+
+Sumadas a las ventajas descritas, podemos destacar su ergonomía e idoneidad para el trabajo en entornos reducidos, ya que las dimensiones de algunos de los citados artefactos pueden resultar en una experiencia tediosa en su manejo. Por el contrario, gracias al peso y dimensiones de Touch X, lo convierten en un método de control portable y adaptable a cualquier entorno de trabajo. Así pues,  la versatilidad que proporcionan sus 6 grados de libertad de movimiento y la realimentación háptica en los tres principales ejes: x, y, z, resultan suficientes para cubrir aparentemente la casuística de este estudio. 
+
+
+\subsubsection{Especificaciones técnicas}
+
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{l p{0.3\linewidth} c c}
+        \specialrule{.1em}{.05em}{.05em} 
+        \textbf{Espacio de Trabajo} & 160 mm x 120 mm x 120 mm (Anchura, Altura, Profundidad) \\
+        \hline
+        \textbf{Dimensiones} & 143 mm x 184 mm (Anchura, Profundidad)\\
+        \hline
+        \textbf{Peso} & 3.257 Kg \\
+        \hline
+        \textbf{Resolución} & $>$1100 dpi / ~0.023 mm \\
+        \hline
+        \textbf{Fricción de Retroceso} & $<$ 0.06 N \\
+        \hline
+        \textbf{Máxima Fuerza Aplicable} & 7.9 N \\
+        \hline
+        \textbf{Rigidez} & Eje X $>$ 1.86 N / mm Eje Y $>$ 2.35 N / mm Eje Z $>$ 1.48 N / mm \\
+        \hline
+        \textbf{Inercia} &  $\approx$ 35 g \\
+        \hline
+        \textbf{Realimentación Háptica} & 3 Ejes (x, y, z) \\
+        \hline
+        \textbf{Grados de Libertad} & 6 \\
+        \hline
+        \textbf{Interfaz de Conexión} & USB 2.0 \\
+        \hline
+        \textbf{Precio} &  $\approx$ 8 440 \\
+        \specialrule{.1em}{.05em}{.05em}
+    \end{tabular}
+    \caption{Especificaciones Técnicas de Touch X \cite{58}}
+    \label{tab:caracteristicas_touch_x}
+\end{table}
+
+\section{Robots Colaborativos}
+
+Los robots colaborativos, también denominados como cobots, tienen el objetivo final de automatizar procesos que se llevan a cabo en el ámbito industrial, con el propósito de mejorar la eficacia con la que se realizan algunos procedimientos  o para evitar los riesgos que estos puedan implicar para los seres humanos.  Así pues, el nombre que estos robots reciben es debido a sus capacidades para colaborar con los mismos en un entorno de trabajo.
+
+Estos robots, de carácter fabril, son articulados y con un tamaño mediano o pequeño. Las tareas a las que estos están destinados son variopintas, pero normalmente se enfocan en la automatización de labores repetitivas o que implican un riesgo para la salud del personal \cite{60}.
+
+\subsection{Problema y Alternativas}
+Tras la motivación presentada, secundada por la transición hacia una industria 4.0, son muchas las opciones disponibles en el mercado debido a la gran cantidad de fabricantes de este tipo de robots. Así pues, realizaremos un listado en el que especificaremos algunos aspectos relevantes de este tipo de máquinas detallando algunas de sus principales características, \ref{tab:robots_colaborativos}.
+
+\begin{table}[!htb]
+    \centering
+    \begin{tabular}{l p{0.03\linewidth} c c c c c c}
+        \specialrule{.1em}{.05em}{.05em} 
+        \textbf{Nombre} & \textbf{Dof} & \textbf{Alcance} & \textbf{Carga} & \textbf{Repetibilidad} & \textbf{Marca}\\
+        \specialrule{.1em}{.05em}{.05em}
+        Hitbot Z-Arm Mini & 4 & 320 mm & 1 Kg & $\pm$ 0'01 mm & Hitbot \\
+        \hline
+        Hitbot Z-Arm & 4 & 400 mm & 3 Kg & $\pm$ 0'03 mm & Hitbot \\
+        \hline
+        UR3e & 6 & 400 mm & 3 Kg & $\pm$ 0'03 mm & Universal Robots \\
+        \hline
+        UR5e & 6 & 850 mm & 5 Kg & $\pm$ 0'03 mm & Universal Robots \\
+        \hline
+        UR10e & 6 & 1300 mm & 12.5 Kg & $\pm$ 0'05 mm & Universal Robots \\
+        \hline
+        UR16e & 6 & 900 mm & 16 Kg & $\pm$ 0'05 mm & Universal Robots \\
+        \hline
+        CR-4iA & 6 & 550 mm & 4 Kg & $\pm$ 0'01 mm & FANUC \\
+        \hline
+        CR-14iA/L & 6 & 911 mm & 14 Kg & $\pm$ 0'01 mm & FANUC\\
+        \hline
+        CR-15iA & 6 & 1441 mm & 15 Kg & $\pm$ 0'02 mm & FANUC \\
+        \hline
+        CR-35iA & 6 & 1813 mm & 35 Kg & $\pm$ 0'03 mm & FANUC \\
+        \hline
+        HC10 & 6 & 1200 mm & 10 Kg & $\pm$ 0'1 mm & YASKAWA \\
+        \hline
+        HC10DT IP67 & 6 & 1200 mm & 10 Kg & $\pm$ 0'1 mm & YASKAWA \\
+        \hline
+        HC10DTF & 6 & 1200 mm & 20 Kg & $\pm$ 0'05 mm & YASKAWA \\
+        \hline
+        HC20DT IP67 & 6 & 1700 mm & 20 Kg & $\pm$ 0'05 mm & YASKAWA \\
+        \hline
+        LBR iiwa 7 R800 & 7 & 800 mm & 7 Kg & $\pm$ 0'1 mm & KUKA \\
+        \hline
+        LBR iiwa 14 R820 & 7 & 820 mm & 14 Kg & $\pm$ 0'1 mm & KUKA \\
+        \hline
+        LBR Med 7 R800 & 7 & 800 mm & 7 Kg & $\pm$ 0'1 mm & KUKA \\
+        \hline
+        LBR Med 14 R820 & 7 & 820 mm & 14 Kg & $\pm$ 0'15 mm & KUKA \\
+        \hline
+        DSCR3 Dual Arm  & 14 & 1200 mm & 6 Kg & $\pm$ 0'02 mm & Siasun \\
+        \hline
+        DSCR5 Dual Arm & 14 & 1600 mm & 10 Kg & $\pm$ 0'02 mm & Siasun \\
+        \hline
+       Baxter & 14 & 1210 mm & 2.2 Kg & $\pm$ 3 mm & Rethink \\
+        \specialrule{.1em}{.05em}{.05em}
+    \end{tabular}
+    \caption{Robots Colaborativos Populares en 2021 \cite{87}}
+    \label{tab:robots_colaborativos}
+\end{table}
+
+En vista a la ingente cantidad modelos disponibles, aunque no hemos citado todos los encontrados, observamos que este es un campo en auge y cuya producción es altamente consumida entre distintas compañías de gran envergadura. Entre las propiedades citadas en esta tabla encontramos la designación del robot, el número de grados de libertad, su alcance, carga máxima, marca y repetibilidad.
+
+Esta última propiedad, menos conocida de forma ordinaria, hace referencia a la variación de los resultados en mediciones que se realizan en un proceso iterativo en un corto lapso de tiempo bajo unas condiciones predispuestas. De este modo, se trata de probar el dispositivo sometido a las pruebas en un ambiente controlado para realizar mediciones de su fiabilidad o tolerancia a los errores. Así pues, en vista a los resultados, podemos ver como los robots que se listan poseen una alta precisión, razón por la cual son usados en tareas que requieren un alto grado de exactitud en el movimiento \cite{61}.
+
+Adicionalmente, respecto a la carga que son capaces de manejar, advertimos que es un factor decisivo en su construcción. Vemos una clara división de las tareas que pueden realizar debido a este factor, ya que algunas serán imposibles para los que soportan un peso menor.
+
+\subsection{Baxter}
+
+Tras esta breve reseña acerca de los distintos dispositivos capaces de colaborar en un ambiente laboral con seres humanos, es evidente que la construcción del robot que utilizamos en esta investigación es totalmente diferente. Baxter, disponible en el laboratorio en el que se lleva a cabo esta investigación, monta algunos accesorios que no están disponibles en otros autómatas de la misma índole. Por consiguiente, entre las ventajas de este constan su alta adaptabilidad a un entorno cambiante, la posibilidad de trabajar en un espacio en el que transitan personas por su alta seguridad o la capacidad de poder ejecutar distintas tareas en una jornada, haciéndolo más versátil que los demás. 
+
+Además de ello, el compendio de sensores que este dispositivo equipa lo hacen una herramienta muy útil en la investigación, ya que unido a su facilidad de programación es posible conocer gran cantidad de aspectos relativos al entorno en que se encuentra trabajando o su propio estado. De este modo, en el propio proyecto, sería posible la integración de sistemas redundantes, haciendo uso de la simulación o de los susodichos detectores \cite{62,63}. 
+
+No obstante, es flagrante que pese a poder ser empleable en una mayor cantidad de situaciones resulta menos idóneo para la realización de tareas más concretas, como podemos observar en su repetibilidad, aunque ello no lo haga inválido para las mismas. Así pues, es característico en robots de su porte, su lentitud respecto a los robots industriales tradicionales, ya que sus movimientos elásticos tienen el fin de proteger a las personas que pululan a su alrededor. 
+
+Sin embargo, en el seno de nuestro proyecto, este cuenta con una propiedad esencial como lo es el hecho de tener dos brazos. En consecuencia, para una manipulación natural de los objetos, resulta más sencillo que un solo robot incorpore todos los efectores necesarios para la ejecución de las tareas de mantenimiento. De este modo, resulta intuitiva la interacción y sencillo el control y la inmersión.
+
+\subsubsection{Especificaciones técnicas}
+
+\begin{table}[!htb]
+    \centering
+    \begin{tabular}{l p{0.3\linewidth} c c}
+        \specialrule{.1em}{.05em}{.05em} 
+        \textbf{Altura} & 94 cm (Sin Pedestal) \\
+        \hline
+        \textbf{Longitud} & 37 cm \\
+        \hline
+        \textbf{Anchura} & 260 cm \\
+        \hline
+        \textbf{Peso} & 75 Kg (Sin Pedestal) \\
+        \hline
+        \textbf{Sensores} & Cinco cámaras (una en la cabeza, dos en el pecho y una en cada antebrazo). Detección de fuerza basada en actuadores elásticos en serie. Cabezal con matriz de sonar para detectar humanos que se mueven cerca. \\
+        \hline
+        \textbf{Actuadores} & Actuadores elásticos en serie con motores de CC sin escobillas, cajas de engranajes de metal y plástico y elementos de resorte personalizados. \\
+        \hline
+        \textbf{Alimentación} & Fuente de alimentación estándar 120 V \\
+        \hline
+        \textbf{Procesador} & Procesador principal basado en Intel i7 en torso. Placas controladoras motoras basadas en ARM  en brazos  \\
+        \hline
+        \textbf{Software} & Linux OS y software personalizado de control ROS \\
+        \hline
+        \textbf{Grados de Libertad} & 16 Total = Brazo: 7 x 2 + Cabeza: 2 \\
+        \hline
+        \textbf{Materiales} & Aluminio, termoplásticos, piezas pulverizadas con metal \\
+        \hline
+        \textbf{Costo} & $\approx$ 22000 - 43200\euro \\
+        \specialrule{.1em}{.05em}{.05em}
+    \end{tabular}
+    \caption{Especificaciones Técnicas de Baxter \cite{88}}
+    \label{tab:caracteristicas_baxter}
+\end{table}
+
+

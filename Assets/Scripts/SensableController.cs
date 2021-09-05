@@ -18,7 +18,7 @@ public class SensableController : MonoBehaviour
     private List<float> driveTargets;
 
     private SensablePlugin sensablePlugin;
-
+    
     private void Awake()
     {
         driveTargets = new List<float>();

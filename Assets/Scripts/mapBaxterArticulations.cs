@@ -11,7 +11,7 @@ public class mapBaxterArticulations : MonoBehaviour
     //// Container List of Targets
     private List<float> targets = new List<float>();
     //// Robot's right Arm
-    private ArticulationBody[] selectedArticulations;
+    public ArticulationBody[] selectedArticulations;
 
 
     //// Necessary constants for the linear relation between haptic device's articulations and baxter

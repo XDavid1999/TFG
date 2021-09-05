@@ -7,12 +7,18 @@ public class baxterHapticFeedback : MonoBehaviour
 {
     // Start is called before the first frame update
     SensablePlugin sensablePlugin;
+    mapBaxterArticulations mapBaxterArticulations;
+    childCollider childCollider;
     private List<ContactPoint> contacts = new List<ContactPoint>();
+    private float[] middleCollisionPoint;
+    public float thresholdCollisionDetection = 0.7f;
 
 
     void Awake()
     {
         sensablePlugin = GetComponent<SensablePlugin>();
+        mapBaxterArticulations = GetComponent<mapBaxterArticulations>();
+        childCollider = GetComponent<childCollider>();
     }
 
     void Start()
@@ -22,32 +28,97 @@ public class baxterHapticFeedback : MonoBehaviour
 
     internal void OnCollisionEnterChild(Collision collision, GameObject gameObject)
     {
-        float[] position = new float[3];
-        collision.GetContacts(contacts);
-        position = getNormal(contacts);
+        sensablePlugin.getButtonStateSync();
+        if (sensablePlugin.buttonActive && collision.gameObject.tag=="Grabbable" && !sensablePlugin.grabbingObject)
+            grabbingObject(collision.gameObject, gameObject);
+        else
+        {
+            float[] position = new float[3];
+            collision.GetContacts(contacts);
+            position = getNormal(contacts);
 
-        position[0] *= 40;
-        position[1] *= 40;
-        position[2] *= 40;
+            if (middleCollisionPoint == null)
+            {
+                middleCollisionPoint = getMiddlePoint(contacts);
+                sensablePlugin.recalculateSync();
+            }
 
-        sensablePlugin.recalculateJointAngles();
-        sensablePlugin.collidigObject = collision.collider.name;
-        sensablePlugin.isColliding = true;
-        sensablePlugin.forces = position;
+            if (gameObject!=sensablePlugin.collidingBaxterArticulation  || checkDistance(middleCollisionPoint, getMiddlePoint(contacts)))
+            {
+                if (sensablePlugin.positions.Count == sensablePlugin.positionsLength)
+                    sensablePlugin.positions.Remove(sensablePlugin.positions[0]);
 
-        Debug.Log("COLLISION: " + sensablePlugin.collidigObject);
+                sensablePlugin.positions.Add(position);
+                sensablePlugin.recalculateSync();
+            }
+
+            middleCollisionPoint = getMiddlePoint(contacts);
+            sensablePlugin.collidingBaxterArticulation = gameObject;
+            sensablePlugin.isColliding = true;
+        }
     }
 
-    internal void OnCollisionStayChild(Collision collision)
+    public void grabbingObject(GameObject collidingObject, GameObject baxterArticulation)
     {
-        sensablePlugin.isColliding = true;
+        if(baxterArticulation == mapBaxterArticulations.selectedArticulations[mapBaxterArticulations.selectedArticulations.Length - 1].gameObject)
+        {
+            sensablePlugin.grabbingObjectGameobject = collidingObject.gameObject;
+            sensablePlugin.isColliding = false;
+            sensablePlugin.grabbingObject = true;
+            collidingObject.transform.SetParent(baxterArticulation.transform);
+            collidingObject.layer = 9;
+            collidingObject.AddComponent<childCollider>();
+            sensablePlugin.collidedRigidBodymass = sensablePlugin.grabbingObjectGameobject.GetComponent<Rigidbody>().mass;
+            Destroy(sensablePlugin.grabbingObjectGameobject.GetComponent<Rigidbody>());
+            unityResetArticulationAddingBugFix(true);
+        }
+    }
+
+    internal void OnCollisionStayChild(Collision collision, GameObject gameObject)
+    {
+        sensablePlugin.getButtonStateSync();
+
+        if (sensablePlugin.buttonActive && collision.gameObject.tag == "Grabbable" && !sensablePlugin.grabbingObject)
+            grabbingObject(collision.gameObject, gameObject);
+        else
+            sensablePlugin.isColliding = true;
     }
     
     internal void OnCollisionExitChild(Collision collision)
     {
+        middleCollisionPoint = null;
         sensablePlugin.isColliding = false;
+        sensablePlugin.lastCollisionForceValues.Clear();
     }
+    public void unityResetArticulationAddingBugFix( bool action)
+    {
+        List<Vector3> velocities = new List<Vector3>();
+        List<ArticulationReducedSpace> positions = new List<ArticulationReducedSpace>();
 
+        foreach (ArticulationBody articulation in mapBaxterArticulations.selectedArticulations)
+        {
+            velocities.Add(articulation.velocity);
+            positions.Add(articulation.jointPosition);
+        }
+
+        if(action)
+            sensablePlugin.grabbingObjectGameobject.AddComponent<ArticulationBody>();
+        else
+            Destroy(sensablePlugin.grabbingObjectGameobject.GetComponent<ArticulationBody>());
+
+        for (int i = 0; i < mapBaxterArticulations.selectedArticulations.Length; i++)
+        {
+            mapBaxterArticulations.selectedArticulations[i].velocity = velocities[i];
+            mapBaxterArticulations.selectedArticulations[i].jointPosition = positions[i];
+        }
+    }
+    public bool checkDistance(float[] point1, float[] point2)
+    {
+        Vector3 origin = new Vector3(point1[0], point1[1], point1[2]);
+        Vector3 end = new Vector3(point2[0], point2[1], point2[2]);
+
+        return Mathf.Abs(Vector3.Distance(origin, end)) > thresholdCollisionDetection ? true : false;
+    }
     public float[] getNormal(List<ContactPoint> contacts)
     {
         float[] normal = new float[3];
