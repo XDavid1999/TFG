@@ -1,81 +1,79 @@
 \babel@toc {spanish}{}\relax 
-\contentsline {chapter}{\numberline {1}Introducción}{1}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Sistemas Teleoperados}{2}{section.1.1}%
-\contentsline {section}{\numberline {1.2}Tecnologías inmersivas}{3}{section.1.2}%
-\contentsline {section}{\numberline {1.3}Marco de trabajo: IFMIF-DONES}{4}{section.1.3}%
-\contentsline {section}{\numberline {1.4}Objetivos Planteados}{5}{section.1.4}%
-\contentsline {section}{\numberline {1.5}Planificación del Proyecto}{6}{section.1.5}%
-\contentsline {section}{\numberline {1.6}Estimación de Costos}{8}{section.1.6}%
-\contentsline {chapter}{\numberline {2}Estado del Arte}{11}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Teleoperación y Robótica}{12}{section.2.1}%
-\contentsline {subsection}{\numberline {2.1.1}Evolución del Arte}{13}{subsection.2.1.1}%
-\contentsline {subsection}{\numberline {2.1.2}Implementaciones Actuales}{14}{subsection.2.1.2}%
-\contentsline {subsubsection}{Aplicaciones Militares}{14}{section*.8}%
-\contentsline {subsubsection}{Aplicaciones Espaciales}{15}{section*.9}%
-\contentsline {subsubsection}{Aplicaciones Médicas}{15}{section*.10}%
-\contentsline {subsubsection}{Aplicaciones Submarinas}{16}{section*.11}%
-\contentsline {subsection}{\numberline {2.1.3}Componentes del Sistema Teleoperado}{16}{subsection.2.1.3}%
-\contentsline {subsubsection}{Operador}{16}{section*.12}%
-\contentsline {subsubsection}{Dispositivo Controlado}{17}{section*.13}%
-\contentsline {subsubsection}{Interfaz}{17}{section*.14}%
-\contentsline {subsubsection}{Control y Canales para la Comunicación}{17}{section*.15}%
-\contentsline {subsubsection}{Sensores}{17}{section*.16}%
-\contentsline {section}{\numberline {2.2}Técnicas de Inmersión}{17}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Evolución del Arte}{19}{subsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.2.2}Implementaciones Actuales}{20}{subsection.2.2.2}%
-\contentsline {subsubsection}{Aplicaciones Militares}{20}{section*.17}%
-\contentsline {subsubsection}{Aplicaciones Espaciales}{21}{section*.18}%
-\contentsline {subsubsection}{Aplicaciones Médicas}{21}{section*.19}%
-\contentsline {subsection}{\numberline {2.2.3}Feedback Háptico}{22}{subsection.2.2.3}%
-\contentsline {section}{\numberline {2.3}Entorno en la Fusión Nuclear}{23}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Proyectos Asociados}{25}{subsection.2.3.1}%
-\contentsline {subsubsection}{ IFMIF-DONES}{25}{section*.20}%
-\contentsline {subsubsection}{ITER}{26}{section*.21}%
-\contentsline {subsubsection}{DEMO}{26}{section*.22}%
-\contentsline {chapter}{\numberline {3}Especificación de Servicios Utilizados}{29}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Motor Gráfico}{30}{section.3.1}%
-\contentsline {subsection}{\numberline {3.1.1}Problema y Alternativas}{30}{subsection.3.1.1}%
-\contentsline {subsubsection}{Unreal}{30}{section*.23}%
-\contentsline {subsubsection}{Game Maker Studio}{31}{section*.24}%
-\contentsline {subsubsection}{Gazebo}{31}{section*.25}%
-\contentsline {subsubsection}{Unity}{31}{section*.26}%
-\contentsline {subsection}{\numberline {3.1.2}Unity}{31}{subsection.3.1.2}%
-\contentsline {subsubsection}{Especificaciones técnicas}{33}{section*.27}%
-\contentsline {subsection}{\numberline {3.1.3}Control de Versiones}{33}{subsection.3.1.3}%
-\contentsline {section}{\numberline {3.2}Dispositivos hápticos}{34}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Problema y Alternativas}{34}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}Touch X}{35}{subsection.3.2.2}%
-\contentsline {subsubsection}{Especificaciones técnicas}{36}{section*.28}%
-\contentsline {section}{\numberline {3.3}Robots Colaborativos}{36}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Problema y Alternativas}{37}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}Baxter}{38}{subsection.3.3.2}%
-\contentsline {subsubsection}{Especificaciones técnicas}{39}{section*.29}%
-\contentsline {chapter}{\numberline {4}Diseño e implementación}{41}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Entorno de Trabajo con Baxter}{42}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}Inicialización del Entorno}{42}{subsection.4.1.1}%
-\contentsline {subsubsection}{Generación de Archivos de Descripción de Baxter}{42}{section*.30}%
-\contentsline {subsubsection}{Importación a Unity}{42}{section*.31}%
-\contentsline {subsubsection}{Conexión Entre Unity y ROS}{43}{section*.32}%
-\contentsline {subsection}{\numberline {4.1.2}Metodología de Control}{43}{subsection.4.1.2}%
-\contentsline {subsubsection}{Cinemática Inversa}{43}{section*.33}%
-\contentsline {subsubsection}{Mapeo de las Articulaciones de Ambos Robots}{44}{section*.34}%
-\contentsline {subsection}{\numberline {4.1.3}API Baxter (ROS)}{45}{subsection.4.1.3}%
-\contentsline {subsubsection}{Modo de Control}{46}{section*.35}%
-\contentsline {section}{\numberline {4.2}Entorno de Trabajo con Touch X}{47}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Inicialización del Entorno}{47}{subsection.4.2.1}%
-\contentsline {subsubsection}{Estudio de la Integración de Touch X y Unity}{47}{section*.36}%
-\contentsline {subsection}{\numberline {4.2.2}Metodología de Control}{48}{subsection.4.2.2}%
-\contentsline {subsubsection}{Implementación del Feedback en Colisión}{48}{section*.37}%
-\contentsline {subsubsection}{Implementación de Feedback de Gravedad y Momento de la Fuerza}{50}{section*.38}%
-\contentsline {subsection}{\numberline {4.2.3}API OpenHaptics}{51}{subsection.4.2.3}%
-\contentsline {subsubsection}{HDApi}{52}{section*.39}%
-\contentsline {subsubsection}{HLApi}{52}{section*.40}%
-\contentsline {subsection}{\numberline {4.2.4}Torque}{53}{subsection.4.2.4}%
-\contentsline {chapter}{\numberline {5}Resultados}{55}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Benchmarks}{56}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}Gráficas de Evolución del Momento}{56}{subsection.5.1.1}%
-\contentsline {subsection}{\numberline {5.1.2}Gráficas de Evolución de Torque en Colisión}{60}{subsection.5.1.2}%
-\contentsline {chapter}{\numberline {6}Conclusiones}{63}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Discusión Crítica de los Resultados y Revisión de Objetivos}{64}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Trabajo Futuro}{65}{section.6.2}%
-\contentsline {chapter}{\numberline {7}Referencias}{67}{chapter.7}%
+\contentsline {chapter}{\numberline {1}Introducción}{3}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Sistemas Teleoperados}{4}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Tecnologías inmersivas}{5}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Marco de trabajo: IFMIF-DONES}{6}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Objetivos Planteados}{7}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Planificación del Proyecto}{8}{section.1.5}%
+\contentsline {section}{\numberline {1.6}Estimación de Costos}{10}{section.1.6}%
+\contentsline {chapter}{\numberline {2}Estado del Arte}{13}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Teleoperación y Robótica}{14}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Evolución del Arte}{15}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Implementaciones Actuales}{16}{subsection.2.1.2}%
+\contentsline {subsubsection}{Aplicaciones Militares}{16}{section*.9}%
+\contentsline {subsubsection}{Aplicaciones Espaciales}{17}{section*.10}%
+\contentsline {subsubsection}{Aplicaciones Médicas}{17}{section*.11}%
+\contentsline {subsubsection}{Aplicaciones Submarinas}{18}{section*.12}%
+\contentsline {subsection}{\numberline {2.1.3}Componentes del Sistema Teleoperado}{18}{subsection.2.1.3}%
+\contentsline {subsubsection}{Operador}{18}{section*.13}%
+\contentsline {subsubsection}{Dispositivo Controlado}{19}{section*.14}%
+\contentsline {subsubsection}{Interfaz}{19}{section*.15}%
+\contentsline {subsubsection}{Control y Canales para la Comunicación}{19}{section*.16}%
+\contentsline {subsubsection}{Sensores}{19}{section*.17}%
+\contentsline {section}{\numberline {2.2}Técnicas de Inmersión}{19}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Evolución del Arte}{21}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Implementaciones Actuales}{22}{subsection.2.2.2}%
+\contentsline {subsubsection}{Aplicaciones Militares}{22}{section*.18}%
+\contentsline {subsubsection}{Aplicaciones Espaciales}{23}{section*.19}%
+\contentsline {subsubsection}{Aplicaciones Médicas}{23}{section*.20}%
+\contentsline {subsection}{\numberline {2.2.3}Feedback Háptico}{24}{subsection.2.2.3}%
+\contentsline {section}{\numberline {2.3}Entorno en la Fusión Nuclear}{25}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1} IFMIF-DONES}{27}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}ITER}{28}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}DEMO}{28}{subsection.2.3.3}%
+\contentsline {chapter}{\numberline {3}Especificación de Servicios Utilizados}{31}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Motor Gráfico}{32}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Problema y Alternativas}{32}{subsection.3.1.1}%
+\contentsline {subsubsection}{Unreal}{32}{section*.21}%
+\contentsline {subsubsection}{Game Maker Studio}{33}{section*.22}%
+\contentsline {subsubsection}{Gazebo}{33}{section*.23}%
+\contentsline {subsubsection}{Unity}{33}{section*.24}%
+\contentsline {subsection}{\numberline {3.1.2}Unity}{33}{subsection.3.1.2}%
+\contentsline {subsubsection}{Especificaciones técnicas}{35}{section*.25}%
+\contentsline {subsection}{\numberline {3.1.3}Control de Versiones}{35}{subsection.3.1.3}%
+\contentsline {section}{\numberline {3.2}Dispositivos hápticos}{36}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Problema y Alternativas}{36}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Touch X}{37}{subsection.3.2.2}%
+\contentsline {subsubsection}{Especificaciones técnicas}{38}{section*.26}%
+\contentsline {section}{\numberline {3.3}Robots Colaborativos}{38}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Problema y Alternativas}{39}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Baxter}{40}{subsection.3.3.2}%
+\contentsline {subsubsection}{Especificaciones técnicas}{41}{section*.27}%
+\contentsline {chapter}{\numberline {4}Diseño e implementación}{43}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Entorno de Trabajo con Baxter}{44}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Inicialización del Entorno}{44}{subsection.4.1.1}%
+\contentsline {subsubsection}{Generación de Archivos de Descripción de Baxter}{44}{section*.28}%
+\contentsline {subsubsection}{Importación a Unity}{44}{section*.29}%
+\contentsline {subsubsection}{Conexión Entre Unity y ROS}{45}{section*.30}%
+\contentsline {subsection}{\numberline {4.1.2}Metodología de Control}{45}{subsection.4.1.2}%
+\contentsline {subsubsection}{Cinemática Inversa}{45}{section*.31}%
+\contentsline {subsubsection}{Mapeo de las Articulaciones de Ambos Robots}{46}{section*.32}%
+\contentsline {subsection}{\numberline {4.1.3}API Baxter (ROS)}{47}{subsection.4.1.3}%
+\contentsline {subsubsection}{Modo de Control}{48}{section*.33}%
+\contentsline {section}{\numberline {4.2}Entorno de Trabajo con Touch X}{49}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Inicialización del Entorno}{49}{subsection.4.2.1}%
+\contentsline {subsubsection}{Estudio de la Integración de Touch X y Unity}{49}{section*.34}%
+\contentsline {subsection}{\numberline {4.2.2}Metodología de Control}{50}{subsection.4.2.2}%
+\contentsline {subsubsection}{Implementación del Feedback en Colisión}{50}{section*.35}%
+\contentsline {subsubsection}{Implementación de Feedback de Gravedad y Momento de la Fuerza}{52}{section*.36}%
+\contentsline {subsection}{\numberline {4.2.3}API OpenHaptics}{53}{subsection.4.2.3}%
+\contentsline {subsubsection}{HDApi}{54}{section*.37}%
+\contentsline {subsubsection}{HLApi}{54}{section*.38}%
+\contentsline {subsection}{\numberline {4.2.4}Torque}{55}{subsection.4.2.4}%
+\contentsline {chapter}{\numberline {5}Resultados}{57}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Benchmarks}{58}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Gráficas de Evolución del Momento}{58}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}Gráficas de Evolución de Torque en Colisión}{62}{subsection.5.1.2}%
+\contentsline {chapter}{\numberline {6}Conclusiones}{65}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Discusión Crítica de los Resultados y Revisión de Objetivos}{66}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Trabajo Futuro}{67}{section.6.2}%
