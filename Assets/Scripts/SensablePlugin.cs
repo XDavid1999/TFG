@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
 using System.IO;
-
+using TMPro;
 public class SensablePlugin : MonoBehaviour
 {
     public enum HDenum
@@ -63,9 +63,10 @@ public class SensablePlugin : MonoBehaviour
     mapBaxterArticulations mapBaxterArticulations;
     baxterHapticFeedback baxterHapticFeedback;
     /* Minimum/Maximum value of torque we will use */
-    public const float MIN_TORQUE = 40;
-    public const float MAX_TORQUE = 1200;
-    public static float[] MAX_PENETRATIONS = { 0.2f, 0.2f, 0.2f };
+    public const float MIN_TORQUE = 45;
+    public const float MAX_TORQUE = 400;
+    public static float[] MAX_PENETRATIONS = { 0.15f, 0.2f, 0.2f };
+    [SerializeField] private TMP_Text texto;
 
     float[] CONSTANTS = { Mathf.Log(MAX_TORQUE - MIN_TORQUE) / MAX_PENETRATIONS[0], Mathf.Log(MAX_TORQUE - MIN_TORQUE) / MAX_PENETRATIONS[1], Mathf.Log(MAX_TORQUE - MIN_TORQUE) / MAX_PENETRATIONS[2] };
     /* ID of the initialized device */
@@ -101,6 +102,14 @@ public class SensablePlugin : MonoBehaviour
     float[] localGimbalValues = new float[3];
     float[] localJointAngles = new float[6];
 
+    public struct OriginalPos
+    {
+        public GameObject gameobject;
+        public Vector3 position;
+        public Quaternion rotation;
+    }
+
+    public List<OriginalPos> originalGrabbable = new List<OriginalPos>();
     public List<string> infoX = new List<string>();
     public List<string> infoY = new List<string>();
     public List<string> infoZ = new List<string>();
@@ -165,7 +174,24 @@ public class SensablePlugin : MonoBehaviour
 
     private void Start()
     {
+        getGrabbable();
+    }
 
+    public void getGrabbable()
+    {
+        List<GameObject> gameobjects = GameObject.FindObjectsOfType<GameObject>().ToList();
+
+        foreach (GameObject gameobject in gameobjects)
+        {
+            if (gameobject.tag != null && gameobject.tag == "Grabbable")
+            {
+                OriginalPos original = new OriginalPos();
+                original.gameobject = gameobject;
+                original.position = gameobject.transform.position;  
+                original.rotation = gameobject.transform.rotation;
+                originalGrabbable.Add(original);
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -173,6 +199,29 @@ public class SensablePlugin : MonoBehaviour
         isGrabbingObject();
         isTouchingObject();
         hdScheduleSynchronous(updateHapticContext, null, ushort.MaxValue);
+        updateText();
+    }
+
+    public void updateText()
+    {
+        float frames = 1/Time.deltaTime;
+        float forceX = forces[1];
+        float forceY = forces[0];
+        float forceZ = forces[2];
+        float mass = collidedRigidBodymass;
+        float velocityX = currentVelocity[0];
+        float velocityY = currentVelocity[1];
+        float velocityZ = currentVelocity[2];
+        texto.text =
+            "FPS: " + frames + "\n" +
+            "Mass: " + mass + "\n" +
+            "Fuerza en X: " + forceX + "\n" +
+            "Fuerza en Y: " + forceY + "\n" +
+            "Fuerza en Z: " + forceZ + "\n" +
+            "Velocidad en X: " + velocityX  + "\n" +
+            "Velocidad en Y: " + velocityY  + "\n" +
+            "Velocidad en Z: " + velocityZ  +  "\n";
+
     }
     private void OnApplicationQuit()
     {
@@ -270,19 +319,27 @@ public class SensablePlugin : MonoBehaviour
 
     public void deleteData()
     {
-        writeInFile(infoX, "infoX");
-        writeInFile(infoY, "infoY");
-        writeInFile(infoZ, "infoZ");
-        writeInFile(varx, "varx");
-        writeInFile(vary, "vary");
-        writeInFile(varz, "varz");
+        Application.Quit();
+        //writeInFile(infoX, "infoX");
+        //writeInFile(infoY, "infoY");
+        //writeInFile(infoZ, "infoZ");
+        //writeInFile(varx, "varx");
+        //writeInFile(vary, "vary");
+        //writeInFile(varz, "varz");
 
-        infoY.Clear();
-        infoX.Clear();
-        infoZ.Clear();
-        varx.Clear();
-        vary.Clear();
-        varz.Clear();
+        //infoY.Clear();
+        //infoX.Clear();
+        //infoZ.Clear();
+        //varx.Clear();
+        //vary.Clear();
+        //varz.Clear();
+    }
+
+    public void reset()
+    {        
+        foreach(OriginalPos original in originalGrabbable){
+            original.gameobject.transform.SetPositionAndRotation(original.position, original.rotation);
+        }
     }
     public void setVelocity(Vector3 newPosition)
     {
@@ -307,8 +364,8 @@ public class SensablePlugin : MonoBehaviour
     public Vector3 gravity()
     {
         Vector3 gravity = new Vector3();
-        float[] weight = { 0, 0.9f, 0.1f };
-        const float GRAVITY_SCALE = 0.2f;
+        float[] weight = { 0, 0.85f, 0.15f };
+        const float GRAVITY_SCALE = 0.4f;
 
         gravity[0] = weight[0] * GRAVITY_SCALE * collidedRigidBodymass * Physics.gravity[0];
         gravity[1] = weight[1] * GRAVITY_SCALE * collidedRigidBodymass * Physics.gravity[1];
@@ -319,7 +376,7 @@ public class SensablePlugin : MonoBehaviour
     public Vector3 inertia()
     {
         float FLIP_TORQUE_SENSE = -1f;
-        float INERTIA_SCALE = 0.4f;
+        float INERTIA_SCALE = 0.5f;
 
         float acceleration;
         float force;
@@ -530,14 +587,14 @@ public class SensablePlugin : MonoBehaviour
                 }
             }
         }
-        float time = Time.deltaTime;
+        //float time = Time.deltaTime;
 
-        infoY.Add(forces[0].ToString());
-        infoX.Add(forces[1].ToString());
-        infoZ.Add(forces[2].ToString());
-        varx.Add(variation[0].ToString());
-        vary.Add(variation[1].ToString());
-        varz.Add(variation[2].ToString());
+        //infoY.Add(forces[0].ToString());
+        //infoX.Add(forces[1].ToString());
+        //infoZ.Add(forces[2].ToString());
+        //varx.Add(variation[0].ToString());
+        //vary.Add(variation[1].ToString());
+        //varz.Add(variation[2].ToString());
     }
 
     public float getAverageCollisionForce(float force, int axe)
@@ -557,7 +614,7 @@ public class SensablePlugin : MonoBehaviour
     }
     public void updateLastCollisionForceValues(float[] forces)
     {
-        int MAX_LAST_COLLISION_FORCE_VALUES_LENGTH = 5;
+        int MAX_LAST_COLLISION_FORCE_VALUES_LENGTH = 4;
 
         if (lastCollisionForceValues.Count == MAX_LAST_COLLISION_FORCE_VALUES_LENGTH)
             lastCollisionForceValues.Remove(lastCollisionForceValues[0]);
@@ -699,8 +756,8 @@ public class SensablePlugin : MonoBehaviour
 
         //if (Mathf.Abs(solution[0]) < minYCollisionValue)
         //    solution[0] *= 0.1f;
-        //if (Mathf.Abs(solution[2]) < minZCollisionValue)
-        //    solution[2] *= 0.5f;
+        if (Mathf.Abs(solution[2]) < minZCollisionValue)
+            solution[2] *= 0.5f;
 
         return solution;
     }
