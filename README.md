@@ -11,6 +11,9 @@ On the other hand, we will make an analysis of the requirements that were intend
 
 Finally, we will present a reflection of the carried out work, discussing the solution obtained with a review of the changes in the objectives and priorities of the study, concluding with ideas and comments for future work within this line of research.
 
+![image](https://user-images.githubusercontent.com/56881598/198829228-b9ec0ea3-6f48-4775-a28c-3a3ef7430a9d.png)
+
+
 ## Links of interest
 
 We list in this section some relevant links in the development of this project that have helped in the development or that are closely related.
