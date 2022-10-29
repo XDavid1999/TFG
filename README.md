@@ -3,7 +3,7 @@
 ## Descriprion
 The main purpose of this final degree project is the investigation and testing of the remote control of collaborative robots in a dynamic and inaccessible environment for human beings. In this context, we will focus on the use of devices with high haptic capabilities for their integration into teleoperation tasks, making the performer’s experience simpler and more immersive. 
 
-Thus, the memoire of this work describes, as well as the environment in which it has been thought to apply this technology as a solution, as the associated costs, the way in which the project has been developed and the devices that have been used. Through the chapters in which the report is divided, the technologies used for each specific purpose and the justification for the choice of each of them will also be described, explaining their role within the work carried out.
+Thus the memoire of this work describes, as well as the environment in which it has been thought to apply this technology as a solution, as the associated costs, the way in which the project has been developed and the devices that have been used. Through the chapters in which the report is divided, the technologies used for each specific purpose and the justification for the choice of each of them will also be described, explaining their role within the work carried out.
 
 Likewise, the methodology which the project has been carried out and, in detail, each of the interfaces that we have dealt with to coordinate the activity of the devices will be discussed. We will also clarify the problems that have arisen during the implementation of the project and the solutions adopted, adding the reasoning that has been followed for their implementation. 
 
