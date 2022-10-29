@@ -26,4 +26,4 @@ We list in this section some relevant links in the development of this project t
 - [**Baxter SDK:**](https://github.com/RethinkRobotics/baxter) For Baxter control.
 - [**URDF-Importer:**](https://github.com/Unity-Technologies/URDF-Importer) For Baxter import and simulation.
 - [**ROS-TCP-Connector:**](https://github.com/Unity-Technologies/ROS-TCP-Connector) For the connection between Unity and ROS and thus be able to command Baxter.
-- [**3DSystems Plugin:**](https://assetstore.unity.com/packages/essentials/tutorial-projects/unity-5-haptic-plugin-for-geomagic-openhaptics-3-3-hlapi- hdapi-34393) For control and demonstration of haptic device capabilities in Unity.
+- [**3DSystems Plugin:**](https://assetstore.unity.com/packages/essentials/tutorial-projects/unity-5-haptic-plugin-for-geomagic-openhaptics-3-3-hlapi-hdapi-34393) For control and demonstration of haptic device capabilities in Unity.
