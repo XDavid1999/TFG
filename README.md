@@ -11,11 +11,11 @@ On the other hand, we will make an analysis of the requirements that were intend
 
 Finally, we will present a reflection of the carried out work, discussing the solution obtained with a review of the changes in the objectives and priorities of the study, concluding with ideas and comments for future work within this line of research.
 
-## Baxter
+## Devices
 
-Baxter Front             |  Baxter Top          |    Baxter Side                 :         
-:-------------------------:|:-------------------------:|:-------------------------:
-![image](https://user-images.githubusercontent.com/56881598/198829228-b9ec0ea3-6f48-4775-a28c-3a3ef7430a9d.png) | ![image](https://user-images.githubusercontent.com/56881598/198829269-c79f07e5-6ecc-4a23-a7cc-b1ae4947fe26.png) | ![image](https://user-images.githubusercontent.com/56881598/198829276-d0c6cde3-c0c2-498b-bd75-a9cfd17c1c1d.png)
+Touch X                             |Baxter Front             |  Baxter Top          |    Baxter Side                 :         
+:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
+![image](https://user-images.githubusercontent.com/56881598/198829552-c071ef37-c935-4801-860b-52bb7d68876a.png) | ![image](https://user-images.githubusercontent.com/56881598/198829228-b9ec0ea3-6f48-4775-a28c-3a3ef7430a9d.png) | ![image](https://user-images.githubusercontent.com/56881598/198829269-c79f07e5-6ecc-4a23-a7cc-b1ae4947fe26.png) | ![image](https://user-images.githubusercontent.com/56881598/198829276-d0c6cde3-c0c2-498b-bd75-a9cfd17c1c1d.png)
 
 
 
